@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="ButtonText">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">2</item>
+    </style>
+
+    <style name="ShadowText">
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textColor">#ff000000</item>
+        <item name="android:paddingLeft">4.0px</item>
+        <item name="android:paddingBottom">4.0px</item>
+        <item name="android:shadowColor">#ff666666</item>
+        <item name="android:shadowDx">3.0</item>
+        <item name="android:shadowDy">3.0</item>
+        <item name="android:shadowRadius">3.0</item>
+    </style>
+
+    <style name="SoftShadow">
+        <item name="android:textSize">@dimen/vakitTextSize</item>
+        <item name="android:textColor">@color/Black</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:shadowColor">@color/White</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">0.6</item>
+    </style>
+
+    <style name="SoftShadowBelow">
+        <item name="android:background">@color/Black</item>
+        <item name="android:textSize">@dimen/vakitTextSize</item>
+        <item name="android:textColor">@color/Black</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:shadowColor">@color/White</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">0.6</item>
+    </style>
+
+    <style name="EngravedText">
+        <item name="android:textSize">@dimen/vakitTextSize</item>
+        <item name="android:background">@color/Grey</item>
+        <item name="android:textColor">@color/Black</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:shadowColor">@color/White</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">0.6</item>
+    </style>
+    
+     <style name="EngravedTextBG">
+        <item name="android:textSize">@dimen/vakitTextSize</item>
+        <item name="android:background">@color/duzarkaplan</item>
+        <item name="android:textColor">@color/Black</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:shadowColor">@color/White</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">0.6</item>
+    </style>
+    
+       <style name="EngravedTextBGSun">
+        <item name="android:textSize">@dimen/vakitTextSize</item>
+        <item name="android:background">@color/duzarkaplan</item>
+        <item name="android:textColor">@color/Black</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:shadowColor">@color/sun_projection</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">0.6</item>
+    </style>
+    
+     
+     
+
+    <style name="GlowingText">
+        <item name="android:textSize">@dimen/vakitTextSize</item>
+        <item name="android:background">@color/Black</item>
+        <item name="android:textColor">@color/White</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:shadowColor">@color/Black</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
+        <item name="android:shadowRadius">3</item>
+    </style>
+
+    <style name="GlowingTextBG">
+        <item name="android:textSize">@dimen/vakitTextSize</item>
+        <item name="android:background">@color/duzarkaplan</item>
+        <item name="android:textColor">@color/White</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:shadowColor">@color/Black</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
+        <item name="android:shadowRadius">3</item>
+    </style>
+
+    <style name="EtherealText">
+        <item name="android:textSize">@dimen/vakitTextSize</item>
+        <item name="android:background">@color/duzarkaplan</item>
+        <item name="android:textColor">@color/Black</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:shadowColor">@color/White</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
+        <item name="android:shadowRadius">2</item>
+    </style>
+
+    <style name="SpookyText">
+        <item name="android:textSize">@dimen/vakitTextSize</item>
+        <item name="android:background">@color/Black</item>
+        <item name="android:textColor">@color/Black</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:shadowColor">@color/Green</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
+        <item name="android:shadowRadius">2</item>
+    </style>
+
+    <style name="SpookyTextPanel">
+        <item name="android:textSize">@dimen/vakitTextPanel</item>
+        <item name="android:background">@color/duzarkaplan</item>
+        <item name="android:textColor">@color/Black</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:shadowColor">@color/Green</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
+        <item name="android:shadowRadius">2</item>
+    </style>
+
+    <style name="PageTitle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:background">@color/duzarkaplan</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">3.0dp</item>
+        <item name="android:shadowColor">#ff000000</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">-1.0</item>
+        <item name="android:shadowRadius">1.0</item>
+    </style>
+
+ <style name="ButtonTextAp">
+        <item name="android:textSize">30.0dip</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">3.0dip</item>
+        <item name="android:shadowColor">#ff000000</item>
+        <item name="android:shadowDx">1.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">2.0</item>
+    </style>
+    
+</resources>

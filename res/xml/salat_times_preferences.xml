@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:example="http://schemas.android.com/apk/res/com.cepmuvakkit.times"
+    android:key="SalatTimes_Settings"
+    android:title="@string/salat_times_settings" >
+
+    <PreferenceCategory android:title="Salat App Settings" >
+        <PreferenceScreen
+            android:icon="@drawable/clock"
+            android:summary="Choose settings for calculating prayers and dates"
+            android:title="Prayer Calculation  Settings" >
+            <PreferenceCategory android:title="Calculations" >
+                <SwitchPreference
+                    android:defaultValue="true"
+                    android:key="enable_internal_calc"
+                    android:summary="@string/enableInternalCalc_sum"
+                    android:switchTextOff="NO"
+                    android:switchTextOn="YES"
+                    android:title="@string/enableInternalCalc" />
+
+                <ListPreference
+                    android:defaultValue="@string/default_calculation_method"
+                    android:dependency="enable_internal_calc"
+                    android:dialogTitle="@string/calculation_method"
+                    android:entries="@array/calculation_methods"
+                    android:entryValues="@array/calculation_methods_values"
+                    android:key="calculationMethodsIndex"
+                    android:summary="Different methods to calculate Fajr and Isha prayers"
+                    android:title="@string/calculation_method" />
+
+                <EditTextPreference
+                    android:name="Dawn Angle"
+                    android:defaultValue="-17.5"
+                    android:enabled="false"
+                    android:key="dawnAngle"
+                    android:numeric="decimal|signed"
+                    android:summary="@string/dawn_angle_sum"
+                    android:title="@string/dawn_angle" />
+                <EditTextPreference
+                    android:name="Dusk Angle"
+                    android:defaultValue="-18.5"
+                    android:enabled="false"
+                    android:key="duskAngle"
+                    android:numeric="decimal|signed"
+                    android:summary="@string/dusk_angle_sum"
+                    android:title="@string/dusk_angle" />
+
+                <ListPreference
+                    android:defaultValue="@string/default_asr_method"
+                    android:dependency="enable_internal_calc"
+                    android:dialogTitle="@string/asr_method"
+                    android:entries="@array/asr_method"
+                    android:entryValues="@array/asr_value"
+                    android:key="isHanafiMathab"
+                    android:summary="@string/asr_method_sum"
+                    android:title="@string/asr_method" />
+
+                <PreferenceScreen
+                    android:key="times_screen"
+                    android:summary="Change Prayers times manually"
+                    android:title="Manual Times Adjustments" >
+                    <Preference
+                        android:summary="Before modifying times, make sure to select the best settings for your area, and choose the correct Time Zone from device settings"
+                        android:title="Important Notice" />
+
+                    <PreferenceCategory android:title="Adjustments" >
+                    </PreferenceCategory>
+
+                    <Preference
+                        android:key="reset_times"
+                        android:summary="Change the times of all prayers back to original values"
+                        android:title="Reset Default Times" />
+                </PreferenceScreen>
+                <PreferenceScreen
+                    android:dependency="enable_internal_calc"
+                    android:icon="@drawable/clock"
+                    android:summary="@string/calculation_at_higher_lat_desc"
+                    android:title="@string/calculation_at_higher_lat" >
+                    <ListPreference
+                        android:defaultValue="@string/default_est_method_fajr"
+                        android:dialogTitle="@string/est_method_fajr"
+                        android:entries="@array/extreme_method_for_fajr"
+                        android:entryValues="@array/extreme_method_for_fajr_values"
+                        android:key="estMethodofFajr"
+                        android:summary="@string/estimationmethod_desc"
+                        android:title="@string/method_for_fajr" />
+                    <ListPreference
+                        android:defaultValue="@string/default_est_method_isha"
+                        android:dialogTitle="@string/est_method_isha"
+                        android:entries="@array/extreme_method_for_isha"
+                        android:entryValues="@array/extreme_method_for_isha_values"
+                        android:key="estMethodofIsha"
+                        android:summary="@string/estimationmethod_desc"
+                        android:title="@string/method_for_isha" />
+
+                    <EditTextPreference
+                        android:name="Base Latitude"
+                        android:defaultValue="48.5"
+                        android:key="baseLatitude"
+                        android:numeric="decimal|signed"
+                        android:summary="@string/base_latitude_sum"
+                        android:title="@string/base_latitude" />
+                    <EditTextPreference
+                        android:defaultValue="90"
+                        android:enabled="false"
+                        android:key="fixedMin"
+                        android:summary="@string/fixed_time_sum"
+                        android:title="@string/fixed_time" />
+
+                    <CheckBoxPreference
+                        android:defaultValue="false"
+                        android:enabled="false"
+                        android:key="useEstAlwaysFajr"
+                        android:summary="@string/useEstAlwaysFajr"
+                        android:title="@string/useItPermanently_fajr" />
+                    <CheckBoxPreference
+                        android:defaultValue="false"
+                        android:enabled="false"
+                        android:key="useEstAlwaysIsha"
+                        android:summary="@string/useEstAlwaysIsha"
+                        android:title="@string/useItPermanently_isha" />
+                    <CheckBoxPreference
+                        android:defaultValue="false"
+                        android:enabled="false"
+                        android:key="applytoAll"
+                        android:summary="@string/applyToAll_sum"
+                        android:title="@string/applyToAll" />
+                </PreferenceScreen>
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen
+            android:icon="@drawable/world"
+            android:summary="@string/location_settings_sum"
+            android:title="@string/location_settings" >
+            <PreferenceCategory android:title="@string/location" >
+                <ListPreference
+                    android:defaultValue="NET"
+                    android:dialogTitle="Location Method"
+                    android:entries="@array/Loc_EN"
+                    android:entryValues="@array/Loc_Value"
+                    android:key="location"
+                    android:summary="Network is faster in finding location"
+                    android:title="Location Method" />
+
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="net"
+                    android:summary="Use Internet only to get your location name"
+                    android:title="Use Internet" />
+
+                <PreferenceScreen
+                    android:dependency="net"
+                    android:summary="The search is done using Google Maps data"
+                    android:title="Search For Location" >
+                    <intent android:action="com.haz.prayer.SEARCH" />
+                </PreferenceScreen>
+
+                <Preference
+                    android:summary="Enter latitude and longitude manually"
+                    android:title="Manual Location Setting" >
+                    <intent android:action="com.haz.prayer.LatLong" />
+                </Preference>
+                <Preference
+                    android:summary="Show currently used latitude and longitude"
+                    android:title="Location Info" >
+                    <intent android:action="com.haz.prayer.LatLongShow" />
+                </Preference>
+            </PreferenceCategory>
+        </PreferenceScreen>
+    </PreferenceCategory>
+
+</PreferenceScreen>

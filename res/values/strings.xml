@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Salat Times New</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="app_label">Şehir Ara</string>
+    <string name="search_hint">İstediğiniz İl yada İlçeyi yazabilirsiniz</string>
+    <string name="search_instructions">Arama kutusunu şehir seçmek için kullanabilirsiniz</string>
+
+    <!-- Arabic Months -->
+    <string name="MUHARRAM">MUHARRAM</string>
+    <string name="SAFAR">Safar</string>
+    <string name="REBIULAVVAL">Rabi`Avval</string>
+    <string name="REBIULAHIR">Rabi`Akhir</string>
+    <string name="JAMIZIALAVVAL">JamaziAvval</string>
+    <string name="JAMIZIALAHIR">JamaziAkhir</string>
+    <string name="RAJAB">RAJAB</string>
+    <string name="SHABAN">Sha`ban</string>
+    <string name="RAMADHAN">Ramadan</string>
+    <string name="SHAVVAL">Shavval</string>
+    <string name="ZILKADE">DHUL-QI`DAH</string>
+    <string name="ZILHICCE">DHUL-HIJJAH</string>
+
+    <!-- Days -->
+    <string name="MONDAY">Monday</string>
+    <string name="SUNDAY">Sunday</string>
+    <string name="TUESDAY">Tuesday</string>
+    <string name="THURSDAY">Thursday</string>
+    <string name="FRIDAY">Friday</string>
+    <string name="SATURDAY">Saturday</string>
+    <string name="WEDNESDAY">Wednesday</string>
+    <!-- holyDay Names -->
+    <string name="NEWYEAR">Hijri New Year</string>
+    <string name="ASHURA">Day of Ashura</string>
+    <string name="MAWLID">Mawlid al-Nabi</string>
+    <string name="HOLYMONTHS">Start of Holy Months</string>
+    <string name="RAGHAIB">Lailatul Raghaib</string>
+    <string name="MERAC">Lailatul Merac</string>
+    <string name="BARAAT">Lailatul Baraat</string>
+    <string name="QADR">Lailatul Qadr</string>
+    <string name="DAYOFEIDFITR">Eid-al-Fitr</string>
+    <string name="DAYOFEIDAHDA">Eid-al-Adha</string>
+    <string name="AREFE">Day of Arafat</string>
+    <string name="tonight">Tonight is </string>
+    <!-- Toast Messages -->
+    <string name="no_location">No location data gathered from GPS, You should input location from Settings Menu</string>
+    <string name="methods">1</string>
+    <string name="summary">Current value in minutes: %1$d</string>
+    <!-- SalatTimes Names -->
+    <string name="SalatTimes">Salat Times</string>
+    <string name="fajr">Fajr</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="dhuhr">Dhuhr</string>
+    <string name="asr">Asr</string>
+    <string name="maghrib">Maghrib</string>
+    <string name="ishaa">Isha</string>
+   <string name="next_fajr">Next Fajr</string>
+    
+    <!-- Preferences Desc -->
+    
+    <string name="calculation_desc">Methods to calculate Fajr and Isha Prayers</string>
+    <string name="calculation_method">Calculation Method</string>
+    <string name="asr_method">Juristic Asr Method</string>
+    
+    <string name="standart">Standart</string>
+    <string name="hanafi">Hanafi</string>
+    <string name="asr_method_sum"> The method to calculate Asr prayer; standart which is Shafi juristic most wide one</string>
+
+    <!--  -->
+    <string name="egypt_survey">Egyptian General Authority of Survey</string>
+    <string name="karachi">Karachi University of Islamic Sciences</string>
+    <string name="turkish_religious">Turkish Religious Affairs</string>
+    <string name="karachi_shaf">Shaf`i - Karachi University of Islamic Sciences</string>
+    <string name="karachi_hanaf">Hanafi - Karachi University of Islamic Sciences</string>
+    <string name="north_america">Islamic Society of North America</string>
+    <string name="muslim_league">Muslim World League</string>
+    <string name="umm_alqurra">Umm Al-Qurra, Saudi Arabia</string>
+    <string name="custom_dawn_dusk">Calculation with Customized Dawn Dusk Angle</string>
+    <!--  -->
+    <string name="time_format">Time Format</string>
+    <string name="AM_PM_format">AM/PM format</string>
+    <string name="clock_24_hour">24 Hour Clock</string>
+    <!--  -->
+    <string name="none">None</string>
+    <string name="sdefault">Default</string>
+    <string name="beep">Beep</string>
+    <string name="recite">Recite</string>
+    <string name="custom">Custom Mp3 file</string>
+    <!--  -->
+    <string name="no_estimation">No Estimation Method</string>
+    <string name="nearest_lat">Nearest Latitude(Aqrab Al-Bilaad)</string>
+    <string name="nearest_day">Nearest Good Day (Aqrab Al-Ayyam)</string>
+    <string name="one_third_of_night">One Third of Night</string>
+    <string name="one_third_of_day">One Third of Day</string>
+    <string name="one_seventh_of_night">One Seventh of Night</string>
+    <string name="one_seventh_of_day">One Seventh of Day</string>
+    <string name="middle_of_night">Middle of Night Time</string>
+    <string name="fixed_time_sum">Fajr and Isha found by adding minutes from Sunrise/Maghrib</string>
+<!-- <string name="fixed_time">Added Fixed Time</string> -->
+   
+   <string name="turkish_isha_method">Turkish Isha Estimation</string>
+    <string name="dawn_angle">Dawn(Fajr) Angle</string>
+    <string name="dusk_angle">Dusk(Isha) Angle</string>
+    <string name="dawn_angle_sum">Dawn Angle used for calculation of Fajr time.(-) minus sign means below  the horizon. Angle value  must be in degrees(°)</string>
+    <string name="dusk_angle_sum">Dusk Angle used for calculation of Isha time.(-) minus sign means below  the horizon. Angle value  must be in degrees(°) </string>
+    <string name="salat_times_settings"> Salat times Settings</string>
+    <string name="prayerAdhan_detail">Select prayer notifications tone from various adhans</string>
+    <string name="prayerAdhan">Adhan</string>
+    <string name="calculation_at_higher_lat">Higher Latitudes Methods</string>
+    <string name="calculation_at_higher_lat_desc">Options for higher latitudes and arctic/antarctic circles 
+          prayer time calculations where no sunset or sunrise is observed</string>
+
+    <!--  -->
+    <string name="estimationmethod">Estimation Criteria at Higher Latitudes</string>
+    <string name="estimationmethod_desc">Eight Different Estimation Methods for Higher and Extreme Latitudes </string>
+    <string name="method_for_fajr">Estimation Method for Fajr</string>
+    <string name="method_for_isha">Estimation Method for Isha</string>
+    <string name="est_method_fajr">Estimation Criteria for Fajr</string>
+    <string name="est_method_isha">Estimation Criteria for Isha</string>
+    <string name="applyToAll_sum">Apply estimation method to all ( 5 of the prayer times) Salat Times; otherwise only Fajr and Isha Time will be affected</string>
+    <string name="applyToAll">Apply to All (5) Salat Times</string>
+    <string name="useEstAlwaysFajr">Permanently use one of the eight Estimation methods selected above for Fajr Time; 
+        otherwise (if not Selected)	will be used in case of invalid return. Invalid return means if it is not possible to calculate a meaningfull fajr time.</string>
+    <string name="useEstAlwaysIsha">Permanently use one of the eight Estimation methods selected above for Isha time; otherwise will 
+        be used in case of invalid return. Invalid return means if it is not possible to calculate a meaningfull isha time.</string>
+    <string name="base_latitude">Nearest Estimation Base Latitude</string>
+    <string name="base_latitude_sum">Nearest Latitude (Aqrab Al-Bilaad): Calculate a prayer time using a safe latitude value. The recommended latitude by many schools of Fiqh is 48.5 degrees</string>
+    <string name="fixed_time">Minutes from Sunrise/Maghrib</string>
+    <string name="useItPermanently_fajr">Use it Permanently for Fajr</string>
+    <string name="useItPermanently_isha">Use it Permanently for Isha</string>
+    <string name="enableInternalCalc">Enable Internal Calculation</string>
+    <string name="enableInternalCalc_sum"> Instead of downloading from  internet website (diyanet.gov.tr), salat times calculated internally when switched on.</string>
+    <!--  default Values -->
+    <string name="default_calculation_method">0</string>
+    <string name="default_est_method_fajr">0</string>
+	<string name="default_est_method_isha">0</string>
+    <string name="default_asr_method">0</string>
+    
+    <!--  -->
+    <string name="location_settings">Location Settings</string>
+    <string name="location_settings_sum">Choose your location settings</string>
+    <string name="location">Location</string>
+
+    <!--  -->
+    <string name="allahu_akbar">Allah is the Greatest</string>
+    <string name="time_for">Time for</string>
+        <string name="error_playing_alert">Error Playing Alert</string>
+        <string name="stop">Stop</string>
+          <string name="error_playing_custom_file">Custom File Error</string>
+    
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+
+</resources>
