@@ -10,20 +10,17 @@ import com.cepmuvakkit.times.posAlgo.Methods;
 import com.cepmuvakkit.times.posAlgo.PTimes;
 import com.cepmuvakkit.times.settings.Settings;
 
-import android.content.Context;
-
 public class Schedule implements Methods, HigherLatitude {
-
-	private GregorianCalendar[] schedule = new GregorianCalendar[7];
-	private double jd, jdn, ΔT;
+	private GregorianCalendar[] schedule = new GregorianCalendar[14];
+	private double jd, jdn;
 	private static Schedule today;
 
 	public Schedule(GregorianCalendar day) {
-		
+		GregorianCalendar[] scheduleTimes,scheduleTimesTemp = new GregorianCalendar[7];
 		Settings.load(VARIABLE.settings);
 		byte[] estMethod =Settings.getInstance().getEstMethods();
 		byte calculationMethod = (byte) Settings.getInstance().getCalculationMethodsIndex();
-		jd = getJulianDay();
+		jd = AstroLib.calculateJulianDay(day);
 		jdn = Math.round(jd) - 0.5;
 		EarthPosition loc = new EarthPosition(
 				Settings.getInstance().getLatitude(),
@@ -35,13 +32,34 @@ public class Schedule implements Methods, HigherLatitude {
 	
 		PTimes ptimes = new PTimes(jdn, loc, calculationMethod, estMethod);
 		PTimes ptimesNext = new PTimes(jdn+1, loc, calculationMethod, estMethod);
-		schedule = ptimes.getSalatinGregorian(Settings.getInstance().isHanafiMathab()?ASR_HANEFI:ASR_SHAFI);
-		ptimesNext.getJustFajrSalatinGregorian();
-		// Next fajr
-		// is
-		// tomorrow
-		schedule[CONSTANT.NEXT_FAJR] =ptimesNext.getJustFajrSalatinGregorian();
+		scheduleTimes = ptimes.getSalatinGregorian(Settings.getInstance().isHanafiMathab()?ASR_HANEFI:ASR_SHAFI);
+		// Next fajr is tomorrow
+		scheduleTimes[CONSTANT.SONRAKI_IMSAK] =ptimesNext.getJustFajrSalatinGregorian();
+		scheduleTimesTemp=scheduleTimes;
+	
+	
+		scheduleTimesTemp[CONSTANT.IMSAK].add(GregorianCalendar.MINUTE,VARIABLE.settings.getInt("ewSetFajr", -10));
+		scheduleTimesTemp[CONSTANT.GUNES].add(GregorianCalendar.MINUTE,VARIABLE.settings.getInt("ewSetSunrise", -45));
+		scheduleTimesTemp[CONSTANT.OGLE].add(GregorianCalendar.MINUTE,VARIABLE.settings.getInt("ewSetDhur", -10));
+		scheduleTimesTemp[CONSTANT.IKINDI].add(GregorianCalendar.MINUTE,VARIABLE.settings.getInt("ewSetAsr", -10));
+		scheduleTimesTemp[CONSTANT.AKSAM].add(GregorianCalendar.MINUTE,VARIABLE.settings.getInt("ewSetMagrib", -10));
+		scheduleTimesTemp[CONSTANT.YATSI].add(GregorianCalendar.MINUTE,VARIABLE.settings.getInt("ewSetIsha", -10));
+		scheduleTimesTemp[CONSTANT.SONRAKI_IMSAK].add(GregorianCalendar.MINUTE,VARIABLE.settings.getInt("ewSetFajr", -10));
 
+		schedule[CONSTANT.FAJR_EW]=scheduleTimesTemp[CONSTANT.IMSAK];
+		schedule[CONSTANT.FAJR]=scheduleTimes[CONSTANT.IMSAK];
+		schedule[CONSTANT.SUNRISE_EW]=scheduleTimesTemp[CONSTANT.GUNES];
+		schedule[CONSTANT.SUNRISE]=scheduleTimes[CONSTANT.GUNES];
+		schedule[CONSTANT.DHUHR_EW]=scheduleTimesTemp[CONSTANT.OGLE];		
+		schedule[CONSTANT.DHUHR]=scheduleTimes[CONSTANT.OGLE];
+		schedule[CONSTANT.ASR_EW]=scheduleTimesTemp[CONSTANT.IKINDI];
+		schedule[CONSTANT.ASR]=scheduleTimes[CONSTANT.IKINDI];		
+		schedule[CONSTANT.MAGHRIB_EW]=scheduleTimesTemp[CONSTANT.AKSAM];
+		schedule[CONSTANT.MAGHRIB]=scheduleTimes[CONSTANT.AKSAM];
+		schedule[CONSTANT.ISHAA_EW]=scheduleTimesTemp[CONSTANT.YATSI];
+		schedule[CONSTANT.ISHAA]=scheduleTimes[CONSTANT.YATSI];
+		schedule[CONSTANT.NEXT_FAJR_EW]=scheduleTimesTemp[CONSTANT.SONRAKI_IMSAK];
+		schedule[CONSTANT.NEXT_FAJR]=scheduleTimes[CONSTANT.SONRAKI_IMSAK];
 	}
 
 	public GregorianCalendar[] getTimes() {
@@ -54,9 +72,9 @@ public class Schedule implements Methods, HigherLatitude {
 
 	public short nextTimeIndex() {
 		Calendar now = new GregorianCalendar();
-		if (now.before(schedule[CONSTANT.FAJR]))
-			return CONSTANT.FAJR;
-		for (short i = CONSTANT.FAJR; i < CONSTANT.NEXT_FAJR; i++) {
+		if (now.before(schedule[CONSTANT.FAJR_EW]))
+			return CONSTANT.FAJR_EW;
+		for (short i = CONSTANT.FAJR_EW; i < CONSTANT.NEXT_FAJR; i++) {
 			if (now.after(schedule[i]) && now.before(schedule[i + 1])) {
 				return ++i;
 			}
@@ -91,25 +109,6 @@ public class Schedule implements Methods, HigherLatitude {
 		return today == null;
 	}
 
-	public static double getGMTOffset() {
-		Calendar now = new GregorianCalendar();
-		int gmtOffset = now.getTimeZone().getOffset(now.getTimeInMillis());
-		return gmtOffset / 3600000;
-	}
-
-	public static boolean isDaylightSavings() {
-		Calendar now = new GregorianCalendar();
-		return now.getTimeZone().inDaylightTime(now.getTime());
-	}
-
-	public static double getJulianDay() {
-		Calendar now = new GregorianCalendar();
-		return AstroLib.calculateJulianDay(now);
-		/*
-		 * return AstroLib.calculateJulianDay(now.get(Calendar.YEAR), (now
-		 * .get(Calendar.MONTH) + 1), now.get(Calendar.DAY_OF_MONTH), 0, 0, 0,
-		 * 0);
-		 */
-	}
+	
 
 }

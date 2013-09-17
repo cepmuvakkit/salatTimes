@@ -89,7 +89,7 @@ SearchView.OnQueryTextListener, SearchView.OnCloseListener, Methods  {
 		setGregorianCalender(jd);
 		setHijriCalender(salatTimes[4]);
 		setTimerCountDown(now);
-		//InitializeSearchMethod(); 
+		InitializeSearchMethod(); 
 
 	}
 	
@@ -308,7 +308,7 @@ SearchView.OnQueryTextListener, SearchView.OnCloseListener, Methods  {
 		}
 	}
 	private void InitializeSearchMethod() {
-		//searchView = (SearchView) findViewById(R.id.search);
+		//	searchView = (SearchView) findViewById(R.id.search);
 			searchView.setIconifiedByDefault(true);
 			searchView.setOnQueryTextListener(this);
 			searchView.setOnCloseListener(this);

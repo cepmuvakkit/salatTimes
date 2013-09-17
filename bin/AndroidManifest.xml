@@ -24,13 +24,14 @@
         <activity
             android:name="Reset"
             android:excludeFromRecents="true"
-            android:label="Reset" >
+            android:label="Reset">
             <intent-filter>
                 <action android:name="com.cepmuvakkit.times.Reset" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity android:name=".SearchableActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -40,20 +41,19 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name="com.cepmuvakkit.times.settings.SalatTimesPreferenceActivity" >
-        </activity>
-        <activity android:name="com.cepmuvakkit.times.GPSTracker" >
-        </activity>
-
-        <receiver android:name=".receiver.StartNotificationReceiver" >
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
+           <activity android:name="com.cepmuvakkit.times.settings.SalatTimesPreferenceActivity" >
+            </activity>
+              <activity android:name="com.cepmuvakkit.times.GPSTracker" >
+            </activity>
+     <receiver android:name=".receiver.StartNotificationReceiver">
+			<intent-filter>
+				<action android:name="android.intent.action.BOOT_COMPLETED" />
+			</intent-filter>
         </receiver>
-        <receiver android:name="com.cepmuvakkit.times.receiver.ClickNotificationReceiver" />
-        <receiver android:name="com.cepmuvakkit.times.receiver.ClearNotificationReceiver" />
-
-        <service android:name="com.cepmuvakkit.times.services.StartNotificationService" />
+        <receiver android:name=".receiver.ClearNotificationReceiver" />
+        <receiver android:name=".receiver.ClearNotificationReceiver" />
+        <service android:name=".services.StartNotificationService" />
+            
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -65,5 +65,5 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
+  
 </manifest>

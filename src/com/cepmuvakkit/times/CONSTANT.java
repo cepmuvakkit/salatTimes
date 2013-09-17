@@ -44,9 +44,28 @@ public class CONSTANT {
 	};
 	public static final short DEFAULT_CALCULATION_METHOD = 0; // Diyanet işleri
 
-	public static final short FAJR = 0, SUNRISE = 1, DHUHR = 2, ASR = 3, MAGHRIB = 4, ISHAA = 5, NEXT_FAJR = 6; // Notification Times
+	public static final short FAJR_EW = 0, FAJR = 1,SUNRISE_EW = 2,SUNRISE = 3,DHUHR_EW = 4,DHUHR = 5, ASR_EW = 6, ASR= 7, MAGHRIB_EW = 8, MAGHRIB = 9, ISHAA_EW = 10,ISHAA = 11,NEXT_FAJR_EW = 12,NEXT_FAJR = 13; // Notification Times
+	public static final short IMSAK = 0, GUNES = 1, OGLE = 2, IKINDI = 3, AKSAM = 4, YATSI = 5, SONRAKI_IMSAK = 6; // Notification Times
+
 	public static int[] TIME_NAMES = new int[]{R.string.fajr, R.string.sunrise, R.string.dhuhr, R.string.asr, R.string.maghrib, R.string.ishaa, R.string.next_fajr};
 
+	
+	/*public static int[] TIME_NAMES = new int[]{
+		R.string.fajrEW,
+		R.string.fajr,
+		R.string.sunrinseEW
+		R.string.sunrise, 
+		R.string.dhuhrEW,
+		R.string.dhuhr,
+		R.string.asrEW,
+		R.string.asr,
+		R.string.maghribEW,
+		R.string.maghrib,
+		R.string.ishaaEW,
+		R.string.ishaa,
+		R.string.next_fajrEW,
+		R.string.next_fajr};
+*/
 	public static final short NOTIFICATION_NONE = 0, NOTIFICATION_DEFAULT = 1, NOTIFICATION_PLAY = 2, NOTIFICATION_CUSTOM = 3; // Notification Methods
 
 	public static final short DEFAULT_TIME_FORMAT = 0; // AM/PM

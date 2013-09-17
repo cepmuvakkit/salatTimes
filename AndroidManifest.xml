@@ -50,10 +50,9 @@
 				<action android:name="android.intent.action.BOOT_COMPLETED" />
 			</intent-filter>
         </receiver>
-        <receiver android:name=".receiver.ClickNotificationReceiver" />
         <receiver android:name=".receiver.ClearNotificationReceiver" />
-        <service android:name=".service.FillDailyTimetableService" />
-        <service android:name=".service.StartNotificationService" />
+        <receiver android:name=".receiver.ClearNotificationReceiver" />
+        <service android:name=".services.StartNotificationService" />
             
     </application>
 

@@ -200,6 +200,8 @@ public class PTimes implements Methods, HigherLatitude {
                 dawnAngle = -18;
                 duskAngle = -17;
                 break;
+                
+                
             case EGYPT_SURVEY:
                 dawnAngle = -19.5;
                 duskAngle = -17.5;
@@ -283,12 +285,12 @@ public class PTimes implements Methods, HigherLatitude {
     public GregorianCalendar[] getSalatinGregorian(int asrIndex) {
   	 
     	GregorianCalendar[] schedule = new GregorianCalendar[7];
- 		schedule[CONSTANT.FAJR]    = AstroLib.convertJulian2Gregorian(jd+salat[FAJR]/24.0);
- 		schedule[CONSTANT.SUNRISE] = AstroLib.convertJulian2Gregorian(jd+salat[SUNRISE]/24.0);
- 		schedule[CONSTANT.DHUHR]   = AstroLib.convertJulian2Gregorian(jd+salat[SUNTRANSIT]/24.0);
- 		schedule[CONSTANT.ASR]     = AstroLib.convertJulian2Gregorian(jd+salat[asrIndex]/24.0);
- 		schedule[CONSTANT.MAGHRIB] = AstroLib.convertJulian2Gregorian(jd+salat[SUNSET]/24.0);
- 		schedule[CONSTANT.ISHAA]   = AstroLib.convertJulian2Gregorian(jd+salat[ISHA] / 24.0);
+ 		schedule[CONSTANT.IMSAK]    = AstroLib.convertJulian2Gregorian(jd+salat[FAJR]/24.0);
+ 		schedule[CONSTANT.GUNES] = AstroLib.convertJulian2Gregorian(jd+salat[SUNRISE]/24.0);
+ 		schedule[CONSTANT.OGLE]   = AstroLib.convertJulian2Gregorian(jd+salat[SUNTRANSIT]/24.0);
+ 		schedule[CONSTANT.IKINDI]     = AstroLib.convertJulian2Gregorian(jd+salat[asrIndex]/24.0);
+ 		schedule[CONSTANT.AKSAM] = AstroLib.convertJulian2Gregorian(jd+salat[SUNSET]/24.0);
+ 		schedule[CONSTANT.YATSI]   = AstroLib.convertJulian2Gregorian(jd+salat[ISHA] / 24.0);
  		// schedule[CONSTANT.NEXT_FAJR].add(Calendar.DAY_OF_MONTH, 1); // Next
  		// fajr*/
  		return schedule;

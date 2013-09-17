@@ -18,7 +18,7 @@ public class Notifier {
 	private static MediaPlayer mediaPlayer;
 	private static Context context;
 	private static Notification notification;
-
+	
 	public static void start(Context context, short timeIndex, long actualTime) {
 		Notifier.context = context;
 
@@ -30,8 +30,8 @@ public class Notifier {
 				.getString(R.string.allahu_akbar) + ": " : "")
 				+ context.getString(R.string.time_for)
 				+ " "
-				+ context.getString(CONSTANT.TIME_NAMES[timeIndex])
-						.toLowerCase();
+				+  context.getString(CONSTANT.TIME_NAMES[timeIndex])
+				.toLowerCase();
 
 		int notificationMethod = VARIABLE.settings.getInt("notificationMethod"
 				+ timeIndex,
