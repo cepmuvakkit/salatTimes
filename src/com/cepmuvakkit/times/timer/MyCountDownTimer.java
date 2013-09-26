@@ -12,7 +12,7 @@ public class MyCountDownTimer extends CountDownTimer {
 	}
 
 	public void onFinish() {
-		mTimer.setText("Namaz Vakti!");
+		mTimer.setText("Vakit Tamam!");//Sabah Namazında Namaz vakti demek olmuyor
 	}
 	public static String intTwoDigit(int i) {
 		return ((i < 10) ? "0" : "") + i;

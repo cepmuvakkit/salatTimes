@@ -11,12 +11,12 @@ import com.cepmuvakkit.times.posAlgo.PTimes;
 import com.cepmuvakkit.times.settings.Settings;
 
 public class Schedule implements Methods, HigherLatitude {
-	private GregorianCalendar[] schedule = new GregorianCalendar[14];
+	private GregorianCalendar[] schedule;
 	private double jd, jdn;
+	private double[] salat;
 	private static Schedule today;
 
 	public Schedule(GregorianCalendar day) {
-		GregorianCalendar[] scheduleTimes,scheduleTimesTemp = new GregorianCalendar[7];
 		Settings.load(VARIABLE.settings);
 		byte[] estMethod =Settings.getInstance().getEstMethods();
 		byte calculationMethod = (byte) Settings.getInstance().getCalculationMethodsIndex();
@@ -32,34 +32,61 @@ public class Schedule implements Methods, HigherLatitude {
 	
 		PTimes ptimes = new PTimes(jdn, loc, calculationMethod, estMethod);
 		PTimes ptimesNext = new PTimes(jdn+1, loc, calculationMethod, estMethod);
-		scheduleTimes = ptimes.getSalatinGregorian(Settings.getInstance().isHanafiMathab()?ASR_HANEFI:ASR_SHAFI);
+		salat=ptimes.getSalat();
 		// Next fajr is tomorrow
-		scheduleTimes[CONSTANT.SONRAKI_IMSAK] =ptimesNext.getJustFajrSalatinGregorian();
-		scheduleTimesTemp=scheduleTimes;
-	
-	
-		scheduleTimesTemp[CONSTANT.IMSAK].add(GregorianCalendar.MINUTE,VARIABLE.settings.getInt("ewSetFajr", -10));
-		scheduleTimesTemp[CONSTANT.GUNES].add(GregorianCalendar.MINUTE,VARIABLE.settings.getInt("ewSetSunrise", -45));
-		scheduleTimesTemp[CONSTANT.OGLE].add(GregorianCalendar.MINUTE,VARIABLE.settings.getInt("ewSetDhur", -10));
-		scheduleTimesTemp[CONSTANT.IKINDI].add(GregorianCalendar.MINUTE,VARIABLE.settings.getInt("ewSetAsr", -10));
-		scheduleTimesTemp[CONSTANT.AKSAM].add(GregorianCalendar.MINUTE,VARIABLE.settings.getInt("ewSetMagrib", -10));
-		scheduleTimesTemp[CONSTANT.YATSI].add(GregorianCalendar.MINUTE,VARIABLE.settings.getInt("ewSetIsha", -10));
-		scheduleTimesTemp[CONSTANT.SONRAKI_IMSAK].add(GregorianCalendar.MINUTE,VARIABLE.settings.getInt("ewSetFajr", -10));
+		schedule = new GregorianCalendar[14];
+		schedule[CONSTANT.FAJR_EW] = AstroLib.convertJulian2Gregorian(jdn
+				+ salat[FAJR] / 24.0
+				+VARIABLE.settings.getInt("ewSetFajr", -10) / 1440.0);
 
-		schedule[CONSTANT.FAJR_EW]=scheduleTimesTemp[CONSTANT.IMSAK];
-		schedule[CONSTANT.FAJR]=scheduleTimes[CONSTANT.IMSAK];
-		schedule[CONSTANT.SUNRISE_EW]=scheduleTimesTemp[CONSTANT.GUNES];
-		schedule[CONSTANT.SUNRISE]=scheduleTimes[CONSTANT.GUNES];
-		schedule[CONSTANT.DHUHR_EW]=scheduleTimesTemp[CONSTANT.OGLE];		
-		schedule[CONSTANT.DHUHR]=scheduleTimes[CONSTANT.OGLE];
-		schedule[CONSTANT.ASR_EW]=scheduleTimesTemp[CONSTANT.IKINDI];
-		schedule[CONSTANT.ASR]=scheduleTimes[CONSTANT.IKINDI];		
-		schedule[CONSTANT.MAGHRIB_EW]=scheduleTimesTemp[CONSTANT.AKSAM];
-		schedule[CONSTANT.MAGHRIB]=scheduleTimes[CONSTANT.AKSAM];
-		schedule[CONSTANT.ISHAA_EW]=scheduleTimesTemp[CONSTANT.YATSI];
-		schedule[CONSTANT.ISHAA]=scheduleTimes[CONSTANT.YATSI];
-		schedule[CONSTANT.NEXT_FAJR_EW]=scheduleTimesTemp[CONSTANT.SONRAKI_IMSAK];
-		schedule[CONSTANT.NEXT_FAJR]=scheduleTimes[CONSTANT.SONRAKI_IMSAK];
+		schedule[CONSTANT.FAJR] = AstroLib.convertJulian2Gregorian(jdn
+				+ salat[FAJR] / 24.0);
+
+		schedule[CONSTANT.SUNRISE_EW] = AstroLib.convertJulian2Gregorian(jdn
+				+ salat[SUNRISE] / 24.0
+				+ VARIABLE.settings.getInt("ewSetSunrise", -45) / 1440.0);
+
+		schedule[CONSTANT.SUNRISE] = AstroLib.convertJulian2Gregorian(jdn
+				+ salat[SUNRISE] / 24.0);
+
+		schedule[CONSTANT.DHUHR_EW] = AstroLib.convertJulian2Gregorian(jdn
+				+ salat[SUNTRANSIT] / 24.0
+				+ VARIABLE.settings.getInt("ewSetDhuhr", -10) / 1440.0);
+
+		schedule[CONSTANT.DHUHR] = AstroLib.convertJulian2Gregorian(jdn
+				+ salat[SUNTRANSIT] / 24.0);
+
+		schedule[CONSTANT.ASR_EW] = AstroLib.convertJulian2Gregorian(jdn
+				+ salat[Settings.getInstance().isHanafiMathab() ? ASR_HANEFI
+						: ASR_SHAFI] / 24.0
+				+ VARIABLE.settings.getInt("ewSetAsr", -10) / 1440.0);
+
+		schedule[CONSTANT.ASR] = AstroLib.convertJulian2Gregorian(jdn
+				+ salat[Settings.getInstance().isHanafiMathab() ? ASR_HANEFI
+						: ASR_SHAFI] / 24.0);
+
+		schedule[CONSTANT.MAGHRIB_EW] = AstroLib.convertJulian2Gregorian(jdn
+				+ salat[SUNSET] / 24.0
+				+ VARIABLE.settings.getInt("ewSetMagrib", -10) / 1440.0);
+		;
+
+		schedule[CONSTANT.MAGHRIB] = AstroLib.convertJulian2Gregorian(jdn
+				+ salat[SUNSET] / 24.0);
+
+		schedule[CONSTANT.ISHAA_EW] = AstroLib.convertJulian2Gregorian(jdn
+				+ salat[ISHA] / 24.0
+				+ VARIABLE.settings.getInt("ewSetIsha", -1) / 1440.0);
+
+		schedule[CONSTANT.ISHAA] = AstroLib.convertJulian2Gregorian(jdn
+				+ salat[ISHA] / 24.0);
+
+		schedule[CONSTANT.NEXT_FAJR_EW] = AstroLib.convertJulian2Gregorian(jdn+1
+				+ ptimesNext.getSalat()[0] / 24.0
+				+ VARIABLE.settings.getInt("ewSetFajr", -10) / 1440.0);
+
+		schedule[CONSTANT.NEXT_FAJR] = AstroLib.convertJulian2Gregorian(jdn+1
+				+ ptimesNext.getSalat()[0] / 24.0);
+	
 	}
 
 	public GregorianCalendar[] getTimes() {
@@ -69,14 +96,14 @@ public class Schedule implements Methods, HigherLatitude {
 	/*
 	 * public boolean isExtreme(int i) { return extremes[i]; }
 	 */
-
+	
 	public short nextTimeIndex() {
 		Calendar now = new GregorianCalendar();
 		if (now.before(schedule[CONSTANT.FAJR_EW]))
 			return CONSTANT.FAJR_EW;
 		for (short i = CONSTANT.FAJR_EW; i < CONSTANT.NEXT_FAJR; i++) {
 			if (now.after(schedule[i]) && now.before(schedule[i + 1])) {
-				return ++i;
+				return ++i;   
 			}
 		}
 		return CONSTANT.NEXT_FAJR;

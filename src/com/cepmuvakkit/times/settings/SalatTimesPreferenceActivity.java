@@ -8,9 +8,11 @@ import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.SwitchPreference;
 
-public class SalatTimesPreferenceActivity extends PreferenceActivity {
-
+public class SalatTimesPreferenceActivity extends  PreferenceActivity {
+	 // Check /res/xml/preferences.xml file for this preference
+    private static final String PREFERENCE_KEY = "seekBarPreference";
 	private ListPreference calculationMethodList;
 	private EditTextPreference dawnAngleText;
 	private EditTextPreference duskAngleText;
@@ -20,6 +22,7 @@ public class SalatTimesPreferenceActivity extends PreferenceActivity {
 	private CheckBoxPreference useEstAlwaysIshaCheckBox;
 	private EditTextPreference fixedMinText;
 	private CheckBoxPreference applytoAllCheckBox;
+	private SwitchPreference onlineCalc;
 
 	@SuppressWarnings("deprecation")
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +30,11 @@ public class SalatTimesPreferenceActivity extends PreferenceActivity {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.salat_times_preferences);
 		
-		//setValueIndex()
 
+		
+
+		//setValueIndex()
+		onlineCalc=(SwitchPreference)findPreference("enable_internal_calc");
 		calculationMethodList = (ListPreference) findPreference("calculationMethodsIndex");
 		dawnAngleText = (EditTextPreference) findPreference("dawnAngle");
 		duskAngleText = (EditTextPreference) findPreference("duskAngle");
@@ -108,4 +114,7 @@ public class SalatTimesPreferenceActivity extends PreferenceActivity {
 
 	}
 
-}
+   
+    
+  
+    }

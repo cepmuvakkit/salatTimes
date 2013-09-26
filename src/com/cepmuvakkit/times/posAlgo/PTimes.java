@@ -9,6 +9,7 @@ package com.cepmuvakkit.times.posAlgo;
 import java.util.GregorianCalendar;
 
 import com.cepmuvakkit.times.CONSTANT;
+import com.cepmuvakkit.times.VARIABLE;
 
 public class PTimes implements Methods, HigherLatitude {
 
@@ -200,9 +201,7 @@ public class PTimes implements Methods, HigherLatitude {
                 dawnAngle = -18;
                 duskAngle = -17;
                 break;
-                
-                
-            case EGYPT_SURVEY:
+             case EGYPT_SURVEY:
                 dawnAngle = -19.5;
                 duskAngle = -17.5;
                 break;
@@ -225,20 +224,35 @@ public class PTimes implements Methods, HigherLatitude {
     }
 
     private int[] getOffsetSalat (int calculationMethod) {
+    	
+    	/*offsetSalat[0] =-1;
+		 offsetSalat[1] =-6;
+		 offsetSalat[2] =7;
+		 offsetSalat[3] =5;
+		 offsetSalat[4] =5;
+		 offsetSalat[5] =9;
+		 offsetSalat[6] =2;  	 */
     
-    	/* int[] offsetSalat={
+    	if (calculationMethod == TURKISH_RELIGOUS) {
+    	 int[] offsetSalat={
     			 VARIABLE.settings.getInt("offsetFajr", -1), 
     			 VARIABLE.settings.getInt("offsetSunrise", -6),
     			 VARIABLE.settings.getInt("offsetDhur", 7),
     			 VARIABLE.settings.getInt("offsetAsr", 5), 
     			 VARIABLE.settings.getInt("offsetAsr", 5), 
     			 VARIABLE.settings.getInt("offsetMagrib", 9), 
-    			 VARIABLE.settings.getInt("offsetIsha", 2)}; */
-		if (calculationMethod == TURKISH_RELIGOUS) {
-			int[] offsetSalat = { -1, -6, 7, 5, 5, 9, 2 };
-			return offsetSalat;
+    			 VARIABLE.settings.getInt("offsetIsha", 2)}; 
+				return offsetSalat;
 		} else {
-			int[] offsetSalat = { 0, 0, 0, 0, 0, 0, 0 };
+	    	 int[] offsetSalat={
+	    			 VARIABLE.settings.getInt("offsetFajr",0), 
+	    			 VARIABLE.settings.getInt("offsetSunrise",0),
+	    			 VARIABLE.settings.getInt("offsetDhur", 0),
+	    			 VARIABLE.settings.getInt("offsetAsr", 0), 
+	    			 VARIABLE.settings.getInt("offsetAsr", 0), 
+	    			 VARIABLE.settings.getInt("offsetMagrib", 0), 
+	    			 VARIABLE.settings.getInt("offsetIsha",0)}; 
+		
 			return offsetSalat;
 		}
 

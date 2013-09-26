@@ -14,6 +14,7 @@ import android.content.BroadcastReceiver;
 import android.util.Log;
 
 public class StartNotificationReceiver extends BroadcastReceiver {
+	public static Schedule today;
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		WakeLock.acquire(context);
@@ -22,7 +23,7 @@ public class StartNotificationReceiver extends BroadcastReceiver {
 	}
 
 	public static void setNext(Context context) {
-		Schedule today = Schedule.today();
+		today = Schedule.today();
 		short nextTimeIndex = today.nextTimeIndex();
 		set(context, nextTimeIndex,today.getTimes()[nextTimeIndex]);
 	}
@@ -35,7 +36,7 @@ public class StartNotificationReceiver extends BroadcastReceiver {
 		Intent intent = new Intent(context, StartNotificationReceiver.class);
 		intent.putExtra("timeIndex", timeIndex);
 		intent.putExtra("actualTime", actualTime.getTimeInMillis());
-		Log.i("StartNotificationReceiver", "actualTime.getTimeInMillis() — get item number " + actualTime.getTimeInMillis()+"-"+timeIndex);
+		//Log.i("StartNotificationReceiver", "actualTime.getTimeInMillis() — get item number " + actualTime.getTimeInMillis()+"-"+timeIndex);
 		AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
 		am.set(AlarmManager.RTC_WAKEUP, actualTime.getTimeInMillis(),PendingIntent.getBroadcast(context, 0, intent,	PendingIntent.FLAG_CANCEL_CURRENT));
 	}

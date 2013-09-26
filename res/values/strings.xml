@@ -3,10 +3,17 @@
 
     <string name="app_name">Salat Times New</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
     <string name="app_label">Şehir Ara</string>
     <string name="search_hint">İstediğiniz İl yada İlçeyi yazabilirsiniz</string>
     <string name="search_instructions">Arama kutusunu şehir seçmek için kullanabilirsiniz</string>
+    
+     <!--Menu Texts -->
+     <string name="refresh">Refresh</string>
+     <string name="find_city">Find City</string>
+     <string name="settings">Settings</string>
+     <string name="share">Share</string>
+     <string name="get_loc">Get Location</string>
+       <!--Menu Texts -->
 
     <!-- Arabic Months -->
     <string name="MUHARRAM">MUHARRAM</string>
@@ -55,14 +62,20 @@
     <string name="asr">Asr</string>
     <string name="maghrib">Maghrib</string>
     <string name="ishaa">Isha</string>
-   <string name="next_fajr">Next Fajr</string>
-    
+    <string name="next_fajr">Next Fajr</string>
+    <string name="fajr_ew">Fajr is Comming!</string>
+    <string name="sunrise_ew">Sunrise Comming!</string>
+    <string name="dhuhr_ew">Dhuhr is Comming!</string>
+    <string name="asr_ew">Asr is Comming!</string>
+    <string name="maghrib_ew">Maghrib is Comming!</string>
+    <string name="ishaa_ew">Isha is Comming!</string>
+    <string name="next_fajr_ew">Next Fajr is Comming!</string>
+
     <!-- Preferences Desc -->
-    
+
     <string name="calculation_desc">Methods to calculate Fajr and Isha Prayers</string>
     <string name="calculation_method">Calculation Method</string>
     <string name="asr_method">Juristic Asr Method</string>
-    
     <string name="standart">Standart</string>
     <string name="hanafi">Hanafi</string>
     <string name="asr_method_sum"> The method to calculate Asr prayer; standart which is Shafi juristic most wide one</string>
@@ -97,9 +110,9 @@
     <string name="one_seventh_of_day">One Seventh of Day</string>
     <string name="middle_of_night">Middle of Night Time</string>
     <string name="fixed_time_sum">Fajr and Isha found by adding minutes from Sunrise/Maghrib</string>
-<!-- <string name="fixed_time">Added Fixed Time</string> -->
-   
-   <string name="turkish_isha_method">Turkish Isha Estimation</string>
+    <!-- <string name="fixed_time">Added Fixed Time</string> -->
+
+    <string name="turkish_isha_method">Turkish Isha Estimation</string>
     <string name="dawn_angle">Dawn(Fajr) Angle</string>
     <string name="dusk_angle">Dusk(Isha) Angle</string>
     <string name="dawn_angle_sum">Dawn Angle used for calculation of Fajr time.(-) minus sign means below  the horizon. Angle value  must be in degrees(°)</string>
@@ -130,13 +143,13 @@
     <string name="useItPermanently_fajr">Use it Permanently for Fajr</string>
     <string name="useItPermanently_isha">Use it Permanently for Isha</string>
     <string name="enableInternalCalc">Enable Internal Calculation</string>
-    <string name="enableInternalCalc_sum"> Instead of downloading from  internet website (diyanet.gov.tr), salat times calculated internally when switched on.</string>
-    <!--  default Values -->
+    <string name="enableInternalCalc_sum">Instead of downloading from  internet website (diyanet.gov.tr) salat times calculated internally when switched on.</string>
+    <!-- default Values -->
     <string name="default_calculation_method">0</string>
     <string name="default_est_method_fajr">0</string>
-	<string name="default_est_method_isha">0</string>
+    <string name="default_est_method_isha">0</string>
     <string name="default_asr_method">0</string>
-    
+
     <!--  -->
     <string name="location_settings">Location Settings</string>
     <string name="location_settings_sum">Choose your location settings</string>
@@ -145,13 +158,56 @@
     <!--  -->
     <string name="allahu_akbar">Allah is the Greatest</string>
     <string name="time_for">Time for</string>
-        <string name="error_playing_alert">Error Playing Alert</string>
-        <string name="stop">Stop</string>
-          <string name="error_playing_custom_file">Custom File Error</string>
-    
+    <string name="error_playing_alert">Error Playing Alert</string>
+    <string name="stop">Stop</string>
+    <string name="error_playing_custom_file">Custom File Error</string>
+
+    <!-- ıqamah strings -->
+    <string name="notification_settings_sum">Select your notifications and reminders settings</string>
+    <string name="notification_settings">Notification Settings</string>
+    <string name="prayer_notification">Prayer Notifications</string>
+    <string name="prayer_settings_sum">Activate notifications for the selected prayers\nNotify before the given minutes for each prayer</string>
+    <string name="early_not_in_minutes">Early Notification (Minutes)</string>
+    <string name="reminder_time">Reminder Time</string>
+    <string name="fajr_notification">Fajr Notification</string>
+    <string name="fajr_iqamah">Fajr Iqamah</string>
+    <string name="fajr_iqamah_ew">Fajr Iqamah (Early Warning)  Notification</string>
+    <string name="sunrise_notification">SunRise Notification</string>
+    <string name="sunrise_iqamah">SunRise Iqamah</string>
+    <string name="sunrise_iqamah_ew">SunRise Iqamah (Early Warning)  Notification</string>
+    <string name="zuhr_notification">Dhuhr Notification</string>
+    <string name="zuhr_iqamah">Dhuhr Iqamah</string>
+    <string name="zuhr_iqamah_ew">Dhuhr Iqamah (Early Warning)  Notification</string>
+    <string name="asr_notification">Asr Notification</string>
+    <string name="asr_iqamah">Asr Iqamah</string>
+    <string name="asr_iqamah_ew">Asr Iqamah (Early Warning)  Notification</string>
+    <string name="magrib_notification">Mahgrib Notification</string>
+    <string name="magrib_iqamah">Mahgrib Iqamah</string>
+    <string name="magrib_iqamah_ew">Mahgrib Iqamah (Early Warning)  Notification</string>
+    <string name="isha_notification">Ishaa Notification</string>
+    <string name="isha_iqamah">Ishaa Iqamah</string>
+    <string name="isha_iqamah_ew">Ishaa Iqamah (Early Warning)  Notification</string>
+
     <!--  -->
+    <string name="offset_time">Offset Value</string>
+    <string name="offline">Offline</string>
+    <string name="enable">Enable</string>
     <!--  -->
-    <!--  -->
+    <string name="offset_sum_fajr">Adjust value to modify Fajr time</string>
+    <string name="offset_fajr">Offset Fajr</string>
+    <string name="offset_sum_sunrise">Adjust value to modify SunRise time</string>
+    <string name="offset_sunrise">Offset SunRise</string>
+    <string name="offset_sum_dhuhr">Adjust value to modify Dhuhr time</string>
+    <string name="offset_dhuhr">Offset Dhuhr</string>
+    <string name="offset_sum_asr">Adjust value to modify Asr time</string>
+    <string name="offset_asr">Offset Asr</string>
+    <string name="offset_sum_magrib">Adjust value to modify Mabhrib time</string>
+    <string name="offset_magrib">Offset Maghrib</string>
+    <string name="offset_sum_isha">Adjust value to modify Ishaa time</string>
+    <string name="offset_isha">Offset Ishaa</string>
+    <string name="offset_important">Important Notice</string>
+    <string name="offset_adjust">OffSet Adjustments</string>
+    <string name="offset_notice">Before modifying times, make sure to select the best settings for your area, and choose the correct Time Zone from device settings</string>
     <!--  -->
 
 </resources>

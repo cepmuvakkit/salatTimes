@@ -26,7 +26,6 @@ import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
@@ -52,11 +51,12 @@ SearchView.OnQueryTextListener, SearchView.OnCloseListener, Methods  {
 	private CountDownTimer countDownTimer;
 	//private boolean  timerHasStarted = false;
 	private GregorianCalendar[] schedule;
-	private SharedPreferences preferences;
-	private int temperature, pressure, altitude;
-	private double jd,timezoneinDay,jdn,mLatitude, mLongitude, mTimeZone;
+	//private SharedPreferences preferences;
+	private double mTimeZone;
+	private int  altitude;
+	private double jd,jdn,mLatitude, mLongitude;
 	private String mLocationName;
-	private DecimalFormat twoDigitFormat, oneDigit, twoDigit;
+	private DecimalFormat twoDigitFormat;
 	private Calendar now;
 	//private GregorianCalendar[] times;
 	private double[] salatTimes = new double[7];;
@@ -83,7 +83,8 @@ SearchView.OnQueryTextListener, SearchView.OnCloseListener, Methods  {
 
 		
 		returnCurrentJulianDay();
-		calculateSalatTimes();
+		//calculateSalatTimes();
+		updateTodaysTimetableAndNotification();
 		setLatLongLocation();
 		//setSalatTimesText(salatTimes);
 		setGregorianCalender(jd);
@@ -110,19 +111,19 @@ SearchView.OnQueryTextListener, SearchView.OnCloseListener, Methods  {
 			return true;
 		case R.id.menu_refresh:
 			returnCurrentJulianDay();
-			calculateSalatTimes();
-			//setSalatTimesText(salatTimes);
-			setGregorianCalender(jd);
-			setHijriCalender(salatTimes[4]);
-			setTimerCountDown(now);
+			updateTodaysTimetableAndNotification();
+			//calculateSalatTimes();
+//			setGregorianCalender(jd);
+	//		setHijriCalender(salatTimes[4]);
+		//	setTimerCountDown(now);
 			return true;
 		case  R.id.use_GPS:
 			//Settings.getInstance().setDataFromGPS(false);
 			//Settings.getInstance().setManualInput(false);
 			getLocation();
-			calculateSalatTimes();
-			//setSalatTimesText(salatTimes);
-			setTimerCountDown(now);
+			//calculateSalatTimes();
+			updateTodaysTimetableAndNotification();
+			//setTimerCountDown(now);
 			setLatLongLocation();
 			return true;	
 		case R.id.menu_settings:
@@ -161,15 +162,18 @@ SearchView.OnQueryTextListener, SearchView.OnCloseListener, Methods  {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		//Toast.makeText(this, "onStart()", Toast.LENGTH_SHORT).show();
-		gps.stopUsingGPS();
-
+		try {
+			//Toast.makeText(this, "onStart()", Toast.LENGTH_SHORT).show();
+			gps.stopUsingGPS();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 			try {
-				myDbHelper.close();
+				//myDbHelper.close();
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			} finally {
-				myDb.close();
+			//	myDb.close();
 			}
 		}
 	
@@ -204,6 +208,7 @@ SearchView.OnQueryTextListener, SearchView.OnCloseListener, Methods  {
 	protected void onRestart() {
 		super.onPause();
 		getLocation();
+		updateTodaysTimetableAndNotification();
 		Toast.makeText(this, " onRestart()", Toast.LENGTH_SHORT).show();
 	}
 
@@ -213,7 +218,7 @@ SearchView.OnQueryTextListener, SearchView.OnCloseListener, Methods  {
 		now= Calendar.getInstance();
 		jd = AstroLib.calculateJulianDay(now);
 		mTimeZone = now.getTimeZone().getOffset(now.getTimeInMillis()) / 3600000;
-		timezoneinDay = mTimeZone / 24.0;
+	//	timezoneinDay = mTimeZone / 24.0;
 		/*Settings.getInstance().setJulianDay(jd);
 		if (Settings.getInstance().isManualInput() == false) {
 			Settings.getInstance().setTimezone(mTimeZone);
@@ -348,7 +353,7 @@ SearchView.OnQueryTextListener, SearchView.OnCloseListener, Methods  {
 	public void calculatePreviousDay(@SuppressWarnings("unused") View view) {
 		//mPreviousButton = (Button) findViewById(R.id.PrevButton);
 		jd--;
-		calculateSalatTimes();
+		calculateSalatTimes(jd);
 		//setSalatTimesText(salatTimes);
 		setGregorianCalender(jd);
 		setHijriCalender(24);
@@ -359,7 +364,7 @@ SearchView.OnQueryTextListener, SearchView.OnCloseListener, Methods  {
 	public void calculateNextDay(@SuppressWarnings("unused") View view) {
 		//mNextButton = (Button) findViewById(R.id.nextButton);
 		jd++;
-		calculateSalatTimes();
+		calculateSalatTimes(jd);
 		//setSalatTimesText(salatTimes);
 		setGregorianCalender(jd);
 		setHijriCalender(24);
@@ -386,7 +391,7 @@ SearchView.OnQueryTextListener, SearchView.OnCloseListener, Methods  {
 	
 	}
 
-	private void calculateSalatTimes() {
+	private void calculateSalatTimes(double jd) {
 		Settings.load(VARIABLE.settings);
 		byte[] estMethod =Settings.getInstance().getEstMethods();
 		byte calculationMethod = (byte) Settings.getInstance().getCalculationMethodsIndex();
@@ -505,12 +510,20 @@ SearchView.OnQueryTextListener, SearchView.OnCloseListener, Methods  {
 
 	}
 	private void updateTodaysTimetableAndNotification() {
-		returnCurrentJulianDay();
-		calculateSalatTimes();
+		//returnCurrentJulianDay();
+		//calculateSalatTimes();
 
 		StartNotificationReceiver.setNext(this);
-
-		//setSalatTimesText(salatTimes);
+		schedule=StartNotificationReceiver.today.getTimes();
+		salatTimes[0] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.FAJR]);
+		salatTimes[1] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.SUNRISE]);
+		salatTimes[2] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.DHUHR]);
+		salatTimes[3] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.ASR]);
+		salatTimes[4] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.MAGHRIB]);
+		salatTimes[5] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.ISHAA]);
+		salatTimes[6] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.NEXT_FAJR])+24;// Next fajr
+		
+		setSalatTimesText();
 		setGregorianCalender(jd);
 		setHijriCalender(salatTimes[4]);
 		setTimerCountDown(now);

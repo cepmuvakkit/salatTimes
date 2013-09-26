@@ -14,8 +14,8 @@
                     android:defaultValue="true"
                     android:key="enable_internal_calc"
                     android:summary="@string/enableInternalCalc_sum"
-                    android:switchTextOff="NO"
-                    android:switchTextOn="YES"
+                    android:switchTextOff="@string/offline"
+                    android:switchTextOn="@string/enable"
                     android:title="@string/enableInternalCalc" />
 
                 <ListPreference
@@ -29,7 +29,7 @@
                     android:title="@string/calculation_method" />
 
                 <EditTextPreference
-                    android:name="Dawn Angle"
+                    android:name="@string/dawn_angle"
                     android:defaultValue="-17.5"
                     android:enabled="false"
                     android:key="dawnAngle"
@@ -37,7 +37,7 @@
                     android:summary="@string/dawn_angle_sum"
                     android:title="@string/dawn_angle" />
                 <EditTextPreference
-                    android:name="Dusk Angle"
+                    android:name="@string/dusk_angle"
                     android:defaultValue="-18.5"
                     android:enabled="false"
                     android:key="duskAngle"
@@ -56,14 +56,70 @@
                     android:title="@string/asr_method" />
 
                 <PreferenceScreen
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:cepmuvakkit="http://cepmuvakkit.com"
                     android:key="times_screen"
                     android:summary="Change Prayers times manually"
-                    android:title="Manual Times Adjustments" >
+                    android:title="Prayer Times Adjustment" >
                     <Preference
-                        android:summary="Before modifying times, make sure to select the best settings for your area, and choose the correct Time Zone from device settings"
-                        android:title="Important Notice" />
+                        android:summary="@string/offset_notice"
+                        android:title="@string/offset_important" />
 
-                    <PreferenceCategory android:title="Adjustments" >
+                    <PreferenceCategory android:title="@string/offset_adjust" >
+                        <com.cepmuvakkit.times.settings.SeekBarPreference
+                            android:defaultValue="0"
+                            android:key="offsetFajr"
+                            android:max="30"
+                            android:summary="@string/offset_sum_fajr"
+                            android:title="@string/offset_fajr"
+                            cepmuvakkit:min="-30"
+                            cepmuvakkit:unitsLeft=""
+                            cepmuvakkit:unitsRight="′" />
+                        <com.cepmuvakkit.times.settings.SeekBarPreference
+                            android:defaultValue="0"
+                            android:key="offsetSunrise"
+                            android:max="30"
+                            android:summary="@string/offset_sum_sunrise"
+                            android:title="@string/offset_sunrise"
+                            cepmuvakkit:min="-30"
+                            cepmuvakkit:unitsLeft=""
+                            cepmuvakkit:unitsRight="′" />
+                        <com.cepmuvakkit.times.settings.SeekBarPreference
+                            android:defaultValue="0"
+                            android:key="offsetDhur"
+                            android:max="30"
+                            android:summary="@string/offset_sum_dhuhr"
+                            android:title="@string/offset_dhuhr"
+                            cepmuvakkit:min="-30"
+                            cepmuvakkit:unitsLeft=""
+                            cepmuvakkit:unitsRight="′" />
+                        <com.cepmuvakkit.times.settings.SeekBarPreference
+                            android:defaultValue="0"
+                            android:key="offsetAsr"
+                            android:max="30"
+                            android:summary="@string/offset_sum_asr"
+                            android:title="@string/offset_asr"
+                            cepmuvakkit:min="-30"
+                            cepmuvakkit:unitsLeft=""
+                            cepmuvakkit:unitsRight="′" />
+                        <com.cepmuvakkit.times.settings.SeekBarPreference
+                            android:defaultValue="0"
+                            android:key="offsetMagrib"
+                            android:max="30"
+                            android:summary="@string/offset_sum_magrib"
+                            android:title="@string/offset_magrib"
+                            cepmuvakkit:min="-30"
+                            cepmuvakkit:unitsLeft=""
+                            cepmuvakkit:unitsRight="′" />
+                        <com.cepmuvakkit.times.settings.SeekBarPreference
+                            android:defaultValue="0"
+                            android:key="offsetIsha"
+                            android:max="30"
+                            android:summary="@string/offset_sum_isha"
+                            android:title="@string/offset_isha"
+                            cepmuvakkit:min="-30"
+                            cepmuvakkit:unitsLeft=""
+                            cepmuvakkit:unitsRight="′" />
                     </PreferenceCategory>
 
                     <Preference
@@ -165,6 +221,226 @@
                     android:title="Location Info" >
                     <intent android:action="com.haz.prayer.LatLongShow" />
                 </Preference>
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen
+            android:icon="@drawable/notify"
+            android:summary="@string/notification_settings_sum"
+            android:title="@string/notification_settings" >
+            <PreferenceCategory android:title="@string/prayer_notification" >
+                <PreferenceScreen
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:cepmuvakkit="http://cepmuvakkit.com"
+                    android:dependency="notify"
+                    android:summary="@string/prayer_settings_sum"
+                    android:title="@string/prayer_notification" >
+                    <PreferenceCategory android:title="@string/fajr" >
+                        <ListPreference
+                            android:dialogTitle="@string/fajr_iqamah"
+                            android:entries="@array/notification_methods"
+                            android:entryValues="@array/notification_methods_values"
+                            android:key="notificationMethod0"
+                            android:summary="@string/fajr_iqamah_ew"
+                            android:title="@string/fajr_iqamah" />
+
+                        <com.cepmuvakkit.times.settings.SeekBarPreference
+                            android:defaultValue="45"
+                            android:key="ewSetFajr"
+                            android:max="60"
+                            android:summary="@string/early_not_in_minutes"
+                            android:title="@string/reminder_time"
+                            cepmuvakkit:min="0"
+                            cepmuvakkit:unitsLeft=""
+                            cepmuvakkit:unitsRight="′" />
+
+                        <ListPreference
+                            android:dialogTitle="@string/fajr_notification"
+                            android:entries="@array/notification_methods"
+                            android:entryValues="@array/notification_methods_values"
+                            android:key="notificationMethod1"
+                            android:summary="@string/fajr_notification"
+                            android:title="@string/fajr_notification" />
+                    </PreferenceCategory>
+                    <PreferenceCategory android:title="@string/sunrise" >
+                        <ListPreference
+                            android:dialogTitle="@string/sunrise_iqamah"
+                            android:entries="@array/notification_methods"
+                            android:entryValues="@array/notification_methods_values"
+                            android:key="notificationMethod2"
+                            android:summary="@string/sunrise_iqamah_ew"
+                            android:title="@string/sunrise_iqamah" />
+
+                        <com.cepmuvakkit.times.settings.SeekBarPreference
+                            android:defaultValue="45"
+                            android:key="ewSetSunrise"
+                            android:max="60"
+                            android:summary="@string/early_not_in_minutes"
+                            android:title="@string/reminder_time"
+                            cepmuvakkit:min="0"
+                            cepmuvakkit:unitsLeft=""
+                            cepmuvakkit:unitsRight="′" />
+
+                        <ListPreference
+                            android:dialogTitle="@string/sunrise_notification"
+                            android:entries="@array/notification_methods"
+                            android:entryValues="@array/notification_methods_values"
+                            android:key="notificationMethod3"
+                            android:summary="@string/sunrise_notification"
+                            android:title="@string/sunrise_notification" />
+                    </PreferenceCategory>
+                    <PreferenceCategory android:title="@string/dhuhr" >
+                        <ListPreference
+                            android:dialogTitle="@string/zuhr_iqamah"
+                            android:entries="@array/notification_methods"
+                            android:entryValues="@array/notification_methods_values"
+                            android:key="notificationMethod4"
+                            android:summary="@string/zuhr_iqamah_ew"
+                            android:title="@string/zuhr_iqamah" />
+
+                        <com.cepmuvakkit.times.settings.SeekBarPreference
+                            android:defaultValue="10"
+                            android:key="ewSetDhuhr"
+                            android:max="60"
+                            android:summary="@string/early_not_in_minutes"
+                            android:title="@string/reminder_time"
+                            cepmuvakkit:min="0"
+                            cepmuvakkit:unitsLeft=""
+                            cepmuvakkit:unitsRight="′" />
+
+                        <ListPreference
+                            android:dialogTitle="@string/zuhr_notification"
+                            android:entries="@array/notification_methods"
+                            android:entryValues="@array/notification_methods_values"
+                            android:key="notificationMethod5"
+                            android:summary="@string/zuhr_notification"
+                            android:title="@string/zuhr_notification" />
+                    </PreferenceCategory>
+                    <PreferenceCategory android:title="@string/asr" >
+                        <ListPreference
+                            android:dialogTitle="@string/asr_iqamah"
+                            android:entries="@array/notification_methods"
+                            android:entryValues="@array/notification_methods_values"
+                            android:key="notificationMethod6"
+                            android:summary="@string/asr_iqamah_ew"
+                            android:title="@string/asr_iqamah" />
+
+                        <com.cepmuvakkit.times.settings.SeekBarPreference
+                            android:defaultValue="10"
+                            android:key="ewSetAsr"
+                            android:max="60"
+                            android:summary="@string/early_not_in_minutes"
+                            android:title="@string/reminder_time"
+                            cepmuvakkit:min="0"
+                            cepmuvakkit:unitsLeft=""
+                            cepmuvakkit:unitsRight="′" />
+
+                        <ListPreference
+                            android:dialogTitle="@string/asr_notification"
+                            android:entries="@array/notification_methods"
+                            android:entryValues="@array/notification_methods_values"
+                            android:key="notificationMethod7"
+                            android:summary="@string/asr_notification"
+                            android:title="@string/asr_notification" />
+                    </PreferenceCategory>
+                    <PreferenceCategory android:title="@string/maghrib" >
+                        <ListPreference
+                            android:dialogTitle="@string/magrib_iqamah"
+                            android:entries="@array/notification_methods"
+                            android:entryValues="@array/notification_methods_values"
+                            android:key="notificationMethod8"
+                            android:summary="@string/magrib_iqamah_ew"
+                            android:title="@string/magrib_iqamah" />
+
+                        <com.cepmuvakkit.times.settings.SeekBarPreference
+                            android:defaultValue="10"
+                            android:key="ewSetMagrib"
+                            android:max="60"
+                            android:summary="@string/early_not_in_minutes"
+                            android:title="@string/reminder_time"
+                            cepmuvakkit:min="0"
+                            cepmuvakkit:unitsLeft=""
+                            cepmuvakkit:unitsRight="′" />
+
+                        <ListPreference
+                            android:dialogTitle="@string/magrib_notification"
+                            android:entries="@array/notification_methods"
+                            android:entryValues="@array/notification_methods_values"
+                            android:key="notificationMethod9"
+                            android:summary="@string/magrib_notification"
+                            android:title="@string/magrib_notification" />
+                    </PreferenceCategory>
+
+                    <PreferenceCategory android:title="@string/ishaa" >
+                        <ListPreference
+                            android:dialogTitle="@string/isha_iqamah"
+                            android:entries="@array/notification_methods"
+                            android:entryValues="@array/notification_methods_values"
+                            android:key="notificationMethod10"
+                            android:summary="@string/isha_iqamah_ew"
+                            android:title="@string/isha_iqamah" />
+
+                        <com.cepmuvakkit.times.settings.SeekBarPreference
+                            android:defaultValue="10"
+                            android:key="ewSetIsha"
+                            android:max="60"
+                            android:summary="@string/early_not_in_minutes"
+                            android:title="@string/reminder_time"
+                            cepmuvakkit:min="0"
+                            cepmuvakkit:unitsLeft=""
+                            cepmuvakkit:unitsRight="′" />
+
+                        <ListPreference
+                            android:dialogTitle="@string/isha_notification"
+                            android:entries="@array/notification_methods"
+                            android:entryValues="@array/notification_methods_values"
+                            android:key="notificationMethod11"
+                            android:summary="@string/isha_notification"
+                            android:title="@string/isha_notification" />
+                    </PreferenceCategory>
+                    <PreferenceCategory android:title="Jumuah" >
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="ac_n_jmah"
+                            android:title="Jumuah Notification" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="notify"
+                    android:summary="Notification on prayer time"
+                    android:title="Notify" />
+                <CheckBoxPreference
+                    android:defaultValue="false"
+                    android:dependency="notify"
+                    android:key="notify_on_s"
+                    android:summary="Notify even if the device is on silent mode"
+                    android:title="Notify on Silent" />
+
+                <PreferenceScreen
+                    android:dependency="notify"
+                    android:summary="Select the prayer notification tone"
+                    android:title="Prayer Notification Tone" >
+                    <CheckBoxPreference
+                        android:key="use_sd"
+                        android:summary="Activate using the SD card to choose your MP3 notification tone"
+                        android:title="Use SD Card" />
+
+                    <RingtonePreference
+                        android:defaultValue="sys_default"
+                        android:key="notify_tone"
+                        android:ringtoneType="notification|alarm"
+                        android:showDefault="true"
+                        android:showSilent="true"
+                        android:summary="Select prayer notification tone from system tones"
+                        android:title="Select From System Tones" />
+
+                    <CheckBoxPreference
+                        android:defaultValue="false"
+                        android:key="notify_each"
+                        android:summary="Use different notification tone for each prayer"
+                        android:title="Use Different Tones" />
+                </PreferenceScreen>
             </PreferenceCategory>
         </PreferenceScreen>
     </PreferenceCategory>

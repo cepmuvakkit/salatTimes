@@ -24,9 +24,9 @@ public class Notifier {
 
 		if (timeIndex == CONSTANT.NEXT_FAJR)
 			timeIndex = CONSTANT.FAJR;
-
+		//0 1 2 3 4 5 6 7 8 9 10 11 12 13
 		notification = new Notification(R.drawable.icon, "", actualTime);
-		notification.tickerText = (timeIndex != CONSTANT.SUNRISE ? context
+		notification.tickerText = ((timeIndex != CONSTANT.SUNRISE)&(timeIndex % 2!=0) ? context
 				.getString(R.string.allahu_akbar) + ": " : "")
 				+ context.getString(R.string.time_for)
 				+ " "
