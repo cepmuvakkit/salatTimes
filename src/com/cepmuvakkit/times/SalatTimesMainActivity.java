@@ -11,7 +11,7 @@ import com.cepmuvakkit.times.receiver.StartNotificationReceiver;
 import com.cepmuvakkit.times.settings.SalatTimesPreferenceActivity;
 import com.cepmuvakkit.times.conversion.hicricalendar.HicriCalendar;
 import com.cepmuvakkit.times.R;
-import com.cepmuvakkit.times.location.DatabaseHelper;
+
 import com.cepmuvakkit.times.posAlgo.PTimes;
 import com.cepmuvakkit.times.settings.Settings;
 import com.cepmuvakkit.times.timer.MyCountDownTimer;
@@ -26,21 +26,13 @@ import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
-public class SalatTimesMainActivity extends Activity implements
-SearchView.OnQueryTextListener, SearchView.OnCloseListener, Methods  {
+public class SalatTimesMainActivity extends Activity implements Methods  {
 	
 	private TextView mTimer,mFajr,mSunRise,mZuhr,mAsr,mMagrib,mIsha;
 	private TextView mYear, mDayOfMonth, mDayName, mMonthName, mHijriYear,
@@ -60,10 +52,7 @@ SearchView.OnQueryTextListener, SearchView.OnCloseListener, Methods  {
 	private Calendar now;
 	//private GregorianCalendar[] times;
 	private double[] salatTimes = new double[7];;
-	private ListView mListView;
-	private SearchView searchView;
-	private DatabaseHelper myDbHelper;
-	private  SQLiteDatabase myDb = null;
+
 	private HicriCalendar hc;
 	private Context context;
 	private GPSTracker gps;
@@ -74,7 +63,8 @@ SearchView.OnQueryTextListener, SearchView.OnCloseListener, Methods  {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.salat_times_main);
 	
-		
+	//	setLatLongLocation();
+
 	//	preferences=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 	//	Settings.load(preferences);
 		context=getBaseContext();
@@ -90,7 +80,7 @@ SearchView.OnQueryTextListener, SearchView.OnCloseListener, Methods  {
 		setGregorianCalender(jd);
 		setHijriCalender(salatTimes[4]);
 		setTimerCountDown(now);
-		InitializeSearchMethod(); 
+		//InitializeSearchMethod(); 
 
 	}
 	
@@ -101,13 +91,16 @@ SearchView.OnQueryTextListener, SearchView.OnCloseListener, Methods  {
 		getMenuInflater().inflate(R.menu.salat_times_main, menu);
 		return true;
 	}
+	
+
 
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent intent;
 
 		switch (item.getItemId()) {
 		case R.id.menu_search:
-			// Intent intent = new Intent(this, SearchActivity.class);
+			//intent = new Intent(this, SearchableActivity.class);
+			onSearchRequested();
 			return true;
 		case R.id.menu_refresh:
 			returnCurrentJulianDay();
@@ -225,116 +218,9 @@ SearchView.OnQueryTextListener, SearchView.OnCloseListener, Methods  {
 		}
 		Settings.save(preferences);*/
 	}
-	public boolean onQueryTextChange(String newText) {
-		showResults(newText + "*");
-		return false;
-	}
 
-	public boolean onQueryTextSubmit(String query) {
-		showResults(query + "*");
-		return false;
-	}
 
-	public boolean onClose() {
-		showResults("");
-		return false;
-	}
-
-	private void showResults(String query) {
-
-		Cursor cursor = myDbHelper.searchCustomer((query != null ? query
-				.toString() : "@@@@"),myDb);
-
-		if (cursor == null) {
-			//
-		} else {
-			// Specify the columns we want to display in the result
-			String[] from = new String[] { DatabaseHelper.KEY_CITY,
-					DatabaseHelper.KEY_COUNTRY };
-
-			// Specify the Corresponding layout elements where we want the
-			// columns to go
-			int[] to = new int[] { R.id.sCity, R.id.sCountry };
-
-			// Create a simple cursor adapter for the definitions and apply them
-			// to the ListView
-			@SuppressWarnings("deprecation")
-			SimpleCursorAdapter locations = new SimpleCursorAdapter(this,
-					R.layout.locationresult, cursor, from, to);
-			mListView.setAdapter(locations);
-
-			// Define the on-click listener for the list items
-			mListView.setOnItemClickListener(new OnItemClickListener() {
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-					// Get the cursor, positioned to the corresponding row in
-					// the result set
-					searchView.onActionViewCollapsed();
-
-					Cursor cursor = (Cursor) mListView
-							.getItemAtPosition(position);
-
-					// Get the state's capital from this row in the database.
-				/*	String Country = cursor.getString(cursor
-							.getColumnIndexOrThrow("Country"));*/
-					String City = cursor.getString(cursor
-							.getColumnIndexOrThrow("City"));
-
-					String Latitude = cursor.getString(cursor
-							.getColumnIndexOrThrow("Latitude"));
-					mLatitude=Double.parseDouble(Latitude);
-					String Longitude = cursor.getString(cursor
-							.getColumnIndexOrThrow("Longitude"));
-					mLongitude=Double.parseDouble(Longitude);
-					String TimeZone = cursor.getString(cursor
-							.getColumnIndexOrThrow("TimeZone"));
-					mTimeZone=Double.parseDouble(TimeZone)/15.0;
-					
-					
-					Settings.getInstance().setCustomCity(
-							mLocationName);
-					Settings.getInstance().setLatitude(mLatitude);
-					Settings.getInstance().setLongitude(mLongitude);
-
-					Settings.getInstance().setTimezone(mTimeZone);
-					
-					setLatLongLocation();
-					
-					Settings.save(VARIABLE.settings);
-					
-					
-
-					searchView.setQuery("", true);
-
-				}
-
-				
-			});
-		}
-	}
-	private void InitializeSearchMethod() {
-			searchView = (SearchView) findViewById(R.id.search);
-			searchView.setIconifiedByDefault(true);
-			searchView.setOnQueryTextListener(this);
-			searchView.setOnCloseListener(this);
-			mListView = (ListView) findViewById(R.id.list);
-			myDbHelper = new DatabaseHelper(this);
-			
-			/* * Database must be initialized before it can be used. This will ensure
-			 * that the database exists and is the current version.*/
-			 
-			myDbHelper.initializeDataBase();
-
-			try {
-				// A reference to the database can be obtained after initialization.
-				myDb = myDbHelper.getWritableDatabase();
-				
-				// * Place code to use database here.
-				 
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-	}
+	
 	private void setHijriCalender(double mSunsetHour) {
 		double ΔT=0;
 		hc = new HicriCalendar(jd, mTimeZone, mSunsetHour, ΔT);

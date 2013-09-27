@@ -92,6 +92,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center" >
 
+  <!--                   <SearchView
+                        android:id="@+id/search"
+                        android:layout_width="8dp"
+                        android:layout_height="14dp"
+                        android:layout_weight="0.89" >
+                    </SearchView> -->
+
                     <TextView
                         android:id="@+id/city"
                         style="@style/PageTitle"
