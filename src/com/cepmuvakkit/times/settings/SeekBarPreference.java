@@ -97,7 +97,8 @@ public class SeekBarPreference extends Preference implements OnSeekBarChangeList
        
     }
    
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void onBindView(View view) {
         super.onBindView(view);
 

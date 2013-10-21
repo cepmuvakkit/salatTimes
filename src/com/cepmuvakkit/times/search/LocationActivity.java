@@ -16,8 +16,12 @@
 
 package com.cepmuvakkit.times.search;
 
+import java.text.DecimalFormat;
+import java.util.Calendar;
+
 import com.cepmuvakkit.times.R;
 import com.cepmuvakkit.times.SalatTimesMainActivity;
+import com.cepmuvakkit.times.Schedule;
 import com.cepmuvakkit.times.VARIABLE;
 import com.cepmuvakkit.times.settings.Settings;
 
@@ -33,19 +37,69 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.SearchView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Displays a word and its definition.
  */
 public class LocationActivity extends Activity {
 	private double mLatitude, mLongitude,mTimeZone;
+	private String Country,City;
+	private Button confirmButton;
+	private CheckBox onlineSalatChkbox,timezoneChkbox,dstChkBox;	
+	private boolean isSystemTimeZone;
+	private DecimalFormat twoDigitFormat=new DecimalFormat("#0.00°");
+	private DecimalFormat timezonefmt=new DecimalFormat("GMT+#.0;GMT-#.0");;
 
+	//"+#,##0.00;-#"
 	@Override  
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      //  setContentView(R.layout.word);
+        setContentView(R.layout.confirm_city);
+        confirmButton=(Button)findViewById(R.id.confirmLocation);
+        onlineSalatChkbox=(CheckBox)findViewById(R.id.onlineChkbox);
+        timezoneChkbox=(CheckBox)findViewById(R.id.timezoneChkbox);
+        dstChkBox=(CheckBox)findViewById(R.id.dstChkBox);
+        isSystemTimeZone=timezoneChkbox.isChecked();
+     	Calendar now = Calendar.getInstance();
+		mTimeZone = now.getTimeZone().getOffset(now.getTimeInMillis()) / 3600000;
+		timezoneChkbox.setOnClickListener(new OnClickListener() {
 
+	            @Override
+	            public void onClick(View v) {
+	                // TODO Auto-generated method stub
+	                if(timezoneChkbox.isChecked()){
+	                	isSystemTimeZone=true;
+	               }else{
+	            	   isSystemTimeZone=false;
+	            	   dstChkBox.setClickable(true);
+	                }
+	            }
+	        });
+		
+		onlineSalatChkbox.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                if(onlineSalatChkbox.isChecked()){
+                    confirmButton.setText("Download");
+                    timezoneChkbox.setClickable(false);
+                    dstChkBox.setClickable(false);
+               }else{
+                   confirmButton.setText("Confirm");
+                   timezoneChkbox.setClickable(true);
+                }
+            }
+        });
+        
+      
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
             ActionBar actionBar = getActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -59,33 +113,41 @@ public class LocationActivity extends Activity {
         } else {
             cursor.moveToFirst();
 
-           // TextView word = (TextView) findViewById(R.id.word);
-            //TextView definition = (TextView) findViewById(R.id.definition);
+            TextView country = (TextView) findViewById(R.id.country);
+            TextView city = (TextView) findViewById(R.id.city);
+            TextView latitude = (TextView) findViewById(R.id.latitude);
+            TextView longitude = (TextView) findViewById(R.id.longitude);
+            TextView timezone = (TextView) findViewById(R.id.timezone);
+
 
             int wIndex = cursor.getColumnIndexOrThrow(LocationDatabase.KEY_SEARCH);
             int dIndex = cursor.getColumnIndexOrThrow(LocationDatabase.KEY_ORDER);
            // int dCountry = cursor.getColumnIndexOrThrow(LocationDatabase.KEY_COUNTRY);
             //int dCity = cursor.getColumnIndexOrThrow(LocationDatabase.KEY_CITY);
 
-			String City = cursor.getString(cursor.getColumnIndexOrThrow("City"));
+			Country = cursor.getString(cursor.getColumnIndexOrThrow("Country"));
+			City = cursor.getString(cursor.getColumnIndexOrThrow("City"));
 			String Latitude = cursor.getString(cursor.getColumnIndexOrThrow("Latitude"));
 			mLatitude = Double.parseDouble(Latitude);
 			String Longitude = cursor.getString(cursor.getColumnIndexOrThrow("Longitude"));
 			mLongitude = Double.parseDouble(Longitude);
-			String TimeZone = cursor.getString(cursor.getColumnIndexOrThrow("TimeZone"));
-			mTimeZone= Double.parseDouble(TimeZone);
-			Settings.getInstance().setCustomCity(City);
-			Settings.getInstance().setLatitude(mLatitude);
-			Settings.getInstance().setLongitude(mLongitude);
-			Settings.getInstance().setTimezone(mTimeZone);
+			final String TimeZone = cursor.getString(cursor.getColumnIndexOrThrow("TimeZone"));
+			if (!isSystemTimeZone)
+			{
 			
-			Settings.save(VARIABLE.settings);
+				mTimeZone= Double.parseDouble(TimeZone);
+			}
+			
+		
             
-          //  word.setText(cursor.getString(wIndex));
-            //definition.setText(cursor.getString(dIndex));
+			country.setText(Country);
+			city.setText(City);
+			latitude.setText( twoDigitFormat.format(mLatitude)+(mLatitude>0?"N":"S"));
+			longitude.setText( twoDigitFormat.format(mLongitude)+(mLongitude>0?"E":"W"));
+			timezone.setText(timezonefmt.format(mTimeZone));
+			
             
           
-			//definition.setText(Country+" "+City+" "+TimeZone+" "+Latitude+" "+Longitude);
         }
     }
 
@@ -119,4 +181,33 @@ public class LocationActivity extends Activity {
                 return false;
         }
     }
+    
+	public void confirmLocation(View view) {
+		
+		Schedule.setSettingsDirty(); 
+		Settings.getInstance().setCountryName(Country);
+		Settings.getInstance().setCustomCity(City);
+		Settings.getInstance().setLatitude(mLatitude);
+		Settings.getInstance().setLongitude(mLongitude);
+		Settings.getInstance().setTimezone(mTimeZone);
+		Settings.save(VARIABLE.settings);
+		
+		Intent myIntent = new Intent(this, SalatTimesMainActivity.class);
+		//myIntent.putExtra("key", value); //Optional parameters
+		this.startActivity(myIntent);
+	
+	}
+	
+	
+	public void cancelButton(View view) {
+		Intent myIntent = new Intent(this, SalatTimesMainActivity.class);
+		this.startActivity(myIntent);
+	
+	}
+	
+	public void onlineCheckBox(View view) {
+		Toast.makeText(this, "onlineCheckBox", Toast.LENGTH_SHORT).show();
+
+	
+	}
 }

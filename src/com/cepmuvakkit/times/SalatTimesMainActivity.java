@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Locale;
 
 import com.cepmuvakkit.times.receiver.StartNotificationReceiver;
+import com.cepmuvakkit.times.search.LocationActivity;
+import com.cepmuvakkit.times.search.LocationDatabase;
+import com.cepmuvakkit.times.search.LocationProvider;
 import com.cepmuvakkit.times.settings.SalatTimesPreferenceActivity;
 import com.cepmuvakkit.times.conversion.hicricalendar.HicriCalendar;
 import com.cepmuvakkit.times.R;
@@ -20,17 +23,27 @@ import com.cepmuvakkit.times.posAlgo.EarthPosition;
 import com.cepmuvakkit.times.posAlgo.Methods;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.app.Activity;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class SalatTimesMainActivity extends Activity implements Methods  {
 	
@@ -41,55 +54,139 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 	//private long startTime = 60 * 10 * 1000;
 	private final long interval = 1000;
 	private CountDownTimer countDownTimer;
-	//private boolean  timerHasStarted = false;
 	private GregorianCalendar[] schedule;
-	//private SharedPreferences preferences;
-	private double mTimeZone;
 	private int  altitude;
-	private double jd,jdn,mLatitude, mLongitude;
+	private double jd,jdn,mLatitude, mLongitude,mTimeZone;
 	private String mLocationName;
-	private DecimalFormat twoDigitFormat;
+	private DecimalFormat twoDigitFormat=new DecimalFormat("#0.00°");;
 	private Calendar now;
-	//private GregorianCalendar[] times;
 	private double[] salatTimes = new double[7];;
-
 	private HicriCalendar hc;
 	private Context context;
 	private GPSTracker gps;
 
+    private TextView mTextView;
+    private ListView mListView;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		twoDigitFormat = new DecimalFormat("#0.00°");
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.salat_times_main);
-	
-	//	setLatLongLocation();
-
-	//	preferences=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-	//	Settings.load(preferences);
 		context=getBaseContext();
 		VARIABLE.context = this;
 		if(VARIABLE.settings == null) VARIABLE.settings =PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
 		
 		returnCurrentJulianDay();
-		//calculateSalatTimes();
+		
 		updateTodaysTimetableAndNotification();
-		setLatLongLocation();
-		//setSalatTimesText(salatTimes);
+		
+		
 		setGregorianCalender(jd);
+		
 		setHijriCalender(salatTimes[4]);
+		
 		setTimerCountDown(now);
-		//InitializeSearchMethod(); 
 
+	    mTextView = (TextView) findViewById(R.id.text);
+        mListView = (ListView) findViewById(R.id.list);
+
+        handleIntent(getIntent());
+		
+		
 	}
 	
 	
+	 @Override
+	    protected void onNewIntent(Intent intent) {
+	        // Because this activity has set launchMode="singleTop", the system calls this method
+	        // to deliver the intent if this activity is currently the foreground activity when
+	        // invoked again (when the user executes a search from this activity, we don't create
+	        // a new instance of this activity, so the system delivers the search intent here)
+	        handleIntent(intent);
+	    }
+	 
+	 private void handleIntent(Intent intent) {
+	        if (Intent.ACTION_VIEW.equals(intent.getAction())) {
+	            // handles a click on a search suggestion; launches activity to show word
+	            Intent locationIntent = new Intent(this, LocationActivity.class);
+	            locationIntent.setData(intent.getData());
+	            startActivity(locationIntent);
+	        } else if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+	            // handles a search query
+	            String query = intent.getStringExtra(SearchManager.QUERY);
+	            showResults(query);
+	        }
+	    }
+	 
+	 
+	 /**
+	     * Searches the dictionary and displays results for the given query.
+	     * @param query The search query
+	     */
+	    private void showResults(String query) {
+
+	        @SuppressWarnings("deprecation")
+			Cursor cursor = managedQuery(LocationProvider.CONTENT_URI, null, null,
+	                                new String[] {query}, null);
+
+	        if (cursor == null) {
+	            // There are no results
+	            mTextView.setText(getString(R.string.no_results, new Object[] {query}));
+	        } else {
+	            // Display the number of results
+	            int count = cursor.getCount();
+	            String countString = getResources().getQuantityString(R.plurals.search_results,
+	                                    count, new Object[] {count, query});
+	            mTextView.setText(countString);
+
+	            // Specify the columns we want to display in the result
+	            String[] from = new String[] { LocationDatabase.KEY_SEARCH,
+	                                           LocationDatabase.KEY_ORDER };
+
+	            // Specify the corresponding layout elements where we want the columns to go
+	            int[] to = new int[] { R.id.word,
+	                                   R.id.definition };
+
+	            // Create a simple cursor adapter for the definitions and apply them to the ListView
+	            @SuppressWarnings("deprecation")
+				SimpleCursorAdapter words = new SimpleCursorAdapter(this,
+	                                          R.layout.result, cursor, from, to);
+	            mListView.setAdapter(words);
+
+	            // Define the on-click listener for the list items
+	            mListView.setOnItemClickListener(new OnItemClickListener() {
+
+	                @Override
+	                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+	                    // Build the Intent used to open LocationActivity with a specific word Uri
+	                    Intent locationIntent = new Intent(getApplicationContext(), LocationActivity.class);
+	                    Uri data = Uri.withAppendedPath(LocationProvider.CONTENT_URI,
+	                                                    String.valueOf(id));
+	                    locationIntent.setData(data);
+	                    startActivity(locationIntent);
+	                }
+	            });
+	        }
+	    }
+
+	   
+	 
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.salat_times_main, menu);
-		return true;
+		 MenuInflater inflater = getMenuInflater();
+	        inflater.inflate(R.menu.salat_times_main, menu);
+
+	        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
+	            SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+	            SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
+	            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+	            searchView.setIconifiedByDefault(false);
+	        }
+
+	        return true;
+	        
 	}
 	
 
@@ -98,12 +195,12 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 		Intent intent;
 
 		switch (item.getItemId()) {
-		case R.id.menu_search:
-			//intent = new Intent(this, SearchableActivity.class);
-			onSearchRequested();
-			return true;
+		 case R.id.menu_search:
+             onSearchRequested();
+             return true;
 		case R.id.menu_refresh:
 			returnCurrentJulianDay();
+			Schedule.setSettingsDirty();
 			updateTodaysTimetableAndNotification();
 			//calculateSalatTimes();
 //			setGregorianCalender(jd);
@@ -114,6 +211,7 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 			//Settings.getInstance().setDataFromGPS(false);
 			//Settings.getInstance().setManualInput(false);
 			getLocation();
+			Schedule.setSettingsDirty();
 			//calculateSalatTimes();
 			updateTodaysTimetableAndNotification();
 			//setTimerCountDown(now);
@@ -122,6 +220,7 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 		case R.id.menu_settings:
 			intent = new Intent(this,SalatTimesPreferenceActivity.class);
 			startActivityForResult(intent, 2);
+			Schedule.setSettingsDirty();
 			Settings.load(VARIABLE.settings);
 			return true;	
 		}
@@ -131,8 +230,11 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 		mCityText = (TextView) findViewById(R.id.city);
 		mLocationText = (TextView) findViewById(R.id.location);
 		mLocationName=Settings.getInstance().getCustomCity();
+		mLatitude=Settings.getInstance().getLatitude();
+		mLongitude=Settings.getInstance().getLongitude();
+		mTimeZone=Settings.getInstance().getTimezone();
 		mCityText.setText(mLocationName);
-		mLocationText.setText(twoDigitFormat.format(mLatitude)+" "+twoDigitFormat.format(mLongitude)+"±"+mTimeZone);
+		mLocationText.setText(twoDigitFormat.format(mLatitude)+" "+twoDigitFormat.format(mLongitude)+mTimeZone);
 	}
 	private void setTimerCountDown(Calendar now) {
 		int i = 0;
@@ -156,36 +258,29 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 	protected void onDestroy() {
 		super.onDestroy();
 		try {
-			//Toast.makeText(this, "onStart()", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "onDestroy()", Toast.LENGTH_SHORT).show();
 			gps.stopUsingGPS();
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
-			try {
-				//myDbHelper.close();
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			} finally {
-			//	myDb.close();
-			}
 		}
 	
 	@Override
 	protected void onStart() {
 		super.onStart();
-		//Toast.makeText(this, "onStart()", Toast.LENGTH_SHORT).show();
-	//	calculateSalatTimes();
+		VARIABLE.mainActivityIsRunning = true;
 
+		Toast.makeText(this, "onStart()", Toast.LENGTH_SHORT).show();
+		//updateTodaysTimetableAndNotification();
 	}
 
 	@Override
 	protected void onResume() {
 		VARIABLE.mainActivityIsRunning = true;
-		setLatLongLocation();
-		updateTodaysTimetableAndNotification();
-		super.onResume();
-		
+		//setLatLongLocation();
+		Toast.makeText(this, "onResume", Toast.LENGTH_SHORT).show();
 
+		//updateTodaysTimetableAndNotification();
+		super.onResume();
 	}
 
 	@Override
@@ -194,15 +289,15 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 		VARIABLE.mainActivityIsRunning = false;
 
 		super.onPause();
-		//Toast.makeText(this, "onPause", Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, "onPause", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
 	protected void onRestart() {
-		super.onPause();
-		getLocation();
-		updateTodaysTimetableAndNotification();
 		Toast.makeText(this, " onRestart()", Toast.LENGTH_SHORT).show();
+		super.onPause();
+		//updateTodaysTimetableAndNotification();
+		
 	}
 
 	
@@ -236,7 +331,7 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 	}
 	
 	/** Called when the user clicks the calculatePreviousDay */
-	public void calculatePreviousDay(@SuppressWarnings("unused") View view) {
+	public void calculatePreviousDay(View view) {
 		//mPreviousButton = (Button) findViewById(R.id.PrevButton);
 		jd--;
 		calculateSalatTimes(jd);
@@ -247,7 +342,7 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 		
 	}
 	/** Called when the user clicks the calculateNextDay */
-	public void calculateNextDay(@SuppressWarnings("unused") View view) {
+	public void calculateNextDay(View view) {
 		//mNextButton = (Button) findViewById(R.id.nextButton);
 		jd++;
 		calculateSalatTimes(jd);
@@ -261,10 +356,8 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 		Calendar c = AstroLib.convertJulian2Gregorian(julian);
 		Locale locale = Locale.getDefault();
 		int year = c.get(Calendar.YEAR);
-		String monthName = c.getDisplayName(Calendar.MONTH, Calendar.SHORT,
-				locale);
-		String dayName = c.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG,
-				locale);
+		String monthName = c.getDisplayName(Calendar.MONTH, Calendar.SHORT,	locale);
+		String dayName = c.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG,locale);
 		int day = c.get(Calendar.DAY_OF_MONTH);
 		mYear = (TextView) findViewById(R.id.year);
 		mDayOfMonth = (TextView) findViewById(R.id.dayOfMonth);
@@ -305,7 +398,6 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 		salatTimes[6] = ptimesNext.getSalat()[FAJR]+24;// Next fajr
 		setSalatTimesText();
 
-		// = ptimes.getSalatinGregorian(Settings.getInstance().isHanafiMathab()?ASR_HANEFI:ASR_SHAFI);
 
 		
 	}
@@ -391,24 +483,24 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 		super.onWindowFocusChanged(hasFocus);
 		if (Schedule.settingsAreDirty()) {
 			updateTodaysTimetableAndNotification();
-			//VARIABLE.updateWidgets(this);
+			VARIABLE.updateWidgets(this);
 		}
 
 	}
 	private void updateTodaysTimetableAndNotification() {
 		//returnCurrentJulianDay();
-		//calculateSalatTimes();
-
 		StartNotificationReceiver.setNext(this);
 		schedule=StartNotificationReceiver.today.getTimes();
-		salatTimes[0] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.FAJR]);
-		salatTimes[1] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.SUNRISE]);
-		salatTimes[2] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.DHUHR]);
-		salatTimes[3] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.ASR]);
-		salatTimes[4] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.MAGHRIB]);
-		salatTimes[5] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.ISHAA]);
-		salatTimes[6] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.NEXT_FAJR])+24;// Next fajr
-		
+		salatTimes[CONSTANT.IMSAK] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.FAJR]);
+		salatTimes[CONSTANT.GUNES] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.SUNRISE]);
+		salatTimes[CONSTANT.OGLE] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.DHUHR]);
+		salatTimes[CONSTANT.IKINDI] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.ASR]);
+		salatTimes[CONSTANT.AKSAM] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.MAGHRIB]);
+		salatTimes[CONSTANT.YATSI] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.ISHAA]);
+		salatTimes[CONSTANT.SONRAKI_IMSAK] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.NEXT_FAJR])+24;// Next fajr
+		//Toast.makeText(this, "updateTodaysTimetableAndNotification", Toast.LENGTH_SHORT).show();
+
+		setLatLongLocation();
 		setSalatTimesText();
 		setGregorianCalender(jd);
 		setHijriCalender(salatTimes[4]);

@@ -170,23 +170,23 @@
     <string name="early_not_in_minutes">Early Notification (Minutes)</string>
     <string name="reminder_time">Reminder Time</string>
     <string name="fajr_notification">Fajr Notification</string>
-    <string name="fajr_iqamah">Fajr Iqamah</string>
-    <string name="fajr_iqamah_ew">Fajr Iqamah (Early Warning)  Notification</string>
+    <string name="fajr_iqamah">Fajr Early Warning</string>
+    <string name="fajr_iqamah_ew">Fajr Early Warning Notification</string>
     <string name="sunrise_notification">SunRise Notification</string>
-    <string name="sunrise_iqamah">SunRise Iqamah</string>
-    <string name="sunrise_iqamah_ew">SunRise Iqamah (Early Warning)  Notification</string>
+    <string name="sunrise_iqamah">SunRise Early Warning</string>
+    <string name="sunrise_iqamah_ew">SunRise Early Warning Notification</string>
     <string name="zuhr_notification">Dhuhr Notification</string>
-    <string name="zuhr_iqamah">Dhuhr Iqamah</string>
-    <string name="zuhr_iqamah_ew">Dhuhr Iqamah (Early Warning)  Notification</string>
+    <string name="zuhr_iqamah">Dhuhr Early Warning</string>
+    <string name="zuhr_iqamah_ew">Dhuhr Early Warning Notification</string>
     <string name="asr_notification">Asr Notification</string>
-    <string name="asr_iqamah">Asr Iqamah</string>
-    <string name="asr_iqamah_ew">Asr Iqamah (Early Warning)  Notification</string>
+    <string name="asr_iqamah">Asr Early Warning</string>
+    <string name="asr_iqamah_ew">Asr Early Warning Notification</string>
     <string name="magrib_notification">Mahgrib Notification</string>
-    <string name="magrib_iqamah">Mahgrib Iqamah</string>
-    <string name="magrib_iqamah_ew">Mahgrib Iqamah (Early Warning)  Notification</string>
+    <string name="magrib_iqamah">Mahgrib Early Warning</string>
+    <string name="magrib_iqamah_ew">Mahgrib Early Warning Notification</string>
     <string name="isha_notification">Ishaa Notification</string>
-    <string name="isha_iqamah">Ishaa Iqamah</string>
-    <string name="isha_iqamah_ew">Ishaa Iqamah (Early Warning)  Notification</string>
+    <string name="isha_iqamah">Ishaa Early Warning</string>
+    <string name="isha_iqamah_ew">Ishaa Early Warning Notification</string>
 
     <!--  -->
     <string name="offset_time">Offset Value</string>
@@ -208,6 +208,19 @@
     <string name="offset_important">Important Notice</string>
     <string name="offset_adjust">OffSet Adjustments</string>
     <string name="offset_notice">Before modifying times, make sure to select the best settings for your area, and choose the correct Time Zone from device settings</string>
-    <!--  -->
-
+    <!--Search  -->
+    <!-- Search failure message. -->
+    <string name="no_results">No results found for \"%s\"</string>
+        <!-- Shown above search results when we receive a search request. -->
+    <plurals name="search_results">
+      <item quantity="one">%1$d result for \"%2$s\": </item>
+      <item quantity="other">%1$d results for \"%2$s\": </item>
+    </plurals>
+   <!-- The description that will show up in the search settings for this source.  -->
+    <string name="settings_description">Definitions of words</string>
+	   <!-- The label for use as a searchable item -->
+    <string name="search_label">Find City</string>
+    <string name="tamam">Tamam</string>
+      <string name="next_time_marker_reverse">&lt;</string>
+    
 </resources>

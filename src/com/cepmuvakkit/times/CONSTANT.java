@@ -42,7 +42,7 @@ public class CONSTANT {
 		new String[]{}
 
 	};
-	public static final short DEFAULT_CALCULATION_METHOD = 0; // Diyanet işleri
+//	public static final short DEFAULT_CALCULATION_METHOD = 0; // Diyanet işleri
 
 	public static final short FAJR_EW = 0, FAJR = 1,SUNRISE_EW = 2,SUNRISE = 3,DHUHR_EW = 4,DHUHR = 5, ASR_EW = 6, ASR= 7, MAGHRIB_EW = 8, MAGHRIB = 9, ISHAA_EW = 10,ISHAA = 11,NEXT_FAJR_EW = 12,NEXT_FAJR = 13; // Notification Times
 	public static final short IMSAK = 0, GUNES = 1, OGLE = 2, IKINDI = 3, AKSAM = 4, YATSI = 5, SONRAKI_IMSAK = 6; // Notification Times

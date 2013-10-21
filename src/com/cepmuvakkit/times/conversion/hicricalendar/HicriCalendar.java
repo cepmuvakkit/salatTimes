@@ -19,9 +19,6 @@ import com.cepmuvakkit.times.posAlgo.AstroLib;
 public class HicriCalendar {
 
 	private byte dayOfWeek;
-	private String ismiSuhiri[] = { "MUHARRAM", "SAFAR", "REBIULAVVAL",
-			"REBIULAHIR", "JAMIZIALAVVAL", "JAMIZIALAHIR", "RAJAB", "SHABAN",
-			"RAMADHAN", "SHAVVAL", "ZILKADE", "ZILHICCE" };
 	private int Lunation;
 	
 	private int hijriYear, hijriMonth, hijriDay;

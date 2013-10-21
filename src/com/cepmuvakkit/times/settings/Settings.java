@@ -8,7 +8,7 @@ import android.content.SharedPreferences.Editor;
 
 public class Settings implements Methods, HigherLatitude {
 	private static Settings instance = new Settings();
-	private String customCity;
+	private String customCity,countryName;
 	private boolean isHanafiMathab=false;
 	private double longitude, latitude, timezone;
 	private int calculationMethodsIndex, estMethodofFajr, estMethodofIsha,
@@ -38,14 +38,13 @@ public class Settings implements Methods, HigherLatitude {
 	}
 
 
-	public String getCustomCity() {
-		return customCity;
-	}
-
 	public void setCustomCity(String customCity) {
 		this.customCity = customCity;
 	}
 
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
+	}
 	public double getTimezone() {
 		return timezone;
 	}
@@ -101,6 +100,7 @@ public class Settings implements Methods, HigherLatitude {
 	}
 
 	public static void load(SharedPreferences pref) {
+		instance.countryName = pref.getString("country", "Türkiye");
 		instance.customCity = pref.getString("customCity", "DefCustomCity");
 		instance.latitude = Double.parseDouble(pref.getString("latitude", "39.938"));
 		instance.longitude = Double.parseDouble(pref.getString("longitude", "32.848"));
@@ -120,7 +120,7 @@ public class Settings implements Methods, HigherLatitude {
 	public static void save(SharedPreferences preferences) {
 
 		Editor editor = preferences.edit();
-
+		editor.putString("country", instance.countryName);
 		editor.putString("customCity", instance.customCity);
 		editor.putString("latitude", instance.latitude + "");
 		editor.putString("longitude", instance.longitude + "");
@@ -135,6 +135,10 @@ public class Settings implements Methods, HigherLatitude {
 		
 
 		editor.commit();
+	}
+	public String getCustomCity() {
+		// TODO Auto-generated method stub
+		return customCity;
 	}
 
 }

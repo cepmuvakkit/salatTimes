@@ -3,7 +3,7 @@ package com.cepmuvakkit.times.receiver;
 import java.util.Calendar;
 import com.cepmuvakkit.times.Schedule;
 import com.cepmuvakkit.times.WakeLock;
-import com.cepmuvakkit.times.services.StartNotificationService;
+import com.cepmuvakkit.times.service.StartNotificationService;
 
 
 import android.app.AlarmManager;
@@ -36,7 +36,7 @@ public class StartNotificationReceiver extends BroadcastReceiver {
 		Intent intent = new Intent(context, StartNotificationReceiver.class);
 		intent.putExtra("timeIndex", timeIndex);
 		intent.putExtra("actualTime", actualTime.getTimeInMillis());
-		//Log.i("StartNotificationReceiver", "actualTime.getTimeInMillis() — get item number " + actualTime.getTimeInMillis()+"-"+timeIndex);
+		Log.i("StartNotificationReceiver", "actualTime.getTimeInMillis() — get item number " + actualTime.getTimeInMillis()+"-"+timeIndex);
 		AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
 		am.set(AlarmManager.RTC_WAKEUP, actualTime.getTimeInMillis(),PendingIntent.getBroadcast(context, 0, intent,	PendingIntent.FLAG_CANCEL_CURRENT));
 	}

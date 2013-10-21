@@ -1,3 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
+    <issue id="DefaultLocale">
+        <ignore path="src/com/cepmuvakkit/times/Notifier.java" />
+    </issue>
+    <issue id="InlinedApi">
+        <ignore path="src/com/cepmuvakkit/times/SalatTimesMainActivity.java" />
+    </issue>
+    <issue id="NewApi">
+        <ignore path="src/com/cepmuvakkit/times/SalatTimesMainActivity.java" />
+        <ignore path="src/com/cepmuvakkit/times/search/LocationActivity.java" />
+    </issue>
 </lint>

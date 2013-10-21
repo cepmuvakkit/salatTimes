@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/backgroundpattern"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/TextView03"
+            style="@style/PageTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.10"
+            android:background="@color/duzarkaplan"
+            android:text="Confirm City Information to get/calculate Prayer times" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/duzarkaplan"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/TextView01"
+            style="@style/PageTitle3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:background="@color/duzarkaplan"
+            android:text="Country" />
+
+        <TextView
+            android:id="@+id/country"
+            style="@style/PageTitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:background="@color/duzarkaplan"
+            android:text="Türkiye" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/duzarkaplan"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/TextView04"
+            style="@style/PageTitle3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:background="@color/duzarkaplan"
+            android:text="City" />
+
+        <TextView
+            android:id="@+id/city"
+            style="@style/PageTitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:background="@color/duzarkaplan"
+            android:text="Ankara" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/duzarkaplan"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/TextView06"
+            style="@style/PageTitle3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:background="@color/duzarkaplan"
+            android:text="Latitude" />
+
+        <TextView
+            android:id="@+id/latitude"
+            style="@style/PageTitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:background="@color/duzarkaplan"
+            android:text="39.98°N" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/duzarkaplan"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/TextView05"
+            style="@style/PageTitle3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:background="@color/duzarkaplan"
+            android:text="Longitude" />
+
+        <TextView
+            android:id="@+id/longitude"
+            style="@style/PageTitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:background="@color/duzarkaplan"
+            android:text="32.98°E" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/duzarkaplan"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/TextView02"
+            style="@style/PageTitle3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:background="@color/duzarkaplan"
+            android:text="TimeZone" />
+
+        <TextView
+            android:id="@+id/timezone"
+            style="@style/PageTitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:text="+3 GMT" />
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/onlineChkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/duzarkaplan"
+        android:checked="true"
+        android:onClick="onlineCheckBox"
+        android:text="Download Salat Times from diyanet.gov.tr"
+        android:textSize="11dp" />
+
+    <CheckBox
+        android:id="@+id/timezoneChkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_margin="5dp"
+        android:background="@color/duzarkaplan"
+        android:checked="true"
+        android:clickable="false"
+        android:text="Use Phone&apos;s default TimeZone"
+        android:textSize="11dp" />
+
+    <CheckBox
+        android:id="@+id/dstChkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:clickable="false"
+        android:background="@color/duzarkaplan"
+        android:checked="false"
+        android:text="Use Daylight Savings"
+        android:textSize="11dp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/duzarkaplan"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/confirmLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="confirmLocation"
+            android:text="Download" />
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="cancelButton"
+            android:text="Cancel" />
+    </LinearLayout>
+
+</LinearLayout>

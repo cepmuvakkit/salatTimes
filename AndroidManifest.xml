@@ -6,43 +6,39 @@
 
     <uses-sdk
         android:minSdkVersion="7"
-        android:targetSdkVersion="17" />
+        android:targetSdkVersion="18" />
+
+    <uses-permission android:name="android.permission.ACCESS_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_GPS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:name="com.cepmuvakkit.times.SalatTimesMainActivity"
-            android:label="@string/app_name" >
-
-            <!-- enable the search dialog to send searches to SearchableActivity -->
-            <meta-data
-                android:name="android.app.default_searchable"
-                android:value=".SearchableActivity" />
-
+            android:name=".SalatTimesMainActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name="Reset"
-            android:excludeFromRecents="true"
-            android:label="Reset" >
-            <intent-filter>
-                <action android:name="com.cepmuvakkit.times.Reset" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".SearchableActivity"
-          android:launchMode="singleTop" >
+            <!-- Receives the search request. -->
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
+                <!-- No category needed, because the Intent will specify this class component -->
             </intent-filter>
 
+            <!-- Points to searchable meta data. -->
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
@@ -57,20 +53,45 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".receiver.ClearNotificationReceiver" />
+        <receiver android:name=".receiver.ClickNotificationReceiver" />
         <receiver android:name=".receiver.ClearNotificationReceiver" />
 
-        <service android:name=".services.StartNotificationService" />
+        <service android:name=".service.StartNotificationService" />
+
+        <receiver
+            android:name=".widget.TimetableWidgetProvider"
+            android:label="salat timetable" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_timetable" />
+        </receiver>
+        <receiver
+            android:name=".widget.NextNotificationWidgetProvider"
+            android:label="salat next time" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_next_notification" />
+        </receiver>
+
+        <!-- Displays the definition of a word. -->
+        <activity android:name="com.cepmuvakkit.times.search.LocationActivity" />
+        <!-- Provides search suggestions for words and their definitions. -->
+        <provider
+            android:name="com.cepmuvakkit.times.search.LocationProvider"
+            android:authorities="com.cepmuvakkit.times.search.LocationProvider"
+            android:exported="false" />
+        <!-- Points to searchable activity so the whole app can invoke search. -->
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value=".SalatTimesMainActivity" />
     </application>
-
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_GPS" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
 </manifest>

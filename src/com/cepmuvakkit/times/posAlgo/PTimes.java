@@ -224,24 +224,17 @@ public class PTimes implements Methods, HigherLatitude {
     }
 
     private int[] getOffsetSalat (int calculationMethod) {
-    	
-    	/*offsetSalat[0] =-1;
-		 offsetSalat[1] =-6;
-		 offsetSalat[2] =7;
-		 offsetSalat[3] =5;
-		 offsetSalat[4] =5;
-		 offsetSalat[5] =9;
-		 offsetSalat[6] =2;  	 */
-    
     	if (calculationMethod == TURKISH_RELIGOUS) {
-    	 int[] offsetSalat={
+    		
+    		 int[] offsetSalat={-1, -6, 7, 5, 5, 9, 2};
+    	/* int[] offsetSalat={
     			 VARIABLE.settings.getInt("offsetFajr", -1), 
     			 VARIABLE.settings.getInt("offsetSunrise", -6),
     			 VARIABLE.settings.getInt("offsetDhur", 7),
     			 VARIABLE.settings.getInt("offsetAsr", 5), 
     			 VARIABLE.settings.getInt("offsetAsr", 5), 
     			 VARIABLE.settings.getInt("offsetMagrib", 9), 
-    			 VARIABLE.settings.getInt("offsetIsha", 2)}; 
+    			 VARIABLE.settings.getInt("offsetIsha", 2)}; */
 				return offsetSalat;
 		} else {
 	    	 int[] offsetSalat={
@@ -316,8 +309,7 @@ public class PTimes implements Methods, HigherLatitude {
     }
     private double getFixedTime() {
     	
-    	return  (90)/60;
-
+    	return VARIABLE.settings.getInt("fixedMin",90)/60.0;
     }
     
     /*public void setFajrEstMethod();

@@ -1,4 +1,4 @@
-package com.cepmuvakkit.times.services;
+package com.cepmuvakkit.times.service;
 
 import java.lang.Runnable;
 
@@ -9,13 +9,13 @@ import com.cepmuvakkit.times.SalatTimesMainActivity;
 import com.cepmuvakkit.times.VARIABLE;
 import com.cepmuvakkit.times.WakeLock;
 
-import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 public class StartNotificationService extends Service {
 
@@ -60,6 +60,8 @@ public class StartNotificationService extends Service {
 
 				short timeIndex = intent.getShortExtra("timeIndex", (short)-1);
 				long actualTime = intent.getLongExtra("actualTime", (long) 0);
+				Log.i("StartNotificationService", "timeIndex -- actualTime " + timeIndex+"---"+actualTime);
+
 				if (timeIndex == -1) { // Got here from boot
 					if (VARIABLE.settings
 							.getBoolean("bismillahOnBootUp", false)) {

@@ -19,11 +19,13 @@ public class Notifier {
 	private static Context context;
 	private static Notification notification;
 	
+	@SuppressWarnings("deprecation")
 	public static void start(Context context, short timeIndex, long actualTime) {
 		Notifier.context = context;
 
-		if (timeIndex == CONSTANT.NEXT_FAJR)
-			timeIndex = CONSTANT.FAJR;
+		if (timeIndex == CONSTANT.NEXT_FAJR_EW)
+			timeIndex = CONSTANT.FAJR_EW;
+
 		//0 1 2 3 4 5 6 7 8 9 10 11 12 13
 		notification = new Notification(R.drawable.icon, "", actualTime);
 		notification.tickerText = ((timeIndex != CONSTANT.SUNRISE)&(timeIndex % 2!=0) ? context
@@ -32,13 +34,10 @@ public class Notifier {
 				+ " "
 				+  context.getString(CONSTANT.TIME_NAMES[timeIndex])
 				.toLowerCase();
-
-		int notificationMethod = VARIABLE.settings.getInt("notificationMethod"
-				+ timeIndex,
-				timeIndex == CONSTANT.SUNRISE ? CONSTANT.NOTIFICATION_NONE
-						: CONSTANT.NOTIFICATION_DEFAULT);
-		if (notificationMethod == CONSTANT.NOTIFICATION_NONE
-				|| (timeIndex == CONSTANT.SUNRISE && !VARIABLE.alertSunrise())) {
+		int notificationMethod =Integer.parseInt( VARIABLE.settings.getString("notificationMethod"+timeIndex,
+				timeIndex == CONSTANT.SUNRISE ? CONSTANT.NOTIFICATION_NONE+"":CONSTANT.NOTIFICATION_DEFAULT+""));
+		if (notificationMethod == CONSTANT.NOTIFICATION_NONE||(timeIndex == CONSTANT.SUNRISE && !VARIABLE.alertSunrise())) 
+		{
 			WakeLock.release();
 			return;
 		}
@@ -125,6 +124,7 @@ public class Notifier {
 					.cancelAll();
 	}
 
+	@SuppressWarnings("deprecation")
 	private static void startNotification() {
 		Intent i = new Intent(context, SalatTimesMainActivity.class);
 		notification.setLatestEventInfo(context, context

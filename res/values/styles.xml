@@ -137,11 +137,56 @@
         <item name="android:shadowDy">0</item>
         <item name="android:shadowRadius">2</item>
     </style>
-
-    <style name="PageTitle">
+    
+    <style name="SpookyTextPanel2">
+        <item name="android:textSize">@dimen/vakitTextPanel</item>
+        <item name="android:background">@color/duzarkaplan</item>
+        <item name="android:textColor">@color/Black</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+ 		<item name="android:gravity">center</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:shadowColor">@color/Green</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
+        <item name="android:shadowRadius">2</item>
+    </style>
+<style name="PageTitle">
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">#ffffffff</item>
         <item name="android:background">@color/duzarkaplan</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">3.0dp</item>
+        <item name="android:shadowColor">#ff000000</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">-1.0</item>
+        <item name="android:shadowRadius">1.0</item>
+    </style>
+    
+
+<style name="PageTitle3">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:background">@color/duzarkaplan</item>
+        <item name="android:gravity">left</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">3.0dp</item>
+        <item name="android:shadowColor">#ff000000</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">-1.0</item>
+        <item name="android:shadowRadius">1.0</item>
+    </style>
+    
+    
+
+<style name="PageTitle2">
+        <item name="android:textStyle">bold</item>
+      <item name="android:background">@color/duzarkaplan</item>
+        <item name="android:textColor">@color/Black</item>
+     
         <item name="android:gravity">center</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
