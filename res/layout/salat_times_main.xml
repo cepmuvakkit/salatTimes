@@ -45,8 +45,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:paddingTop="4.0dip"
-                        android:text="Recep"
-                        android:textSize="@dimen/vakitTextPanel" />
+                        android:text="JamaziAvval"
+                        android:textSize="@dimen/monthText" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -78,15 +78,6 @@
                 android:layout_gravity="top|center"
                 android:orientation="vertical" >
 
-                <TextView
-                    style="@style/SpookyTextPanel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:layout_margin="3.0dip"
-                    android:text="@string/SalatTimes"
-                    android:textSize="@dimen/smallTextSize2" />
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -115,8 +106,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="39.98°;32.87° +3 GMT"
+                    android:text="39.98° N ;32.87°E"
                     android:textSize="@dimen/smallTextSize" />
+
+                <TextView
+                    android:id="@+id/timezone"
+                    style="@style/SpookyTextPanel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="GMT+3"
+                    android:textSize="@dimen/smallTextSize" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -139,7 +140,7 @@
                         android:paddingTop="5.0dip"
                         android:text="Mayıs"
                         android:textColor="@color/sun_projection"
-                        android:textSize="@dimen/vakitTextPanel" />
+                        android:textSize="@dimen/monthText" />
 
                     <TextView
                         android:id="@+id/dayOfMonth"
@@ -175,345 +176,352 @@
             </LinearLayout>
         </FrameLayout>
 
-        <ScrollView
-            android:id="@+id/sv1"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical" >
+            android:layout_height="fill_parent"
+            android:layout_gravity="center" >
 
-            <FrameLayout
+            <ScrollView
+                android:id="@+id/sv1"
                 android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1.0" >
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="fill_parent"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="@dimen/smallTextSize"
-                    android:layout_marginTop="@dimen/bosluk2"
-                    android:background="@color/duzarkaplan"
-                    android:orientation="vertical" >
+                    android:layout_weight="1.0" >
 
-                    <FrameLayout
-                        android:layout_width="fill_parent"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/default_gap"
-                        android:layout_marginRight="@dimen/default_gap"
-                        android:layout_marginTop="@dimen/default_gap"
-                        android:background="@drawable/panel_vakit5" >
+                        android:layout_marginBottom="@dimen/smallTextSize"
+                        android:layout_marginTop="@dimen/bosluk2"
+                        android:background="@color/duzarkaplan"
+                        android:orientation="vertical" >
 
-                        <LinearLayout
+                        <FrameLayout
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:orientation="horizontal" >
+                            android:layout_marginLeft="@dimen/default_gap"
+                            android:layout_marginRight="@dimen/default_gap"
+                            android:layout_marginTop="@dimen/default_gap"
+                            android:background="@drawable/panel_vakit5" >
 
-                            <ImageView
-                                android:id="@+id/ImageView08"
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/voice_margin"
-                                android:src="@drawable/volume1" />
+                                android:layout_gravity="center"
+                                android:orientation="horizontal" >
 
-                            <TextView
-                                android:id="@+id/TextView09"
-                                style="@style/ShadowText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/voice_margin"
-                                android:gravity="left"
-                                android:layout_weight="1.0"
-                                android:text="@string/fajr"
-                                android:textSize="@dimen/vakitTextSize" />
-                            <TextView
-                                android:id="@+id/FajrTxtView"
-                                style="@style/ShadowText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:layout_weight="0.25"
-                                android:gravity="right"
-                                android:text="00:00"
-                                android:textSize="@dimen/vakitTextSize" />
+                                <ImageView
+                                    android:id="@+id/ImageView08"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/voice_margin"
+                                    android:src="@drawable/volume1" />
 
-                             <ImageView
+                                <TextView
+                                    android:id="@+id/TextView09"
+                                    style="@style/ShadowText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/voice_margin"
+                                    android:layout_weight="1.0"
+                                    android:gravity="left"
+                                    android:text="@string/fajr"
+                                    android:textSize="@dimen/vakitTextSize" />
+
+                                <TextView
+                                    android:id="@+id/FajrTxtView"
+                                    style="@style/ShadowText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:layout_weight="0.25"
+                                    android:gravity="right"
+                                    android:text="00:00"
+                                    android:textSize="@dimen/vakitTextSize" />
+
+                                <ImageView
                                     android:id="@+id/ImageView07"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="@dimen/voice_margin"
                                     android:src="@drawable/d_vib_off" />
-                        
-                        </LinearLayout>
-                    </FrameLayout>
+                            </LinearLayout>
+                        </FrameLayout>
 
-                    <FrameLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/default_gap"
-                        android:layout_marginRight="@dimen/default_gap"
-                        android:layout_marginTop="@dimen/default_gap"
-                        android:background="@drawable/panel_vakit5" >
-
-                        <LinearLayout
+                        <FrameLayout
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:orientation="horizontal" >
+                            android:layout_marginLeft="@dimen/default_gap"
+                            android:layout_marginRight="@dimen/default_gap"
+                            android:layout_marginTop="@dimen/default_gap"
+                            android:background="@drawable/panel_vakit5" >
 
-                            <ImageView
-                                android:id="@+id/ImageView05"
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/voice_margin"
-                                android:src="@drawable/volume1" />
+                                android:layout_gravity="center"
+                                android:orientation="horizontal" >
 
-                            <TextView
-                                android:id="@+id/TextView06"
-                                style="@style/ShadowText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="left"
-                                android:layout_marginLeft="@dimen/voice_margin"
-                                android:layout_weight="1.0"
-                                android:text="@string/sunrise"
-                                android:textSize="@dimen/vakitTextSize" />
+                                <ImageView
+                                    android:id="@+id/ImageView05"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/voice_margin"
+                                    android:src="@drawable/volume1" />
 
-                            <TextView
-                                android:id="@+id/SunRiseTxtView"
-                                style="@style/ShadowText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.25"
-                                android:text="00:00"
-                                android:layout_alignParentRight="true" 
-                                android:gravity="right"            
-                                android:textSize="@dimen/vakitTextSize" />
+                                <TextView
+                                    android:id="@+id/TextView06"
+                                    style="@style/ShadowText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:layout_marginLeft="@dimen/voice_margin"
+                                    android:layout_weight="1.0"
+                                    android:text="@string/sunrise"
+                                    android:textSize="@dimen/vakitTextSize" />
 
-                            <ImageView
-                                android:id="@+id/ImageView03"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/voice_margin"
-                                android:src="@drawable/d_vib_off" />
-                        </LinearLayout>
-                    </FrameLayout>
+                                <TextView
+                                    android:id="@+id/SunRiseTxtView"
+                                    style="@style/ShadowText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_weight="0.25"
+                                    android:gravity="right"
+                                    android:text="00:00"
+                                    android:textSize="@dimen/vakitTextSize" />
 
-                    <FrameLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/default_gap"
-                        android:layout_marginRight="@dimen/default_gap"
-                        android:layout_marginTop="@dimen/default_gap"
-                        android:background="@drawable/panel_vakit5" >
+                                <ImageView
+                                    android:id="@+id/ImageView03"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="@dimen/voice_margin"
+                                    android:src="@drawable/d_vib_off" />
+                            </LinearLayout>
+                        </FrameLayout>
 
-                        <LinearLayout
+                        <FrameLayout
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:orientation="horizontal" >
+                            android:layout_marginLeft="@dimen/default_gap"
+                            android:layout_marginRight="@dimen/default_gap"
+                            android:layout_marginTop="@dimen/default_gap"
+                            android:background="@drawable/panel_vakit5" >
 
-                            <ImageView
-                                android:id="@+id/ImageView06"
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/voice_margin"
-                                android:src="@drawable/volume1" />
+                                android:layout_gravity="center"
+                                android:orientation="horizontal" >
 
-                            <TextView
-                                android:id="@+id/TextView04"
-                                style="@style/ShadowText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="left"
-                                android:layout_marginLeft="@dimen/voice_margin"
-                                android:layout_weight="1.0"
-                                android:text="@string/dhuhr"
-                                android:textSize="@dimen/vakitTextSize" />
+                                <ImageView
+                                    android:id="@+id/ImageView06"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/voice_margin"
+                                    android:src="@drawable/volume1" />
 
-                            <TextView
-                                android:id="@+id/ZuhrTxtView"
-                                style="@style/ShadowText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.25"
-                                android:gravity="right"
-                                android:text="00:00"
-                                android:textSize="@dimen/vakitTextSize" />
+                                <TextView
+                                    android:id="@+id/TextView04"
+                                    style="@style/ShadowText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:layout_marginLeft="@dimen/voice_margin"
+                                    android:layout_weight="1.0"
+                                    android:text="@string/dhuhr"
+                                    android:textSize="@dimen/vakitTextSize" />
 
-                            <ImageView
-                                android:id="@+id/ImageView04"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/voice_margin"
-                                android:src="@drawable/d_vib_off" />
-                        </LinearLayout>
-                    </FrameLayout>
+                                <TextView
+                                    android:id="@+id/ZuhrTxtView"
+                                    style="@style/ShadowText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.25"
+                                    android:gravity="right"
+                                    android:text="00:00"
+                                    android:textSize="@dimen/vakitTextSize" />
 
-                    <FrameLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/default_gap"
-                        android:layout_marginRight="@dimen/default_gap"
-                        android:layout_marginTop="@dimen/default_gap"
-                        android:background="@drawable/panel_vakit5" >
+                                <ImageView
+                                    android:id="@+id/ImageView04"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="@dimen/voice_margin"
+                                    android:src="@drawable/d_vib_off" />
+                            </LinearLayout>
+                        </FrameLayout>
 
-                        <LinearLayout
+                        <FrameLayout
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:orientation="horizontal" >
+                            android:layout_marginLeft="@dimen/default_gap"
+                            android:layout_marginRight="@dimen/default_gap"
+                            android:layout_marginTop="@dimen/default_gap"
+                            android:background="@drawable/panel_vakit5" >
 
-                            <ImageView
-                                android:id="@+id/ImageView02"
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/voice_margin"
-                                android:src="@drawable/volume1" />
+                                android:layout_gravity="center"
+                                android:orientation="horizontal" >
 
-                            <TextView
-                                android:id="@+id/TextView01"
-                                style="@style/ShadowText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="left"
-                                android:layout_marginLeft="@dimen/voice_margin"
-                                android:layout_weight="1.0"
-                                android:text="@string/asr"
-                                android:textSize="@dimen/vakitTextSize" />
+                                <ImageView
+                                    android:id="@+id/ImageView02"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/voice_margin"
+                                    android:src="@drawable/volume1" />
 
-                            <TextView
-                                android:id="@+id/AsrTxtView"
-                                style="@style/ShadowText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.25"
-                                android:text="00:00"
-                                android:gravity="right"
-                                android:textSize="@dimen/vakitTextSize" />
+                                <TextView
+                                    android:id="@+id/TextView01"
+                                    style="@style/ShadowText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:layout_marginLeft="@dimen/voice_margin"
+                                    android:layout_weight="1.0"
+                                    android:text="@string/asr"
+                                    android:textSize="@dimen/vakitTextSize" />
 
-                            <ImageView
-                                android:id="@+id/ImageView01"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/voice_margin"
-                                android:src="@drawable/d_vib_off" />
-                        </LinearLayout>
-                    </FrameLayout>
+                                <TextView
+                                    android:id="@+id/AsrTxtView"
+                                    style="@style/ShadowText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.25"
+                                    android:gravity="right"
+                                    android:text="00:00"
+                                    android:textSize="@dimen/vakitTextSize" />
 
-                    <FrameLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/default_gap"
-                        android:layout_marginRight="@dimen/default_gap"
-                        android:layout_marginTop="@dimen/default_gap"
-                        android:background="@drawable/panel_vakit5" >
+                                <ImageView
+                                    android:id="@+id/ImageView01"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="@dimen/voice_margin"
+                                    android:src="@drawable/d_vib_off" />
+                            </LinearLayout>
+                        </FrameLayout>
 
-                        <LinearLayout
+                        <FrameLayout
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:orientation="horizontal" >
+                            android:layout_marginLeft="@dimen/default_gap"
+                            android:layout_marginRight="@dimen/default_gap"
+                            android:layout_marginTop="@dimen/default_gap"
+                            android:background="@drawable/panel_vakit5" >
 
-                            <ImageView
-                                android:id="@+id/ImageView012"
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/voice_margin"
-                                android:src="@drawable/volume1" />
+                                android:layout_gravity="center"
+                                android:orientation="horizontal" >
 
-                            <TextView
-                                android:id="@+id/TextView02"
-                                style="@style/ShadowText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="left"
-                                android:layout_marginLeft="@dimen/voice_margin"
-                                android:layout_weight="1.0"
-                                android:text="@string/maghrib"
-                                android:textSize="@dimen/vakitTextSize" />
+                                <ImageView
+                                    android:id="@+id/ImageView012"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/voice_margin"
+                                    android:src="@drawable/volume1" />
 
-                            <TextView
-                                android:id="@+id/MagribTxtView"
-                                style="@style/ShadowText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.25"
-                                android:text="00:00"
-                                android:gravity="right"
-                                android:textSize="@dimen/vakitTextSize" />
+                                <TextView
+                                    android:id="@+id/TextView02"
+                                    style="@style/ShadowText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:layout_marginLeft="@dimen/voice_margin"
+                                    android:layout_weight="1.0"
+                                    android:text="@string/maghrib"
+                                    android:textSize="@dimen/vakitTextSize" />
 
-                            <ImageView
-                                android:id="@+id/imsakVibrationIcon"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/voice_margin"
-                                android:src="@drawable/d_vib_off" />
-                        </LinearLayout>
-                    </FrameLayout>
+                                <TextView
+                                    android:id="@+id/MagribTxtView"
+                                    style="@style/ShadowText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.25"
+                                    android:gravity="right"
+                                    android:text="00:00"
+                                    android:textSize="@dimen/vakitTextSize" />
 
-                    <FrameLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="@dimen/default_gap"
-                        android:layout_marginLeft="@dimen/default_gap"
-                        android:layout_marginRight="@dimen/default_gap"
-                        android:layout_marginTop="@dimen/default_gap"
-                        android:background="@drawable/panel_vakit5" >
+                                <ImageView
+                                    android:id="@+id/imsakVibrationIcon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="@dimen/voice_margin"
+                                    android:src="@drawable/d_vib_off" />
+                            </LinearLayout>
+                        </FrameLayout>
 
-                        <LinearLayout
+                        <FrameLayout
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:orientation="horizontal" >
+                            android:layout_marginBottom="@dimen/default_gap"
+                            android:layout_marginLeft="@dimen/default_gap"
+                            android:layout_marginRight="@dimen/default_gap"
+                            android:layout_marginTop="@dimen/default_gap"
+                            android:background="@drawable/panel_vakit5" >
 
-                            <ImageView
-                                android:id="@+id/ImageView10"
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/voice_margin"
-                                android:src="@drawable/volume1" />
+                                android:layout_gravity="center"
+                                android:orientation="horizontal" >
 
-                            <TextView
-                                android:id="@+id/TextView10"
-                                style="@style/ShadowText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="left"
-                                android:layout_marginLeft="@dimen/voice_margin"
-                                android:layout_weight="1.0"
-                                android:text="@string/ishaa"
-                                android:textSize="@dimen/vakitTextSize" />
+                                <ImageView
+                                    android:id="@+id/ImageView10"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/voice_margin"
+                                    android:src="@drawable/volume1" />
 
-                            <TextView
-                                android:id="@+id/IshaTxtView"
-                                style="@style/ShadowText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.25"
-                                android:text="00:00"
-                                android:gravity="right"
-                                android:textSize="@dimen/vakitTextSize" />
+                                <TextView
+                                    android:id="@+id/TextView10"
+                                    style="@style/ShadowText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:layout_marginLeft="@dimen/voice_margin"
+                                    android:layout_weight="1.0"
+                                    android:text="@string/ishaa"
+                                    android:textSize="@dimen/vakitTextSize" />
 
-                            <ImageView
-                                android:id="@+id/ImageView09"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/voice_margin"
-                                android:src="@drawable/d_vib_off" />
-                        </LinearLayout>
-                    </FrameLayout>
-                </LinearLayout>
-            </FrameLayout>
-        </ScrollView>
+                                <TextView
+                                    android:id="@+id/IshaTxtView"
+                                    style="@style/ShadowText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.25"
+                                    android:gravity="right"
+                                    android:text="00:00"
+                                    android:textSize="@dimen/vakitTextSize" />
+
+                                <ImageView
+                                    android:id="@+id/ImageView09"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="@dimen/voice_margin"
+                                    android:src="@drawable/d_vib_off" />
+                            </LinearLayout>
+                        </FrameLayout>
+                    </LinearLayout>
+                </FrameLayout>
+            </ScrollView>
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -542,7 +550,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@color/duzarkaplan"
-                android:text="00:00:00" />
+                android:text="00:00:00"
+                android:textColor="@color/White"
+                android:textSize="14dp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/nextButton"

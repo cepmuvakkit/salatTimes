@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Salat Times New</string>
+    <string name="app_name">Salat Times</string>
     <string name="action_settings">Settings</string>
-    <string name="app_label">Şehir Ara</string>
-    <string name="search_hint">İstediğiniz İl yada İlçeyi yazabilirsiniz</string>
-    <string name="search_instructions">Arama kutusunu şehir seçmek için kullanabilirsiniz</string>
+    <string name="app_label">Search City</string>
+    <string name="search_hint">Type your City or State Name</string>
+    <string name="search_instructions">Search box can be used for select City</string>
+    <string name="salat_timetable">Salat Timetable</string>
+    <string name="salat_next_time">Salat Next Time</string>
     
      <!--Menu Texts -->
      <string name="refresh">Refresh</string>
@@ -63,13 +65,13 @@
     <string name="maghrib">Maghrib</string>
     <string name="ishaa">Isha</string>
     <string name="next_fajr">Next Fajr</string>
-    <string name="fajr_ew">Fajr is Comming!</string>
-    <string name="sunrise_ew">Sunrise Comming!</string>
-    <string name="dhuhr_ew">Dhuhr is Comming!</string>
-    <string name="asr_ew">Asr is Comming!</string>
-    <string name="maghrib_ew">Maghrib is Comming!</string>
-    <string name="ishaa_ew">Isha is Comming!</string>
-    <string name="next_fajr_ew">Next Fajr is Comming!</string>
+    <string name="fajr_ew">Fajr is Coming!</string>
+    <string name="sunrise_ew">Sunrise Coming!</string>
+    <string name="dhuhr_ew">Dhuhr is Coming!</string>
+    <string name="asr_ew">Asr is Coming!</string>
+    <string name="maghrib_ew">Maghrib is Coming!</string>
+    <string name="ishaa_ew">Isha is Coming!</string>
+    <string name="next_fajr_ew">Next Fajr is Coming!</string>
 
     <!-- Preferences Desc -->
 
@@ -220,7 +222,7 @@
     <string name="settings_description">Definitions of words</string>
 	   <!-- The label for use as a searchable item -->
     <string name="search_label">Find City</string>
-    <string name="tamam">Tamam</string>
+    <string name="tamam">Okey</string>
       <string name="next_time_marker_reverse">&lt;</string>
     
 </resources>

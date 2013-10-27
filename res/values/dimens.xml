@@ -12,6 +12,7 @@
      <dimen name="smallTextSize">8dp</dimen>
         <dimen name="smallTextSize2">11dp</dimen>
     <dimen name="vakitTextPanel">15dp</dimen>
+     <dimen name="monthText">12dp</dimen>
     
     
 

@@ -58,9 +58,9 @@ public class StartNotificationService extends Service {
 
 				VARIABLE.updateWidgets(context);
 
-				short timeIndex = intent.getShortExtra("timeIndex", (short)-1);
+				short timeIndex = intent.getShortExtra("timeIndex", (short)-1);//Burada crash ediyor
 				long actualTime = intent.getLongExtra("actualTime", (long) 0);
-				Log.i("StartNotificationService", "timeIndex -- actualTime " + timeIndex+"---"+actualTime);
+				//Log.i("StartNotificationService", "timeIndex -- actualTime " + timeIndex+"---"+actualTime);
 
 				if (timeIndex == -1) { // Got here from boot
 					if (VARIABLE.settings

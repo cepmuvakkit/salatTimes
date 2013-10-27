@@ -33,6 +33,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -49,7 +50,7 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 	
 	private TextView mTimer,mFajr,mSunRise,mZuhr,mAsr,mMagrib,mIsha;
 	private TextView mYear, mDayOfMonth, mDayName, mMonthName, mHijriYear,
-			mHijriDayOfMonth, mHijriDayName, mHijriMonthName, mCityText,mLocationText;
+			mHijriDayOfMonth, mHijriDayName, mHijriMonthName, mCityText,mLocationText,mTimeZoneText;
 	//private Button  mPreviousButton, mNextButton;
 	//private long startTime = 60 * 10 * 1000;
 	private final long interval = 1000;
@@ -58,7 +59,9 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 	private int  altitude;
 	private double jd,jdn,mLatitude, mLongitude,mTimeZone;
 	private String mLocationName;
-	private DecimalFormat twoDigitFormat=new DecimalFormat("#0.00°");;
+	private DecimalFormat twoDigitFormat=new DecimalFormat("#0.00°");
+	private DecimalFormat timezonefmt=new DecimalFormat("GMT+#.0;GMT-#.0");
+
 	private Calendar now;
 	private double[] salatTimes = new double[7];;
 	private HicriCalendar hc;
@@ -229,12 +232,22 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 	private void setLatLongLocation() {
 		mCityText = (TextView) findViewById(R.id.city);
 		mLocationText = (TextView) findViewById(R.id.location);
+		mTimeZoneText = (TextView) findViewById(R.id.timezone);
+
+		
 		mLocationName=Settings.getInstance().getCustomCity();
 		mLatitude=Settings.getInstance().getLatitude();
 		mLongitude=Settings.getInstance().getLongitude();
 		mTimeZone=Settings.getInstance().getTimezone();
 		mCityText.setText(mLocationName);
-		mLocationText.setText(twoDigitFormat.format(mLatitude)+" "+twoDigitFormat.format(mLongitude)+mTimeZone);
+		mLocationText.setText(twoDigitFormat.format(mLatitude)+(mLatitude>0?"N":"S")
+				+" "+twoDigitFormat.format(mLongitude)+(mLongitude>0?"E":"W"));
+		try {
+			mTimeZoneText.setText(timezonefmt.format(mTimeZone));
+		} catch (Exception e) {
+			Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT);
+		}
+		
 	}
 	private void setTimerCountDown(Calendar now) {
 		int i = 0;
@@ -258,7 +271,7 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 	protected void onDestroy() {
 		super.onDestroy();
 		try {
-			Toast.makeText(this, "onDestroy()", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(this, "onDestroy()", Toast.LENGTH_SHORT).show();
 			gps.stopUsingGPS();
 		} catch (Exception e) {
 		}
@@ -269,15 +282,14 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 		super.onStart();
 		VARIABLE.mainActivityIsRunning = true;
 
-		Toast.makeText(this, "onStart()", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, "onStart()", Toast.LENGTH_SHORT).show();
 		//updateTodaysTimetableAndNotification();
 	}
 
 	@Override
 	protected void onResume() {
 		VARIABLE.mainActivityIsRunning = true;
-		//setLatLongLocation();
-		Toast.makeText(this, "onResume", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, "onResume", Toast.LENGTH_SHORT).show();
 
 		//updateTodaysTimetableAndNotification();
 		super.onResume();
@@ -289,12 +301,12 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 		VARIABLE.mainActivityIsRunning = false;
 
 		super.onPause();
-		Toast.makeText(this, "onPause", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, "onPause", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
 	protected void onRestart() {
-		Toast.makeText(this, " onRestart()", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, " onRestart()", Toast.LENGTH_SHORT).show();
 		super.onPause();
 		//updateTodaysTimetableAndNotification();
 		
@@ -411,12 +423,28 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 		mMagrib=(TextView)findViewById(R.id.MagribTxtView);
 		mIsha=(TextView)findViewById(R.id.IshaTxtView);
 		
+		int nextTimeIndex = Schedule.today().nextTimeIndex();
+		if (nextTimeIndex % 2 == 0) nextTimeIndex++;
+		int index=(nextTimeIndex-1)/2;
+		
+		
 		mFajr.setText(AstroLib.getStringHHMM(salatTimes[0]));
 		mSunRise.setText(AstroLib.getStringHHMM(salatTimes[1]));
 		mZuhr.setText(AstroLib.getStringHHMM(salatTimes[2]));
 		mAsr.setText(AstroLib.getStringHHMM(salatTimes[3]));
 		mMagrib.setText(AstroLib.getStringHHMM(salatTimes[4]));
 		mIsha.setText(AstroLib.getStringHHMM(salatTimes[5]));
+		if	(index==0)	mFajr.setTextColor(Color.RED);
+		mSunRise.setTextColor(Color.RED);
+		mZuhr.setTextColor(Color.RED);
+		mAsr.setTextColor(Color.RED);
+		mMagrib.setTextColor(Color.RED);
+		mIsha.setTextColor(Color.RED);
+
+		
+		
+		
+		
 	}
 	
 	private void getLocation() {
@@ -491,6 +519,7 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 		//returnCurrentJulianDay();
 		StartNotificationReceiver.setNext(this);
 		schedule=StartNotificationReceiver.today.getTimes();
+	//getTime()
 		salatTimes[CONSTANT.IMSAK] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.FAJR]);
 		salatTimes[CONSTANT.GUNES] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.SUNRISE]);
 		salatTimes[CONSTANT.OGLE] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.DHUHR]);

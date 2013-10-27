@@ -40,15 +40,16 @@ public class NextNotificationWidgetProvider extends AppWidgetProvider {
 		if(VARIABLE.settings.getInt("timeFormatIndex", CONSTANT.DEFAULT_TIME_FORMAT) != CONSTANT.DEFAULT_TIME_FORMAT) {
 			timeFormat = new SimpleDateFormat("k:mm");
 		}
-		final int nextTimeIndex = Schedule.today().nextTimeIndex();
+		int nextTimeIndex = Schedule.today().nextTimeIndex();
+		if (nextTimeIndex % 2 == 0) nextTimeIndex++;
 		final GregorianCalendar nextTime = Schedule.today().getTimes()[nextTimeIndex];
 		for(int i = 0; i < appWidgetIds.length; i++) {
 			RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_next_notification);
 
 			PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, SalatTimesMainActivity.class), 0);
 			views.setOnClickPendingIntent(R.id.widget_next_notification, pendingIntent);
-
-			views.setTextViewText(R.id.time_name, context.getString(times[nextTimeIndex]));
+		
+			views.setTextViewText(R.id.time_name, context.getString(times[(nextTimeIndex-1)/2]));
 			views.setTextViewText(R.id.next_notification, timeFormat.format(nextTime.getTime()));
 
 			appWidgetManager.updateAppWidget(appWidgetIds[i], views);

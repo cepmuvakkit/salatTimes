@@ -204,6 +204,7 @@
     <!--  -->
    <!-- The description that will show up in the search settings for this source.  -->
     <string name="settings_description">Definitions of words</string>
-
+    <string name="tamam">Tamam</string>
+    
     <!-- General instructions in the main activity. -->
 </resources>

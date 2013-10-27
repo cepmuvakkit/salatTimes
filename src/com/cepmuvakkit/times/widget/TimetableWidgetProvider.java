@@ -62,6 +62,9 @@ public class TimetableWidgetProvider extends AppWidgetProvider {
 			timeFormat = new SimpleDateFormat("k:mm");
 		}
 		final SimpleDateFormat amPmFormat = new SimpleDateFormat("a");
+		int nextTimeIndex = Schedule.today().nextTimeIndex();
+		if (nextTimeIndex % 2 == 0) nextTimeIndex++;
+		int index=(nextTimeIndex-1)/2;		
 
 		final GregorianCalendar[] schedule = Schedule.today().getTimes();
 		for (int i = 0; i < appWidgetIds.length; i++) {
@@ -75,19 +78,17 @@ public class TimetableWidgetProvider extends AppWidgetProvider {
 			for (int j = 0; j < times.length; j++) {
 				views.setTextViewText(text[j], context.getText(locale_text[j]));
 				views.setTextViewText(times[j],
-						timeFormat.format(schedule[j].getTime()));
+						timeFormat.format(schedule[2*j+1].getTime()));
 				if (VARIABLE.settings.getInt("timeFormatIndex",
 						CONSTANT.DEFAULT_TIME_FORMAT) == CONSTANT.DEFAULT_TIME_FORMAT) {
 					views.setTextViewText(am_pms[j],
-							amPmFormat.format(schedule[j].getTime()));
+							amPmFormat.format(schedule[2*j+1].getTime()));
 				} else {
 
 					views.setTextViewText(am_pms[j], "");
 				}
-				views.setTextViewText(
-						markers[j],
-						j == Schedule.today().nextTimeIndex() ? context
-								.getString(R.string.next_time_marker_reverse)
+	
+				views.setTextViewText(markers[j],(j==index)?context.getString(R.string.next_time_marker_reverse)
 								: "");
 			}
 			appWidgetManager.updateAppWidget(appWidgetIds[i], views);

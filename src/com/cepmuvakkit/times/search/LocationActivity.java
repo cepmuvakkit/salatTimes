@@ -55,7 +55,7 @@ public class LocationActivity extends Activity {
 	private CheckBox onlineSalatChkbox,timezoneChkbox,dstChkBox;	
 	private boolean isSystemTimeZone;
 	private DecimalFormat twoDigitFormat=new DecimalFormat("#0.00°");
-	private DecimalFormat timezonefmt=new DecimalFormat("GMT+#.0;GMT-#.0");;
+	private DecimalFormat timezonefmt=new DecimalFormat("GMT+#.0;GMT-#.0");
 
 	//"+#,##0.00;-#"
 	@Override  
