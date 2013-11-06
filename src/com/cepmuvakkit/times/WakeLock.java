@@ -13,7 +13,7 @@ public class WakeLock {
 
 		wakeLock = ((PowerManager) context
 				.getSystemService(Context.POWER_SERVICE)).newWakeLock(
-				PowerManager.PARTIAL_WAKE_LOCK, "Adhan Alarm Wake Lock");
+				PowerManager.PARTIAL_WAKE_LOCK, "Salat Times Wake Lock");
 		wakeLock.acquire();
 	}
 

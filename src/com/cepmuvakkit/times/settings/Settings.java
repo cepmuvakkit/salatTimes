@@ -1,5 +1,6 @@
 package com.cepmuvakkit.times.settings;
 
+import com.cepmuvakkit.times.CONSTANT;
 import com.cepmuvakkit.times.posAlgo.HigherLatitude;
 import com.cepmuvakkit.times.posAlgo.Methods;
 
@@ -9,9 +10,10 @@ import android.content.SharedPreferences.Editor;
 public class Settings implements Methods, HigherLatitude {
 	private static Settings instance = new Settings();
 	private String customCity,countryName;
+	int calculationMethodsIndex;
 	private boolean isHanafiMathab=false;
 	private double longitude, latitude, timezone;
-	private int calculationMethodsIndex, estMethodofFajr, estMethodofIsha,
+	private int  estMethodofFajr, estMethodofIsha,
 			temperature, pressure, altitude;
 	
 	public Settings() {
@@ -108,7 +110,7 @@ public class Settings implements Methods, HigherLatitude {
 		instance.temperature = Integer.parseInt(pref.getString("temperature","10"));
 		instance.pressure = Integer	.parseInt(pref.getString("pressure", "1010"));
 		instance.altitude = Integer.parseInt(pref.getString("altitude", "0"));
-		instance.calculationMethodsIndex = Integer.parseInt(pref.getString("calculationMethodsIndex", TURKISH_RELIGOUS + ""));
+		instance.calculationMethodsIndex = Integer.parseInt(pref.getString("calculationMethodsIndex",CONSTANT.DEFAULT_CALCULATION_METHOD+""));
 		instance.estMethodofFajr = Integer.parseInt(pref.getString("estMethodofFajr", NO_ESTIMATION + ""));
 		instance.estMethodofIsha = Integer.parseInt(pref.getString("estMethodofIsha", NO_ESTIMATION + ""));
 		instance.isHanafiMathab = pref.getString("isHanafiMathab", "0").equals("1");

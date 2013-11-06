@@ -2,6 +2,7 @@ package com.cepmuvakkit.times;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -23,6 +24,7 @@ import com.cepmuvakkit.times.posAlgo.EarthPosition;
 import com.cepmuvakkit.times.posAlgo.Methods;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,6 +34,8 @@ import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.view.Menu;
@@ -81,6 +85,7 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 		if(VARIABLE.settings == null) VARIABLE.settings =PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		
 		returnCurrentJulianDay();
+		configureCalculationDefaults();
 		
 		updateTodaysTimetableAndNotification();
 		
@@ -385,7 +390,7 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 	private void calculateSalatTimes(double jd) {
 		Settings.load(VARIABLE.settings);
 		byte[] estMethod =Settings.getInstance().getEstMethods();
-		byte calculationMethod = (byte) Settings.getInstance().getCalculationMethodsIndex();
+		byte calculationMethod = (byte) Integer.parseInt(VARIABLE.settings.getString("calculationMethodsIndex",CONSTANT.DEFAULT_CALCULATION_METHOD+""));
 		jdn = Math.round(jd) - 0.5;
 		EarthPosition loc = new EarthPosition(
 				Settings.getInstance().getLatitude(),
@@ -434,14 +439,30 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 		mAsr.setText(AstroLib.getStringHHMM(salatTimes[3]));
 		mMagrib.setText(AstroLib.getStringHHMM(salatTimes[4]));
 		mIsha.setText(AstroLib.getStringHHMM(salatTimes[5]));
-		if	(index==0)	mFajr.setTextColor(Color.RED);
-		mSunRise.setTextColor(Color.RED);
-		mZuhr.setTextColor(Color.RED);
-		mAsr.setTextColor(Color.RED);
-		mMagrib.setTextColor(Color.RED);
-		mIsha.setTextColor(Color.RED);
-
-		
+		if (index == 0) {
+			((TextView) findViewById(R.id.FajrTxtLbl)).setTextColor(Color.RED);
+			mFajr.setTextColor(Color.RED);
+		}
+		if (index == 1) {
+			((TextView) findViewById(R.id.SunRiseTxtLbl)).setTextColor(Color.RED);
+			mSunRise.setTextColor(Color.RED);
+		}
+		if (index == 2) {
+			((TextView) findViewById(R.id.DhuhrTxtLbl)).setTextColor(Color.RED);
+			mZuhr.setTextColor(Color.RED);
+		}
+		if (index == 3) {
+			((TextView) findViewById(R.id.AsrTxtLbl)).setTextColor(Color.RED);
+			mAsr.setTextColor(Color.RED);
+		}
+		if (index == 4) {
+			((TextView) findViewById(R.id.MaghribTxtLbl)).setTextColor(Color.RED);
+			mMagrib.setTextColor(Color.RED);
+		}
+		if (index == 5) {
+			((TextView) findViewById(R.id.IshaTxtLbl)).setTextColor(Color.RED);
+			mIsha.setTextColor(Color.RED);
+		}
 		
 		
 		
@@ -506,6 +527,34 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 		return locationName;
 	}
 
+	private void configureCalculationDefaults() {
+		if (!VARIABLE.settings.contains("latitude")
+				|| !VARIABLE.settings.contains("longitude")) {
+
+			getLocation();
+			VARIABLE.updateWidgets(this);
+
+		}
+		if(!VARIABLE.settings.contains("calculationMethodsIndex")) {
+			try {
+				String country = Locale.getDefault().getISO3Country().toUpperCase();
+
+				SharedPreferences.Editor editor = VARIABLE.settings.edit();
+				for(int i = 0; i < CONSTANT.CALCULATION_METHOD_COUNTRY_CODES.length; i++) {
+					if(Arrays.asList(CONSTANT.CALCULATION_METHOD_COUNTRY_CODES[i]).contains(country)) {
+						editor.putString("calculationMethodsIndex",	i+"");
+						editor.commit();
+						VARIABLE.updateWidgets(this);
+						break;
+					}
+				}
+			} catch(Exception ex) {
+				// Wasn't set, oh well we'll uses DEFAULT_CALCULATION_METHOD later
+			}
+		}
+	}
+
+	
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);

@@ -167,8 +167,11 @@
     <!-- ıqamah strings -->
     <string name="notification_settings_sum">Select your notifications and reminders settings</string>
     <string name="notification_settings">Notification Settings</string>
+    	<string name="ew_prayer_notification">Early Warning Prayer Notifications</string>
+    <string name="ew_prayer_settings_sum">Activate  early warning notifications for the selected prayers\nNotify before the given minutes for each prayer</string>
+  
     <string name="prayer_notification">Prayer Notifications</string>
-    <string name="prayer_settings_sum">Activate notifications for the selected prayers\nNotify before the given minutes for each prayer</string>
+    <string name="prayer_settings_sum">Activate notifications for the selected prayers</string>
     <string name="early_not_in_minutes">Early Notification (Minutes)</string>
     <string name="reminder_time">Reminder Time</string>
     <string name="fajr_notification">Fajr Notification</string>

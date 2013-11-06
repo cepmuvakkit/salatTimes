@@ -47,21 +47,18 @@
         <item>@string/recite</item>
         <item>@string/custom</item>
     </string-array>
-    
     <string-array name="notification_methods_values">
         <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
     </string-array>
-    
     <string-array name="notification_methods_sunrise">
         <item>@string/none</item>
         <item>@string/sdefault</item>
         <item>@string/beep</item>
         <item>@string/custom</item>
     </string-array>
-    
     <string-array name="extreme_method_for_fajr">
         <item>@string/no_estimation</item>
         <item>@string/nearest_lat</item>

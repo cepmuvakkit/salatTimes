@@ -31,7 +31,7 @@
                 <PreferenceScreen
                     android:dependency="enable_internal_calc"
                     android:key="dawn_dusk_angle"
-                    android:title="Dawn/Dusk Angle Adjustment">
+                    android:title="Dawn/Dusk Angle Adjustment" >
                     <EditTextPreference
                         android:name="@string/dawn_angle"
                         android:defaultValue="-17.5"
@@ -64,9 +64,9 @@
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:cepmuvakkit="http://cepmuvakkit.com"
                     android:dependency="enable_internal_calc"
-                	android:textColor="#00FFD0"
-                     android:key="times_screen"
+                    android:key="times_screen"
                     android:summary="Change Prayers times manually"
+                    android:textColor="#00FFD0"
                     android:title="Prayer Times Adjustment" >
                     <Preference
                         android:summary="@string/offset_notice"
@@ -121,9 +121,9 @@
                         <com.cepmuvakkit.times.settings.SeekBarPreference
                             android:defaultValue="0"
                             android:key="offsetIsha"
-                            android:textColor="#00FF00"
                             android:max="30"
                             android:summary="@string/offset_sum_isha"
+                            android:textColor="#00FF00"
                             android:title="@string/offset_isha"
                             cepmuvakkit:min="-30"
                             cepmuvakkit:unitsLeft=""
@@ -160,6 +160,7 @@
                     <EditTextPreference
                         android:name="Base Latitude"
                         android:defaultValue="48.5"
+						android:enabled="false"
                         android:key="baseLatitude"
                         android:numeric="decimal|signed"
                         android:summary="@string/base_latitude_sum"
@@ -167,8 +168,8 @@
                     <EditTextPreference
                         android:defaultValue="90"
                         android:enabled="false"
+                        android:inputType="number"
                         android:key="fixedMin"
-						android:inputType="number"
                         android:summary="@string/fixed_time_sum"
                         android:title="@string/fixed_time" />
 
@@ -242,9 +243,9 @@
                 <PreferenceScreen
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:cepmuvakkit="http://cepmuvakkit.com"
-                    android:summary="@string/prayer_settings_sum"
-                    android:title="@string/prayer_notification" >
-                    <PreferenceCategory android:title="@string/fajr" >
+                    android:summary="@string/ew_prayer_settings_sum"
+                    android:title="@string/ew_prayer_notification" >
+                    <PreferenceCategory>
                         <ListPreference
                             android:defaultValue="0"
                             android:dialogTitle="@string/fajr_iqamah"
@@ -263,19 +264,10 @@
                             cepmuvakkit:min="0"
                             cepmuvakkit:unitsLeft=""
                             cepmuvakkit:unitsRight="′" />
-
-                        <ListPreference
-                            android:defaultValue="0"
-                            android:dialogTitle="@string/fajr_notification"
-                            android:entries="@array/notification_methods"
-                            android:entryValues="@array/notification_methods_values"
-                            android:key="notificationMethod1"
-                            android:summary="@string/fajr_notification"
-                            android:title="@string/fajr_notification" />
                     </PreferenceCategory>
-                    <PreferenceCategory android:title="@string/sunrise" >
+                    <PreferenceCategory>
                         <ListPreference
-                           	android:defaultValue="1"
+                            android:defaultValue="1"
                             android:dialogTitle="@string/sunrise_iqamah"
                             android:entries="@array/notification_methods"
                             android:entryValues="@array/notification_methods_values"
@@ -292,20 +284,12 @@
                             cepmuvakkit:min="0"
                             cepmuvakkit:unitsLeft=""
                             cepmuvakkit:unitsRight="′" />
-
-                        <ListPreference
-                           	android:defaultValue="0"
-                            android:dialogTitle="@string/sunrise_notification"
-                            android:entries="@array/notification_methods"
-                            android:entryValues="@array/notification_methods_values"
-                            android:key="notificationMethod3"
-                            android:summary="@string/sunrise_notification"
-                            android:title="@string/sunrise_notification" />
                     </PreferenceCategory>
-                    <PreferenceCategory android:title="@string/dhuhr" >
+                    
+                       <PreferenceCategory>
                         <ListPreference
-                           	android:defaultValue="0"
-                            android:dialogTitle="@string/zuhr_iqamah"
+                            android:defaultValue="1"
+                            android:dialogTitle="@string/zuhr_notification"
                             android:entries="@array/notification_methods"
                             android:entryValues="@array/notification_methods_values"
                             android:key="notificationMethod4"
@@ -313,25 +297,16 @@
                             android:title="@string/zuhr_iqamah" />
 
                         <com.cepmuvakkit.times.settings.SeekBarPreference
-                            android:defaultValue="10"
-                            android:key="ewSetDhuhr"
+                            android:defaultValue="45"
+                            android:key="ewSetSunrise"
                             android:max="60"
                             android:summary="@string/early_not_in_minutes"
                             android:title="@string/reminder_time"
                             cepmuvakkit:min="0"
                             cepmuvakkit:unitsLeft=""
                             cepmuvakkit:unitsRight="′" />
-
-                        <ListPreference
-                            android:defaultValue="1"
-                            android:dialogTitle="@string/zuhr_notification"
-                            android:entries="@array/notification_methods"
-                            android:entryValues="@array/notification_methods_values"
-                            android:key="notificationMethod5"
-                            android:summary="@string/zuhr_notification"
-                            android:title="@string/zuhr_notification" />
                     </PreferenceCategory>
-                    <PreferenceCategory android:title="@string/asr" >
+                    <PreferenceCategory>
                         <ListPreference
                             android:defaultValue="0"
                             android:dialogTitle="@string/asr_iqamah"
@@ -350,17 +325,8 @@
                             cepmuvakkit:min="0"
                             cepmuvakkit:unitsLeft=""
                             cepmuvakkit:unitsRight="′" />
-
-                        <ListPreference
-                            android:defaultValue="1"
-                            android:dialogTitle="@string/asr_notification"
-                            android:entries="@array/notification_methods"
-                            android:entryValues="@array/notification_methods_values"
-                            android:key="notificationMethod7"
-                            android:summary="@string/asr_notification"
-                            android:title="@string/asr_notification" />
                     </PreferenceCategory>
-                    <PreferenceCategory android:title="@string/maghrib" >
+                    <PreferenceCategory>
                         <ListPreference
                             android:defaultValue="0"
                             android:dialogTitle="@string/magrib_iqamah"
@@ -379,17 +345,8 @@
                             cepmuvakkit:min="0"
                             cepmuvakkit:unitsLeft=""
                             cepmuvakkit:unitsRight="′" />
-
-                        <ListPreference
-                            android:defaultValue="1"
-                            android:dialogTitle="@string/magrib_notification"
-                            android:entries="@array/notification_methods"
-                            android:entryValues="@array/notification_methods_values"
-                            android:key="notificationMethod9"
-                            android:summary="@string/magrib_notification"
-                            android:title="@string/magrib_notification" />
                     </PreferenceCategory>
-                    <PreferenceCategory android:title="@string/ishaa" >
+                    <PreferenceCategory>
                         <ListPreference
                             android:defaultValue="0"
                             android:dialogTitle="@string/isha_iqamah"
@@ -408,7 +365,64 @@
                             cepmuvakkit:min="0"
                             cepmuvakkit:unitsLeft=""
                             cepmuvakkit:unitsRight="′" />
-
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:cepmuvakkit="http://cepmuvakkit.com"
+                    android:summary="@string/prayer_settings_sum"
+                    android:title="@string/prayer_notification" >
+                    <PreferenceCategory android:title="@string/fajr" >
+                        <ListPreference
+                            android:defaultValue="0"
+                            android:dialogTitle="@string/fajr_notification"
+                            android:entries="@array/notification_methods"
+                            android:entryValues="@array/notification_methods_values"
+                            android:key="notificationMethod1"
+                            android:summary="@string/fajr_notification"
+                            android:title="@string/fajr_notification" />
+                    </PreferenceCategory>
+                    <PreferenceCategory android:title="@string/sunrise" >
+                        <ListPreference
+                            android:defaultValue="0"
+                            android:dialogTitle="@string/sunrise_notification"
+                            android:entries="@array/notification_methods"
+                            android:entryValues="@array/notification_methods_values"
+                            android:key="notificationMethod3"
+                            android:summary="@string/sunrise_notification"
+                            android:title="@string/sunrise_notification" />
+                    </PreferenceCategory>
+                    <PreferenceCategory android:title="@string/dhuhr" >
+                        <ListPreference
+                            android:defaultValue="1"
+                            android:dialogTitle="@string/zuhr_notification"
+                            android:entries="@array/notification_methods"
+                            android:entryValues="@array/notification_methods_values"
+                            android:key="notificationMethod5"
+                            android:summary="@string/zuhr_notification"
+                            android:title="@string/zuhr_notification" />
+                    </PreferenceCategory>
+                    <PreferenceCategory android:title="@string/asr" >
+                        <ListPreference
+                            android:defaultValue="1"
+                            android:dialogTitle="@string/asr_notification"
+                            android:entries="@array/notification_methods"
+                            android:entryValues="@array/notification_methods_values"
+                            android:key="notificationMethod7"
+                            android:summary="@string/asr_notification"
+                            android:title="@string/asr_notification" />
+                    </PreferenceCategory>
+                    <PreferenceCategory android:title="@string/maghrib" >
+                        <ListPreference
+                            android:defaultValue="1"
+                            android:dialogTitle="@string/magrib_notification"
+                            android:entries="@array/notification_methods"
+                            android:entryValues="@array/notification_methods_values"
+                            android:key="notificationMethod9"
+                            android:summary="@string/magrib_notification"
+                            android:title="@string/magrib_notification" />
+                    </PreferenceCategory>
+                    <PreferenceCategory android:title="@string/ishaa" >
                         <ListPreference
                             android:defaultValue="1"
                             android:dialogTitle="@string/isha_notification"

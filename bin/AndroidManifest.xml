@@ -47,6 +47,19 @@
         </activity>
         <activity android:name="com.cepmuvakkit.times.GPSTracker" >
         </activity>
+        
+          <!-- This is necessary for file browser -->
+        <activity
+            android:name="com.cepmuvakkit.times.filepick.FilePickActivity"
+            android:label="File browser" 
+            android:configChanges="orientation|keyboardHidden">
+            <intent-filter>
+                <action android:name="com.cepmuvakkit.times.filepick.SELECT_DIRECTORY_ACTION"></action>
+            </intent-filter>
+            
+        </activity>
+        <!-- End of file browser necessity -->
+        
 
         <receiver android:name=".receiver.StartNotificationReceiver" >
             <intent-filter>

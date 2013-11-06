@@ -19,7 +19,7 @@ public class Schedule implements Methods, HigherLatitude {
 	public Schedule(GregorianCalendar day) {
 		Settings.load(VARIABLE.settings);
 		byte[] estMethod =Settings.getInstance().getEstMethods();
-		byte calculationMethod = (byte) Settings.getInstance().getCalculationMethodsIndex();
+		byte calculationMethod = (byte) Integer.parseInt(VARIABLE.settings.getString("calculationMethodsIndex",CONSTANT.DEFAULT_CALCULATION_METHOD+""));
 		jd = AstroLib.calculateJulianDay(day);
 		jdn = Math.round(jd) - 0.5;
 		EarthPosition loc = new EarthPosition(

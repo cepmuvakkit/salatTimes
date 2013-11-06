@@ -16,6 +16,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 
 public class NextNotificationWidgetProvider extends AppWidgetProvider {
@@ -33,7 +34,9 @@ public class NextNotificationWidgetProvider extends AppWidgetProvider {
 	}
 	private static void setNextTime(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 		VARIABLE.context = context.getApplicationContext();
-		VARIABLE.settings = VARIABLE.context.getSharedPreferences("settingsFile", Context.MODE_PRIVATE);
+		VARIABLE.settings =PreferenceManager.getDefaultSharedPreferences(VARIABLE.context);
+		
+		//VARIABLE.settings = VARIABLE.context.getSharedPreferences("settingsFile", Context.MODE_PRIVATE);
 	//	new LocaleManagerOwn();
 
 		SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");

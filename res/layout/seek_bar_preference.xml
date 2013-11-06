@@ -3,8 +3,9 @@
     android:id="@android:id/widget_frame"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:background="@color/duzarkaplan"
     android:paddingBottom="5dp"
-    android:paddingLeft="7dp"
+    android:paddingLeft="16dp"
     android:paddingRight="10dp"
     android:paddingTop="5dp" >
 
@@ -12,8 +13,6 @@
         android:id="@android:id/title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:textColor="#ffffff"
         android:textSize="17dp"
         android:textStyle="normal"
@@ -24,7 +23,6 @@
         android:id="@android:id/summary"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_below="@android:id/title" >
     </TextView>
 
@@ -60,8 +58,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_below="@android:id/summary"
-       >
-
+        android:orientation="horizontal" >
     </LinearLayout>
 
 </RelativeLayout>
