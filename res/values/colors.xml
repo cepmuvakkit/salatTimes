@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="translucent_black">#55000000</color>
     <color name="translucent_black_darker">#99000000</color>
     <color name="translucent_black_darkest">#cc000000</color>
@@ -11,6 +12,7 @@
     <color name="sun_projection">#ffffee00</color>
     <color name="sun_rise">#ffffa500</color>
     <color name="sun_set">#ffff5000</color>
+    <color name="dark">#ff333333</color>
     <color name="horizon">#ff00ff00</color>
     <color name="sun_noon">#ffff00ff</color>
     <color name="twi_dawn">#ffff7700</color>
@@ -27,8 +29,11 @@
     <color name="Grey">#7F7F7F</color>
     <color name="DarkGrey">#4F4F4F</color>
     <color name="Green">#0F0</color>
-      <color name="GreenPanel">#c1c7ab</color>
+        <color name="BluePanel">#98c9ff</color>
+    
+    <color name="GreenPanel">#c1c7ab</color>
     <color name="TransparentGrey">#7F000000</color>
     <color name="duzarkaplan">#1c1c1c</color>
-          
+    <color name="duzarkaplan_widget">#c4cab0</color>
+
 </resources>

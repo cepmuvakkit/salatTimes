@@ -44,7 +44,7 @@ public class SalatTimesPreferenceActivity extends PreferenceActivity implements
 		addPreferencesFromResource(R.xml.salat_times_preferences);
 
 		// setValueIndex()
-		onlineCalc = (SwitchPreference) findPreference("enable_internal_calc");
+		//onlineCalc = (SwitchPreference) findPreference("enable_internal_calc");
 		calculationMethodList = (ListPreference) findPreference("calculationMethodsIndex");
 
 		dawn_dusk_angle = (PreferenceScreen) findPreference("dawn_dusk_angle");

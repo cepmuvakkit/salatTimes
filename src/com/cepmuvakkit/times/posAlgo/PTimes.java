@@ -226,16 +226,8 @@ public class PTimes implements Methods, HigherLatitude {
     private int[] getOffsetSalat (int calculationMethod) {
     	if (calculationMethod == TURKISH_RELIGOUS) {
     		
-    		 int[] offsetSalat={-1, -6, 7, 5, 5, 9, 2};
-    	/* int[] offsetSalat={
-    			 VARIABLE.settings.getInt("offsetFajr", -1), 
-    			 VARIABLE.settings.getInt("offsetSunrise", -6),
-    			 VARIABLE.settings.getInt("offsetDhur", 7),
-    			 VARIABLE.settings.getInt("offsetAsr", 5), 
-    			 VARIABLE.settings.getInt("offsetAsr", 5), 
-    			 VARIABLE.settings.getInt("offsetMagrib", 9), 
-    			 VARIABLE.settings.getInt("offsetIsha", 2)}; */
-				return offsetSalat;
+    		 int[] offsetSalat={-1, -10, 7, 5, 5, 13, 2};
+    			return offsetSalat;
 		} else {
 	    	 int[] offsetSalat={
 	    			 VARIABLE.settings.getInt("offsetFajr",0), 

@@ -5,14 +5,15 @@ import android.os.CountDownTimer;
 import android.widget.TextView;
 
 public class MyCountDownTimer extends CountDownTimer {
-	public TextView mTimer;
+	public static TextView mTimer;
 	public MyCountDownTimer(long startTime, long interval,TextView mTimer) {
 		super(startTime, interval);
-		this.mTimer = mTimer;
+		MyCountDownTimer.mTimer = mTimer;
 	}
 
 	public void onFinish() {
 		mTimer.setText("Vakit Tamam!");//Sabah Namazında Namaz vakti demek olmuyor
+		//MyCountDownTimerRecursive.onUpdate(mTimer);
 	}
 	public static String intTwoDigit(int i) {
 		return ((i < 10) ? "0" : "") + i;

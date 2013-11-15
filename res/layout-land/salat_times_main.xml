@@ -9,12 +9,12 @@
     <LinearLayout
         android:id="@+id/LinearLayout1"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:orientation="vertical" >
 
         <FrameLayout
-            android:id="@id/FrameLayout1"
+            android:id="@+id/FrameLayout1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@color/duzarkaplan" >
@@ -45,8 +45,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:paddingTop="4.0dip"
-                        android:text="Recep"
-                        android:textSize="@dimen/vakitTextPanel" />
+                        android:text="JamaziAvval"
+                        android:textSize="@dimen/monthText" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -78,15 +78,6 @@
                 android:layout_gravity="top|center"
                 android:orientation="vertical" >
 
-                <TextView
-                    style="@style/SpookyTextPanel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:layout_margin="3.0dip"
-                    android:text="@string/SalatTimes"
-                    android:textSize="@dimen/smallTextSize2" />
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -106,7 +97,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="39.98°;32.87° +3 GMT"
+                    android:text="39.98° N ;32.87°E"
+                    android:textSize="@dimen/smallTextSize" />
+
+                <TextView
+                    android:id="@+id/timezone"
+                    style="@style/SpookyTextPanel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="GMT+3"
                     android:textSize="@dimen/smallTextSize" />
             </LinearLayout>
 
@@ -130,7 +130,7 @@
                         android:paddingTop="5.0dip"
                         android:text="Mayıs"
                         android:textColor="@color/sun_projection"
-                        android:textSize="@dimen/vakitTextPanel" />
+                        android:textSize="@dimen/monthText" />
 
                     <TextView
                         android:id="@+id/dayOfMonth"
@@ -166,48 +166,44 @@
             </LinearLayout>
         </FrameLayout>
 
-        <ScrollView
-            android:id="@+id/sv1"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center|center_vertical"
-            android:orientation="horizontal" >
-
-        <FrameLayout
+        <LinearLayout
+            android:id="@+id/LinearLayout1"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:layout_gravity="center_horizontal|center_vertical" >
+            android:layout_gravity="center"
+            android:orientation="horizontal" >
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="@dimen/bosluk2"
+                android:layout_marginTop="@dimen/default_gap"
                 android:background="@color/duzarkaplan"
-                android:orientation="horizontal" >
+                android:orientation="vertical" >
 
                 <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:background="@drawable/panel_vakit6" >
-
-                    <ImageView
-                        android:id="@+id/ImageView08"
-                         android:layout_gravity="left|center_vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/volume1" />
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/default_gap"
+                    android:layout_marginRight="@dimen/default_gap"
+                    android:background="@drawable/bg_label" >
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical" >
+                        android:orientation="horizontal" >
 
                         <TextView
                             android:id="@+id/FajrTxtLbl"
                             style="@style/ShadowText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/voice_margin"
+                            android:layout_weight="1.0"
+                            android:gravity="left"
                             android:text="@string/fajr"
                             android:textSize="@dimen/vakitTextSize" />
 
@@ -216,43 +212,36 @@
                             style="@style/ShadowText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_weight="0.25"
+                            android:gravity="right"
                             android:text="00:00"
                             android:textSize="@dimen/vakitTextSize" />
                     </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/ImageView07"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right|center_vertical"
-                        android:src="@drawable/d_vib_off" />
-
                 </FrameLayout>
 
                 <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-       
-                    android:background="@drawable/panel_vakit6" >
-
-                    <ImageView
-                        android:id="@+id/ImageView05"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left|center_vertical"
-                        android:src="@drawable/volume1" />
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/default_gap"
+                    android:layout_marginRight="@dimen/default_gap"
+                    android:background="@drawable/bg_label" >
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical" >
+                        android:orientation="horizontal" >
 
                         <TextView
                             android:id="@+id/SunRiseTxtLbl"
                             style="@style/ShadowText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="@dimen/voice_margin"
+                            android:layout_weight="1.0"
                             android:text="@string/sunrise"
                             android:textSize="@dimen/vakitTextSize" />
 
@@ -261,44 +250,36 @@
                             style="@style/ShadowText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_weight="0.25"
+                            android:gravity="right"
                             android:text="00:00"
                             android:textSize="@dimen/vakitTextSize" />
                     </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/ImageView03"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right|center_vertical"
-                        android:layout_marginRight="@dimen/voice_margin"
-                        android:src="@drawable/d_vib_off" />
-
                 </FrameLayout>
 
                 <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-        
-                    android:background="@drawable/panel_vakit6" >
-
-                    <ImageView
-                        android:id="@+id/ImageView06"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left|center_vertical"
-                        android:src="@drawable/volume1" />
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/default_gap"
+                    android:layout_marginRight="@dimen/default_gap"
+                    android:background="@drawable/bg_label" >
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical" >
+                        android:orientation="horizontal" >
 
                         <TextView
                             android:id="@+id/DhuhrTxtLbl"
                             style="@style/ShadowText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="@dimen/voice_margin"
+                            android:layout_weight="1.0"
                             android:text="@string/dhuhr"
                             android:textSize="@dimen/vakitTextSize" />
 
@@ -307,43 +288,45 @@
                             style="@style/ShadowText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="0.25"
+                            android:gravity="right"
                             android:text="00:00"
                             android:textSize="@dimen/vakitTextSize" />
                     </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/ImageView04"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right|center_vertical"
-                        android:layout_marginRight="@dimen/voice_margin"
-                        android:src="@drawable/d_vib_off" />
-
                 </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="@dimen/bosluk2"
+                android:layout_marginTop="@dimen/default_gap"
+                android:background="@color/duzarkaplan"
+                android:orientation="vertical" >
 
                 <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:background="@drawable/panel_vakit6" >
-
-                    <ImageView
-                        android:id="@+id/ImageView02"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left|center_vertical"
-                        android:src="@drawable/volume1" />
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/default_gap"
+                    android:layout_marginRight="@dimen/default_gap"
+                    android:background="@drawable/bg_label" >
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical" >
+                        android:orientation="horizontal" >
 
                         <TextView
                             android:id="@+id/AsrTxtLbl"
                             style="@style/ShadowText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="@dimen/voice_margin"
+                            android:layout_weight="1.0"
                             android:text="@string/asr"
                             android:textSize="@dimen/vakitTextSize" />
 
@@ -352,42 +335,34 @@
                             style="@style/ShadowText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="0.25"
+                            android:gravity="right"
                             android:text="00:00"
                             android:textSize="@dimen/vakitTextSize" />
                     </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/ImageView01"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right|center_vertical"
-                        android:src="@drawable/d_vib_off" />
-
                 </FrameLayout>
 
                 <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:background="@drawable/panel_vakit6" >
-
-                    <ImageView
-                        android:id="@+id/imsakSoundIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left|center_vertical"
-                        android:src="@drawable/volume1" />
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_gap"
+                    android:layout_marginRight="@dimen/default_gap"
+                    android:background="@drawable/bg_label" >
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical" >
+                        android:orientation="horizontal" >
 
                         <TextView
                             android:id="@+id/MaghribTxtLbl"
                             style="@style/ShadowText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="@dimen/voice_margin"
+                            android:layout_weight="1.0"
                             android:text="@string/maghrib"
                             android:textSize="@dimen/vakitTextSize" />
 
@@ -396,43 +371,34 @@
                             style="@style/ShadowText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="0.25"
+                            android:gravity="right"
                             android:text="00:00"
                             android:textSize="@dimen/vakitTextSize" />
-
                     </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/imsakVibrationIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right|center_vertical"
-                        android:src="@drawable/d_vib_off" />
-
                 </FrameLayout>
 
                 <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:background="@drawable/panel_vakit6" >
-
-                    <ImageView
-                        android:id="@+id/ImageView10"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left|center_vertical"
-                        android:src="@drawable/volume1" />
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_gap"
+                    android:layout_marginRight="@dimen/default_gap"
+                    android:background="@drawable/bg_label" >
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical" >
+                        android:orientation="horizontal" >
 
                         <TextView
-                            android:id="@+id/TextView10"
+                            android:id="@+id/IshaTxtLbl"
                             style="@style/ShadowText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="@dimen/voice_margin"
+                            android:layout_weight="1.0"
                             android:text="@string/ishaa"
                             android:textSize="@dimen/vakitTextSize" />
 
@@ -441,21 +407,14 @@
                             style="@style/ShadowText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="0.25"
+                            android:gravity="right"
                             android:text="00:00"
                             android:textSize="@dimen/vakitTextSize" />
                     </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/ImageView09"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right|center_vertical"
-                        android:src="@drawable/d_vib_off" />
-
                 </FrameLayout>
             </LinearLayout>
-        </FrameLayout>
-           </ScrollView>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -484,7 +443,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@color/duzarkaplan"
-                android:text="00:00:00" />
+                android:text="00:00:00"
+                android:textColor="@color/White"
+                android:textSize="14dp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/nextButton"

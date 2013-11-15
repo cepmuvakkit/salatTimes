@@ -128,11 +128,11 @@
     </style>
 
     <style name="SpookyTextPanel">
-        <item name="android:textSize">@dimen/vakitTextPanel</item>
+        <item name="android:textSize">@dimen/blueTextPanel</item>
         <item name="android:background">@color/duzarkaplan</item>
         <item name="android:textColor">@color/Black</item>
         <item name="android:padding">2dp</item>
-        <item name="android:shadowColor">@color/Green</item>
+        <item name="android:shadowColor">@color/BluePanel</item>
         <item name="android:shadowDx">0</item>
         <item name="android:shadowDy">0</item>
         <item name="android:shadowRadius">2</item>

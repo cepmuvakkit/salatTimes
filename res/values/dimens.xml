@@ -2,18 +2,25 @@
 
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
-        <dimen name="voice_margin">4dp</dimen>
-    
-    <dimen name="default_gap">9dp</dimen>
+    <dimen name="voice_margin">4dp</dimen>
+    <dimen name="default_gap">4dp</dimen>
+    <dimen name="widget_gap">5dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="bosluk">31dp</dimen>
-     <dimen name="bosluk2">25dp</dimen>
+    <dimen name="widget_margin8">0.0dip</dimen>
+
+    <color name="light">#fff1f1f1</color>
+
+    <dimen name="bosluk2">17dp</dimen>
     <dimen name="vakitTextSize">16dp</dimen>
-     <dimen name="smallTextSize">8dp</dimen>
-        <dimen name="smallTextSize2">11dp</dimen>
+    <dimen name="widgetTextSize">14dp</dimen>
+    
+    <dimen name="smallTextSize">8dp</dimen>
+    <dimen name="smallTextWidget">11dp</dimen>
+    <dimen name="smallTextSize2">11dp</dimen>
     <dimen name="vakitTextPanel">15dp</dimen>
-     <dimen name="monthText">12dp</dimen>
+        <dimen name="blueTextPanel">12dp</dimen>
     
-    
+    <dimen name="monthText">12dp</dimen>
 
 </resources>

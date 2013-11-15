@@ -2,7 +2,6 @@ package com.cepmuvakkit.times;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
 import com.cepmuvakkit.times.posAlgo.AstroLib;
 import com.cepmuvakkit.times.posAlgo.EarthPosition;
 import com.cepmuvakkit.times.posAlgo.HigherLatitude;
@@ -19,7 +18,9 @@ public class Schedule implements Methods, HigherLatitude {
 	public Schedule(GregorianCalendar day) {
 		Settings.load(VARIABLE.settings);
 		byte[] estMethod =Settings.getInstance().getEstMethods();
-		byte calculationMethod = (byte) Integer.parseInt(VARIABLE.settings.getString("calculationMethodsIndex",CONSTANT.DEFAULT_CALCULATION_METHOD+""));
+		byte calculationMethod = (byte) Integer.parseInt(VARIABLE.settings
+				.getString("calculationMethodsIndex",
+						CONSTANT.DEFAULT_CALCULATION_METHOD + ""));
 		jd = AstroLib.calculateJulianDay(day);
 		jdn = Math.round(jd) - 0.5;
 		EarthPosition loc = new EarthPosition(
@@ -88,10 +89,23 @@ public class Schedule implements Methods, HigherLatitude {
 
 	}
 
+	
 	public GregorianCalendar[] getTimes() {
 		return schedule;
 	}
 
+	
+	public double[] getSalatTimes() {
+		double[] salatTimes = new double[7];
+		salatTimes[CONSTANT.IMSAK] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.FAJR]);
+		salatTimes[CONSTANT.GUNES] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.SUNRISE]);
+		salatTimes[CONSTANT.OGLE] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.DHUHR]);
+		salatTimes[CONSTANT.IKINDI] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.ASR]);
+		salatTimes[CONSTANT.AKSAM] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.MAGHRIB]);
+		salatTimes[CONSTANT.YATSI] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.ISHAA]);
+		salatTimes[CONSTANT.SONRAKI_IMSAK] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.NEXT_FAJR])+24;// Next fajr
+		return salatTimes;
+	}
 	/*
 	 * public boolean isExtreme(int i) { return extremes[i]; }
 	 */
@@ -100,7 +114,7 @@ public class Schedule implements Methods, HigherLatitude {
 		Calendar now = new GregorianCalendar();
 		if (now.before(schedule[CONSTANT.FAJR_EW]))
 			return CONSTANT.FAJR_EW;
-		for (short i = CONSTANT.FAJR_EW; i < CONSTANT.NEXT_FAJR; i++) {
+		for (short i = CONSTANT.FAJR_EW; i < CONSTANT.NEXT_FAJR_EW; i++) {
 			if (now.after(schedule[i]) && now.before(schedule[i + 1])) {
 				return ++i;   
 			}

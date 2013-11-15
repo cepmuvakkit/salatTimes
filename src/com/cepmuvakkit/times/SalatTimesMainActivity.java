@@ -19,12 +19,12 @@ import com.cepmuvakkit.times.R;
 import com.cepmuvakkit.times.posAlgo.PTimes;
 import com.cepmuvakkit.times.settings.Settings;
 import com.cepmuvakkit.times.timer.MyCountDownTimer;
+import com.cepmuvakkit.times.timer.MyCountDownTimerRecursive;
 import com.cepmuvakkit.times.posAlgo.AstroLib;
 import com.cepmuvakkit.times.posAlgo.EarthPosition;
 import com.cepmuvakkit.times.posAlgo.Methods;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,7 +35,6 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.view.Menu;
@@ -59,22 +58,20 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 	//private long startTime = 60 * 10 * 1000;
 	private final long interval = 1000;
 	private CountDownTimer countDownTimer;
-	private GregorianCalendar[] schedule;
+	//private GregorianCalendar[] schedule;
 	private int  altitude;
 	private double jd,jdn,mLatitude, mLongitude,mTimeZone;
 	private String mLocationName;
 	private DecimalFormat twoDigitFormat=new DecimalFormat("#0.00°");
 	private DecimalFormat timezonefmt=new DecimalFormat("GMT+#.0;GMT-#.0");
-
-	private Calendar now;
-	private double[] salatTimes = new double[7];;
+	private boolean isCurrentDay=true;
+	private GregorianCalendar now;
+	private double[] salatTimes = new double[7];
 	private HicriCalendar hc;
 	private Context context;
 	private GPSTracker gps;
-
     private TextView mTextView;
     private ListView mListView;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -83,20 +80,18 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 		context=getBaseContext();
 		VARIABLE.context = this;
 		if(VARIABLE.settings == null) VARIABLE.settings =PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-		
+		//Settings.load(VARIABLE.settings);
 		returnCurrentJulianDay();
 		configureCalculationDefaults();
-		
 		updateTodaysTimetableAndNotification();
-		
-		
 		setGregorianCalender(jd);
 		
 		setHijriCalender(salatTimes[4]);
 		
 		setTimerCountDown(now);
-
-	    mTextView = (TextView) findViewById(R.id.text);
+		//mTimer = (TextView) this.findViewById(R.id.timer);
+		//MyCountDownTimerRecursive.onUpdate(mTimer);
+		mTextView = (TextView) findViewById(R.id.text);
         mListView = (ListView) findViewById(R.id.list);
 
         handleIntent(getIntent());
@@ -208,18 +203,16 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
              return true;
 		case R.id.menu_refresh:
 			returnCurrentJulianDay();
-			Schedule.setSettingsDirty();
 			updateTodaysTimetableAndNotification();
 			//calculateSalatTimes();
 //			setGregorianCalender(jd);
 	//		setHijriCalender(salatTimes[4]);
-		//	setTimerCountDown(now);
+			setTimerCountDown(now);
 			return true;
 		case  R.id.use_GPS:
 			//Settings.getInstance().setDataFromGPS(false);
 			//Settings.getInstance().setManualInput(false);
 			getLocation();
-			Schedule.setSettingsDirty();
 			//calculateSalatTimes();
 			updateTodaysTimetableAndNotification();
 			//setTimerCountDown(now);
@@ -228,8 +221,8 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 		case R.id.menu_settings:
 			intent = new Intent(this,SalatTimesPreferenceActivity.class);
 			startActivityForResult(intent, 2);
-			Schedule.setSettingsDirty();
 			Settings.load(VARIABLE.settings);
+			updateTodaysTimetableAndNotification();
 			return true;	
 		}
 		return false;
@@ -257,12 +250,21 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 	private void setTimerCountDown(Calendar now) {
 		int i = 0;
 		double hourNow=AstroLib.getLocalHourFromGregor(now);
+
+		int nextTimeIndex = Schedule.today().nextTimeIndex();
+		if (nextTimeIndex % 2 == 0) nextTimeIndex++;
+		int index=(nextTimeIndex-1)/2;		
+
+		
 		while (hourNow>salatTimes[i]) {
 			i++;
 		}
 		long timeLeftinMillis = (long) ((salatTimes[i] - hourNow)* 60 * 60 * 1000);
 		mTimer = (TextView) this.findViewById(R.id.timer);
-		if (countDownTimer!=null)	countDownTimer.cancel();
+		if (countDownTimer!=null)	
+		{	countDownTimer.onFinish();
+			countDownTimer.cancel();
+		}
 		countDownTimer = new MyCountDownTimer(timeLeftinMillis, interval,
 				mTimer);
 		
@@ -287,14 +289,14 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 		super.onStart();
 		VARIABLE.mainActivityIsRunning = true;
 
-		//Toast.makeText(this, "onStart()", Toast.LENGTH_SHORT).show();
+	//	Toast.makeText(this, "onStart()", Toast.LENGTH_SHORT).show();
 		//updateTodaysTimetableAndNotification();
 	}
 
 	@Override
 	protected void onResume() {
 		VARIABLE.mainActivityIsRunning = true;
-		//Toast.makeText(this, "onResume", Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, "onResume", Toast.LENGTH_SHORT).show();
 
 		//updateTodaysTimetableAndNotification();
 		super.onResume();
@@ -306,7 +308,7 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 		VARIABLE.mainActivityIsRunning = false;
 
 		super.onPause();
-		//Toast.makeText(this, "onPause", Toast.LENGTH_SHORT).show();
+		//onPause", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -320,7 +322,7 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 	
 	
 	private  void returnCurrentJulianDay() {
-		now= Calendar.getInstance();
+		now = new GregorianCalendar();
 		jd = AstroLib.calculateJulianDay(now);
 		mTimeZone = now.getTimeZone().getOffset(now.getTimeInMillis()) / 3600000;
 	//	timezoneinDay = mTimeZone / 24.0;
@@ -349,22 +351,20 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 	
 	/** Called when the user clicks the calculatePreviousDay */
 	public void calculatePreviousDay(View view) {
-		//mPreviousButton = (Button) findViewById(R.id.PrevButton);
+		isCurrentDay=false;
 		jd--;
-		calculateSalatTimes(jd);
-		//setSalatTimesText(salatTimes);
-		setGregorianCalender(jd);
+		calculateSalatTimesNav(jd);
+		setGregorianCalender(jdn);
 		setHijriCalender(24);
 		
 		
 	}
 	/** Called when the user clicks the calculateNextDay */
 	public void calculateNextDay(View view) {
-		//mNextButton = (Button) findViewById(R.id.nextButton);
+		isCurrentDay=false;
 		jd++;
-		calculateSalatTimes(jd);
-		//setSalatTimesText(salatTimes);
-		setGregorianCalender(jd);
+		calculateSalatTimesNav(jd);
+		setGregorianCalender(jdn);
 		setHijriCalender(24);
 	
 	}
@@ -387,7 +387,7 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 	
 	}
 
-	private void calculateSalatTimes(double jd) {
+	private void calculateSalatTimesNav(double jd) {
 		Settings.load(VARIABLE.settings);
 		byte[] estMethod =Settings.getInstance().getEstMethods();
 		byte calculationMethod = (byte) Integer.parseInt(VARIABLE.settings.getString("calculationMethodsIndex",CONSTANT.DEFAULT_CALCULATION_METHOD+""));
@@ -401,7 +401,7 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 				Settings.getInstance().getPressure());
 	
 		PTimes ptimes = new PTimes(jdn, loc, calculationMethod, estMethod);
-		PTimes ptimesNext = new PTimes(jdn+1, loc, calculationMethod, estMethod);
+		//PTimes ptimesNext = new PTimes(jdn+1, loc, calculationMethod, estMethod);
 
 		double[]  salatRaw=ptimes.getSalat();
 	
@@ -412,7 +412,7 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 		salatTimes[3] = salatRaw[Settings.getInstance().isHanafiMathab()?ASR_HANEFI:ASR_SHAFI];
 		salatTimes[4] = salatRaw[SUNSET];
 		salatTimes[5] = salatRaw[ISHA];
-		salatTimes[6] = ptimesNext.getSalat()[FAJR]+24;// Next fajr
+		//salatTimes[6] = ptimesNext.getSalat()[FAJR]+24;// Next fajr
 		setSalatTimesText();
 
 
@@ -427,10 +427,10 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 		mAsr=(TextView)findViewById(R.id.AsrTxtView);
 		mMagrib=(TextView)findViewById(R.id.MagribTxtView);
 		mIsha=(TextView)findViewById(R.id.IshaTxtView);
-		
+		int index=6;
 		int nextTimeIndex = Schedule.today().nextTimeIndex();
 		if (nextTimeIndex % 2 == 0) nextTimeIndex++;
-		int index=(nextTimeIndex-1)/2;
+		if (isCurrentDay)index=(nextTimeIndex-1)/2;
 		
 		
 		mFajr.setText(AstroLib.getStringHHMM(salatTimes[0]));
@@ -476,21 +476,28 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 					mLatitude = gps.getLatitude();
 					mLocationName = getLocationName(mLatitude, mLongitude);
 					altitude = (int) gps.getAltitude();
+					mTimeZone = now.getTimeZone().getOffset(now.getTimeInMillis()) / 3600000;
 
 					Settings.getInstance().setLatitude(mLatitude);
 					Settings.getInstance()
 							.setLongitude(mLongitude);
 					Settings.getInstance().setAltitude(altitude);
-					Settings.getInstance().setCustomCity(
-							mLocationName);
+					Settings.getInstance().setCustomCity(mLocationName);
 					Settings.getInstance().setTimezone(mTimeZone);
-					Settings.save(VARIABLE.settings);
 
+					SharedPreferences.Editor editor = VARIABLE.settings.edit();
+					editor.putString("customCity",mLocationName);
+					editor.putString("latitude", mLatitude+ "");
+					editor.putString("longitude",mLongitude+ "");
+					editor.putString("altitude", altitude+"");
+					editor.putString("timezone", mTimeZone+"");
+					editor.commit();
+					
 					Toast.makeText(
 							this,
 							"Your Position: "+mLocationName+" "
 								+ twoDigitFormat.format(mLatitude)
-									+ twoDigitFormat.format(mLongitude) + " ",
+									+ twoDigitFormat.format(mLongitude) + " "+altitude,
 							Toast.LENGTH_SHORT).show();
 
 				} else {
@@ -532,13 +539,12 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 				|| !VARIABLE.settings.contains("longitude")) {
 
 			getLocation();
-			VARIABLE.updateWidgets(this);
+		//	VARIABLE.updateWidgets(this); Buradaki update yüzünden Calculation methodu catch edemiyordu.
 
 		}
 		if(!VARIABLE.settings.contains("calculationMethodsIndex")) {
 			try {
 				String country = Locale.getDefault().getISO3Country().toUpperCase();
-
 				SharedPreferences.Editor editor = VARIABLE.settings.edit();
 				for(int i = 0; i < CONSTANT.CALCULATION_METHOD_COUNTRY_CODES.length; i++) {
 					if(Arrays.asList(CONSTANT.CALCULATION_METHOD_COUNTRY_CODES[i]).contains(country)) {
@@ -566,22 +572,14 @@ public class SalatTimesMainActivity extends Activity implements Methods  {
 	}
 	private void updateTodaysTimetableAndNotification() {
 		//returnCurrentJulianDay();
+		isCurrentDay=true;
+		Schedule.setSettingsDirty();
 		StartNotificationReceiver.setNext(this);
-		schedule=StartNotificationReceiver.today.getTimes();
-	//getTime()
-		salatTimes[CONSTANT.IMSAK] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.FAJR]);
-		salatTimes[CONSTANT.GUNES] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.SUNRISE]);
-		salatTimes[CONSTANT.OGLE] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.DHUHR]);
-		salatTimes[CONSTANT.IKINDI] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.ASR]);
-		salatTimes[CONSTANT.AKSAM] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.MAGHRIB]);
-		salatTimes[CONSTANT.YATSI] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.ISHAA]);
-		salatTimes[CONSTANT.SONRAKI_IMSAK] = AstroLib.getLocalHourFromGregor(schedule[CONSTANT.NEXT_FAJR])+24;// Next fajr
-		//Toast.makeText(this, "updateTodaysTimetableAndNotification", Toast.LENGTH_SHORT).show();
-
+		salatTimes= Schedule.today().getSalatTimes();
 		setLatLongLocation();
 		setSalatTimesText();
 		setGregorianCalender(jd);
 		setHijriCalender(salatTimes[4]);
-		setTimerCountDown(now);
+		//setTimerCountDown(now);
 	}
 }

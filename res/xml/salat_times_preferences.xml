@@ -10,13 +10,13 @@
             android:summary="Choose settings for calculating prayers and dates"
             android:title="Prayer Calculation  Settings" >
             <PreferenceCategory android:title="Calculations" >
-                <SwitchPreference
+              <SwitchPreference
                     android:defaultValue="true"
                     android:key="enable_internal_calc"
                     android:summary="@string/enableInternalCalc_sum"
                     android:switchTextOff="download"
                     android:switchTextOn="calculate"
-                    android:title="@string/enableInternalCalc" />
+                    android:title="@string/enableInternalCalc" /> 
 
                 <ListPreference
                     android:defaultValue="@string/default_calculation_method"
@@ -337,7 +337,7 @@
                             android:title="@string/magrib_iqamah" />
 
                         <com.cepmuvakkit.times.settings.SeekBarPreference
-                            android:defaultValue="10"
+                            android:defaultValue="2"
                             android:key="ewSetMagrib"
                             android:max="60"
                             android:summary="@string/early_not_in_minutes"
@@ -357,7 +357,7 @@
                             android:title="@string/isha_iqamah" />
 
                         <com.cepmuvakkit.times.settings.SeekBarPreference
-                            android:defaultValue="10"
+                            android:defaultValue="1"
                             android:key="ewSetIsha"
                             android:max="60"
                             android:summary="@string/early_not_in_minutes"

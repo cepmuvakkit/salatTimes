@@ -107,10 +107,10 @@ public class Settings implements Methods, HigherLatitude {
 		instance.latitude = Double.parseDouble(pref.getString("latitude", "39.938"));
 		instance.longitude = Double.parseDouble(pref.getString("longitude", "32.848"));
 		instance.timezone = Double.parseDouble(pref.getString("timezone", "3.0"));
-		instance.temperature = Integer.parseInt(pref.getString("temperature","10"));
-		instance.pressure = Integer	.parseInt(pref.getString("pressure", "1010"));
-		instance.altitude = Integer.parseInt(pref.getString("altitude", "0"));
-		instance.calculationMethodsIndex = Integer.parseInt(pref.getString("calculationMethodsIndex",CONSTANT.DEFAULT_CALCULATION_METHOD+""));
+		//instance.temperature = Integer.parseInt(pref.getString("temperature","10"));
+		//instance.pressure = Integer	.parseInt(pref.getString("pressure", "1010"));
+		//instance.altitude = Integer.parseInt(pref.getString("altitude", "0"));
+		//instance.calculationMethodsIndex = Integer.parseInt(pref.getString("calculationMethodsIndex",CONSTANT.DEFAULT_CALCULATION_METHOD+""));
 		instance.estMethodofFajr = Integer.parseInt(pref.getString("estMethodofFajr", NO_ESTIMATION + ""));
 		instance.estMethodofIsha = Integer.parseInt(pref.getString("estMethodofIsha", NO_ESTIMATION + ""));
 		instance.isHanafiMathab = pref.getString("isHanafiMathab", "0").equals("1");

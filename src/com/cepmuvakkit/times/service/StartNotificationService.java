@@ -1,14 +1,12 @@
 package com.cepmuvakkit.times.service;
 
 import java.lang.Runnable;
-
 import com.cepmuvakkit.times.receiver.StartNotificationReceiver;
 import com.cepmuvakkit.times.Notifier;
 import com.cepmuvakkit.times.R;
 import com.cepmuvakkit.times.SalatTimesMainActivity;
 import com.cepmuvakkit.times.VARIABLE;
 import com.cepmuvakkit.times.WakeLock;
-
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +14,7 @@ import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
 public class StartNotificationService extends Service {
 
@@ -57,11 +56,10 @@ public class StartNotificationService extends Service {
 				}
 
 				VARIABLE.updateWidgets(context);
+				short timeIndex = intent.getShortExtra("timeIndex", (short) -1);
+				Log.i("StartNotificationReceiver", "timeIndex:" + timeIndex);
 
-				short timeIndex = intent.getShortExtra("timeIndex", (short)-1);//Burada crash ediyor
 				long actualTime = intent.getLongExtra("actualTime", (long) 0);
-				//Log.i("StartNotificationService", "timeIndex -- actualTime " + timeIndex+"---"+actualTime);
-
 				if (timeIndex == -1) { // Got here from boot
 					if (VARIABLE.settings
 							.getBoolean("bismillahOnBootUp", false)) {
@@ -80,7 +78,10 @@ public class StartNotificationService extends Service {
 					}
 				} else {
 					Notifier.start(context, timeIndex, actualTime);
-					// Notify  the user  for the current time, need to	 do this last	since it releases the WakeLock
+					/*
+					 * Notify the user for the current time, need to do this
+					 * last since it releases the WakeLock
+					 */
 				}
 			}
 		}

@@ -2,7 +2,6 @@ package com.cepmuvakkit.times;
 
 import com.cepmuvakkit.times.receiver.ClearNotificationReceiver;
 import com.cepmuvakkit.times.receiver.ClickNotificationReceiver;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -18,26 +17,28 @@ public class Notifier {
 	private static MediaPlayer mediaPlayer;
 	private static Context context;
 	private static Notification notification;
-	
+
 	@SuppressWarnings("deprecation")
 	public static void start(Context context, short timeIndex, long actualTime) {
 		Notifier.context = context;
 
 		if (timeIndex == CONSTANT.NEXT_FAJR_EW)
 			timeIndex = CONSTANT.FAJR_EW;
-
-		//0 1 2 3 4 5 6 7 8 9 10 11 12 13
+		// 0 1 2 3 4 5 6 7 8 9 10 11 12 13
 		notification = new Notification(R.drawable.icon, "", actualTime);
-		notification.tickerText = ((timeIndex != CONSTANT.SUNRISE)&(timeIndex % 2!=0) ? context
+		notification.tickerText = ((timeIndex != CONSTANT.SUNRISE)
+				& (timeIndex % 2 != 0) ? context
 				.getString(R.string.allahu_akbar) + ": " : "")
 				+ context.getString(R.string.time_for)
 				+ " "
-				+  context.getString(CONSTANT.TIME_NAMES[timeIndex])
-				.toLowerCase();
-		int notificationMethod =Integer.parseInt( VARIABLE.settings.getString("notificationMethod"+timeIndex,
-				timeIndex == CONSTANT.SUNRISE ? CONSTANT.NOTIFICATION_NONE+"":CONSTANT.NOTIFICATION_DEFAULT+""));
-		if (notificationMethod == CONSTANT.NOTIFICATION_NONE||(timeIndex == CONSTANT.SUNRISE && !VARIABLE.alertSunrise())) 
-		{
+				+ context.getString(CONSTANT.TIME_NAMES[timeIndex])
+						.toLowerCase();
+		int notificationMethod = Integer.parseInt(VARIABLE.settings.getString(
+				"notificationMethod" + timeIndex,
+				timeIndex == CONSTANT.SUNRISE ? CONSTANT.NOTIFICATION_NONE + ""
+						: CONSTANT.NOTIFICATION_DEFAULT + ""));
+		if (notificationMethod == CONSTANT.NOTIFICATION_NONE
+				|| (timeIndex == CONSTANT.SUNRISE && !VARIABLE.alertSunrise())) {
 			WakeLock.release();
 			return;
 		}
