@@ -85,9 +85,10 @@
     <string name="custom_dawn_dusk">Calculation with Customized Dawn Dusk Angle</string>
     <!--  -->
     <string name="time_format">Time Format</string>
-    <string name="AM_PM_format">AM/PM format</string>
     <string name="clock_24_hour">24 Hour Clock</string>
-    <!--  -->
+    <string name="AM_PM_format">AM/PM format</string>
+    <string name="time_seconds">Seconds (HH:MM:SS) Format</string>
+     <!--  -->
     <string name="none">None</string>
     <string name="sdefault">Default</string>
     <string name="beep">Beep</string>

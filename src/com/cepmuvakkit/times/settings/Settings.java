@@ -1,14 +1,9 @@
 package com.cepmuvakkit.times.settings;
 
-import com.cepmuvakkit.times.CONSTANT;
-import com.cepmuvakkit.times.posAlgo.HigherLatitude;
-import com.cepmuvakkit.times.posAlgo.Methods;
 
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 
-public class Settings implements Methods, HigherLatitude {
-	private static Settings instance = new Settings();
+public class Settings {
+/*	private static Settings instance = new Settings();
 	private String customCity,countryName;
 	int calculationMethodsIndex;
 	private boolean isHanafiMathab=false;
@@ -21,12 +16,9 @@ public class Settings implements Methods, HigherLatitude {
 	public static Settings getInstance() {
 		return instance;
 	}
+*/
 
-	public int getCalculationMethodsIndex() {
-		return calculationMethodsIndex;
-	}
-
-	public void setCalculationMethodsIndex(int calculationMethodsIndex) {
+/*	public void setCalculationMethodsIndex(int calculationMethodsIndex) {
 		this.calculationMethodsIndex = calculationMethodsIndex;
 	}
 
@@ -108,7 +100,7 @@ public class Settings implements Methods, HigherLatitude {
 		instance.longitude = Double.parseDouble(pref.getString("longitude", "32.848"));
 		instance.timezone = Double.parseDouble(pref.getString("timezone", "3.0"));
 		//instance.temperature = Integer.parseInt(pref.getString("temperature","10"));
-		//instance.pressure = Integer	.parseInt(pref.getString("pressure", "1010"));
+		//instance.pressure = Integer.parseInt(pref.getString("pressure", "1010"));
 		//instance.altitude = Integer.parseInt(pref.getString("altitude", "0"));
 		//instance.calculationMethodsIndex = Integer.parseInt(pref.getString("calculationMethodsIndex",CONSTANT.DEFAULT_CALCULATION_METHOD+""));
 		instance.estMethodofFajr = Integer.parseInt(pref.getString("estMethodofFajr", NO_ESTIMATION + ""));
@@ -141,6 +133,6 @@ public class Settings implements Methods, HigherLatitude {
 	public String getCustomCity() {
 		// TODO Auto-generated method stub
 		return customCity;
-	}
+	}*/
 
 }

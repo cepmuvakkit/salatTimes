@@ -47,6 +47,28 @@
         </activity>
         <activity android:name="com.cepmuvakkit.times.GPSTracker" >
         </activity>
+        <activity
+            android:name="LatLong"
+            android:excludeFromRecents="true"
+            android:label="Location"
+            android:theme="@style/CustomLightDialog" >
+            <intent-filter>
+                <action android:name="com.cepmuvakkit.times.LatLong" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="ConfirmLocation"
+            android:excludeFromRecents="true"
+            android:label="ConfirmLocation"
+            android:theme="@style/CustomLightDialog" >
+            <intent-filter>
+                <action android:name="com.cepmuvakkit.times.search.LatLongConfirm" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <!-- This is necessary for file browser -->
         <activity
@@ -55,6 +77,14 @@
             android:label="File browser" >
             <intent-filter>
                 <action android:name="com.cepmuvakkit.times.filepick.SELECT_DIRECTORY_ACTION" >
+                </action>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.cepmuvakkit.times.KarahatTimesActivity"
+            android:label="@string/karahat_times" >
+            <intent-filter>
+                <action android:name="com.cepmuvakkit.times.KarahatTimesActivity" >
                 </action>
             </intent-filter>
         </activity>
@@ -72,6 +102,8 @@
 
         <!-- Displays the definition of a word. -->
         <activity android:name="com.cepmuvakkit.times.search.LocationActivity" />
+        <activity android:name="com.cepmuvakkit.times.search.LatLongConfirm" />
+
         <!-- Provides search suggestions for words and their definitions. -->
         <provider
             android:name="com.cepmuvakkit.times.search.LocationProvider"
@@ -84,7 +116,7 @@
 
         <receiver
             android:name=".widget.NextNotificationWidgetProvider"
-            android:label="salat_next_time" >
+            android:label="@string/salat_next_time" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

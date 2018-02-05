@@ -4,56 +4,74 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-import java.io.FileOutputStream;
-import java.io.IOException;
+
 
 public class LatLong extends Activity {
 
 	AlertDialog alert;
-	String lang = "AR";
-
-	public void onCreate(Bundle var1) {
-		super.onCreate(var1);
+	EditText latitudeEditTxt, longitudeEditTxt, timezoneEditText,
+			cityNameEditText, countryEditText, altitudeEditText,
+			temperatureEditText,pressureEditText;
+	public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 		this.requestWindowFeature(1);
 		final View latlongLayout = ((LayoutInflater) this
 				.getSystemService("layout_inflater")).inflate(R.layout.lat_long, null);
-		this.lang = "EN";
-		TextView latitudeText = (TextView) latlongLayout.findViewById(R.id.editText1);
-		TextView longitudeText = (TextView) latlongLayout.findViewById(R.id.editText2);
-		String var6;
-		String var7;
-		String var8;
+		latitudeEditTxt = (EditText) latlongLayout
+				.findViewById(R.id.latitudeEditText);
+		longitudeEditTxt  = (EditText) latlongLayout
+				.findViewById(R.id.longitudeEditText);
+		timezoneEditText  = (EditText) latlongLayout
+				.findViewById(R.id.timezoneEditText);
+		cityNameEditText= (EditText) latlongLayout
+				.findViewById(R.id.cityNameEditText);
+		countryEditText= (EditText) latlongLayout
+				.findViewById(R.id.countryEditText);
+		altitudeEditText= (EditText) latlongLayout
+				.findViewById(R.id.altitudeEditText);
+		temperatureEditText= (EditText) latlongLayout
+				.findViewById(R.id.temperatureEditText);
+		pressureEditText= (EditText) latlongLayout
+				.findViewById(R.id.pressureEditText);
+		latitudeEditTxt.setText(VARIABLE.settings.getString("latitude", ""));
+		longitudeEditTxt.setText(VARIABLE.settings.getString("longitude", ""));
+		timezoneEditText.setText(VARIABLE.settings.getString("timezone", ""));
+		cityNameEditText.setText(VARIABLE.settings.getString("customCity", ""));
+		countryEditText.setText(VARIABLE.settings.getString("country", ""));
+		altitudeEditText.setText(VARIABLE.settings.getString("altitude", "0"));
+		temperatureEditText.setText(VARIABLE.settings.getString("temperature", "10"));
+		pressureEditText.setText(VARIABLE.settings.getString("pressure", "1010"));
 
-		latitudeText.setText("Latitude:");
-		longitudeText.setText("Longitude:");
-		var6 = "Set";
-		var7 = "Cancel";
-		var8 = "Location";
 
+	
 		Builder var9 = new Builder(this);
 		var9.setView(latlongLayout);
-		var9.setCancelable(true).setTitle(var8)
-				.setPositiveButton(var6, new OnClickListener() {
+		var9.setCancelable(true).setTitle(R.string.location)
+				.setPositiveButton(R.string.set, new OnClickListener() {
 					public void onClick(DialogInterface var1, int var2) {
-						EditText var3x = (EditText) latlongLayout
-								.findViewById(R.id.editText1);
-						EditText var4 = (EditText) latlongLayout
-								.findViewById(R.id.editText2);
-						String var5 = var3x.getText().toString();
-						String var6 = var4.getText().toString();
-						LatLong.this.setLoc(var5, var6);
+					
+						String latitudeStr = latitudeEditTxt.getText().toString();
+						String longitudeStr = longitudeEditTxt.getText().toString();
+						String timezoneStr =timezoneEditText.getText().toString();
+						String customCityStr =cityNameEditText.getText().toString();
+						String countryStr =countryEditText.getText().toString();
+						String altitudeStr =altitudeEditText.getText().toString();
+						String temperatureStr =temperatureEditText.getText().toString();
+						String pressureStr =pressureEditText.getText().toString();
+						
+						LatLong.this.setLoc(latitudeStr, longitudeStr,
+								timezoneStr, customCityStr, countryStr,
+								altitudeStr, temperatureStr, pressureStr);
 					}
-				}).setNegativeButton(var7, new OnClickListener() {
+				}).setNegativeButton(R.string.cancel, new OnClickListener() {
 					public void onClick(DialogInterface var1, int var2) {
 						var1.cancel();
 						LatLong.this.finish();
@@ -83,37 +101,34 @@ public class LatLong extends Activity {
 
 	}
 
-	public void setLoc(String var1, String var2) {
-		String var3 = var1 + "\n" + var2;
-		String var4;
-		String var5;
+	public void setLoc(String latitudeStr, String longitudeStr,
+			String timezoneStr, String customCityStr, String countryStr,
+			String altitudeStr, String temperatureStr, String pressureStr) {
+		
+		if (latitudeStr != null && longitudeStr != null && !latitudeStr.equals("")
+				&& !longitudeStr.equals("")) {
+	
+			SharedPreferences.Editor editor = VARIABLE.settings.edit();
 
-		var4 = "Location has been set";
-		var5 = "Location wasn\'t enterd properly";
+			
+			editor.putString("customCity",customCityStr);
+			editor.putString("latitude", latitudeStr);
+			editor.putString("longitude",longitudeStr);
+			editor.putString("timezone",timezoneStr);
+			editor.putString("country",countryStr);
+			editor.putString("altitude",altitudeStr);
+			editor.putString("temperature",temperatureStr);
+			editor.putString("pressure",pressureStr);
+			
+			editor.commit();
+		
 
-		if (var1 != null && var2 != null && !var1.equals("")
-				&& !var2.equals("")) {
-			Editor var7 = PreferenceManager.getDefaultSharedPreferences(this)
-					.edit();
-			var7.putString("lastLat", var1);
-			var7.putString("lastLon", var2);
-			var7.putString("lastLocName", "");
-			var7.commit();
-
-			try {
-				FileOutputStream var14 = this.openFileOutput("lastFix.pray", 0);
-				var14.write(var3.getBytes());
-				var14.close();
-			} catch (IOException var15) {
-				var15.printStackTrace();
-			}
-
-			Toast var13 = Toast.makeText(this.getApplicationContext(), var4, 0);
+			Toast var13 = Toast.makeText(this.getApplicationContext(), R.string.locationset, 0);
 			var13.setGravity(17, 0, 0);
 			var13.show();
 			this.finish();
 		} else {
-			Toast var6 = Toast.makeText(this.getApplicationContext(), var5, 0);
+			Toast var6 = Toast.makeText(this.getApplicationContext(),R.string.locationnotset, 0);
 			var6.setGravity(17, 0, 0);
 			var6.show();
 			this.finish();

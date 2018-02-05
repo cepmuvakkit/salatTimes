@@ -35,7 +35,7 @@
             android:layout_gravity="left"
             android:layout_weight="1"
             android:background="@color/duzarkaplan"
-            android:text="Country" />
+            android:text="@string/country"/>
 
         <TextView
             android:id="@+id/country"
@@ -62,7 +62,7 @@
             android:layout_gravity="left"
             android:layout_weight="1"
             android:background="@color/duzarkaplan"
-            android:text="City" />
+           android:text="@string/city" />
 
         <TextView
             android:id="@+id/city"
@@ -89,7 +89,7 @@
             android:layout_gravity="left"
             android:layout_weight="1"
             android:background="@color/duzarkaplan"
-            android:text="Latitude" />
+            android:text="@string/latitude" />
 
         <TextView
             android:id="@+id/latitude"
@@ -116,7 +116,7 @@
             android:layout_gravity="left"
             android:layout_weight="1"
             android:background="@color/duzarkaplan"
-            android:text="Longitude" />
+           android:text="@string/longitude"  />
 
         <TextView
             android:id="@+id/longitude"
@@ -143,7 +143,7 @@
             android:layout_gravity="left"
             android:layout_weight="1"
             android:background="@color/duzarkaplan"
-            android:text="TimeZone" />
+            android:text="@string/timezone" />
 
         <TextView
             android:id="@+id/timezone"

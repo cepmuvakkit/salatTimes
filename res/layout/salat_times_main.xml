@@ -83,15 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center" >
 
-                    <!--
-                         <SearchView
-                        android:id="@+id/search"
-                        android:layout_width="8dp"
-                        android:layout_height="14dp"
-                        android:layout_weight="0.89" >
-                    </SearchView>
-                    -->
-
+                  
                     <TextView
                         android:id="@+id/city"
                         style="@style/PageTitle"
@@ -117,7 +109,6 @@
                     android:layout_gravity="center"
                     android:text="GMT+3"
                     android:textSize="@dimen/blueTextPanel" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -178,9 +169,9 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:orientation="horizontal"
             android:layout_height="fill_parent"
-            android:layout_gravity="center" >
+            android:layout_gravity="center"
+            android:orientation="horizontal" >
 
             <ScrollView
                 android:id="@+id/sv1"
@@ -237,7 +228,7 @@
                                     android:layout_gravity="right"
                                     android:layout_weight="0.25"
                                     android:gravity="right"
-                                    android:text="00:00"
+                                    android:text="00:00 AM"
                                     android:textSize="@dimen/vakitTextSize" />
                             </LinearLayout>
                         </FrameLayout>
@@ -273,10 +264,10 @@
                                     style="@style/ShadowText"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_alignParentRight="true"
+                                    android:layout_marginLeft="4dp"
                                     android:layout_weight="0.25"
                                     android:gravity="right"
-                                    android:text="00:00"
+                                    android:text="00:00 PM"
                                     android:textSize="@dimen/vakitTextSize" />
                             </LinearLayout>
                         </FrameLayout>
@@ -314,7 +305,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="0.25"
                                     android:gravity="right"
-                                    android:text="00:00"
+                                    android:text="00:00 PM"
                                     android:textSize="@dimen/vakitTextSize" />
                             </LinearLayout>
                         </FrameLayout>
@@ -352,7 +343,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="0.25"
                                     android:gravity="right"
-                                    android:text="00:00"
+                                    android:text="00:00 PM"
                                     android:textSize="@dimen/vakitTextSize" />
                             </LinearLayout>
                         </FrameLayout>
@@ -390,7 +381,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="0.25"
                                     android:gravity="right"
-                                    android:text="00:00"
+                                    android:text="00:00 PM"
                                     android:textSize="@dimen/vakitTextSize" />
                             </LinearLayout>
                         </FrameLayout>
@@ -429,17 +420,14 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="0.25"
                                     android:gravity="right"
-                                    android:text="00:00"
+                                    android:text="00:00 PM"
                                     android:textSize="@dimen/vakitTextSize" />
                             </LinearLayout>
                         </FrameLayout>
                     </LinearLayout>
-
                 </FrameLayout>
             </ScrollView>
-
         </LinearLayout>
-
     </LinearLayout>
 
     <LinearLayout

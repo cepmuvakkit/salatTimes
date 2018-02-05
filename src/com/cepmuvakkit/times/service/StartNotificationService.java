@@ -14,7 +14,6 @@ import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
 
 public class StartNotificationService extends Service {
 

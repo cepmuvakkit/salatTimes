@@ -17,37 +17,145 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/latitudeTxtLbl"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5.0dip"
+                android:text="@string/latitude"
                 android:textAppearance="?android:textAppearanceMedium" />
 
             <EditText
-                android:id="@+id/editText1"
+                android:id="@+id/latitudeEditText"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5.0dip"
-                android:ems="10"
+                android:ems="5"
                 android:inputType="numberSigned|numberDecimal" >
 
                 <requestFocus />
             </EditText>
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/longitudeTxtLbl"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5.0dip"
-                android:textAppearance="?android:textAppearanceMedium" />
+                android:textAppearance="?android:textAppearanceMedium" 
+                android:text="@string/longitude"/>
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/longitudeEditText"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5.0dip"
                 android:ems="10"
                 android:inputType="numberSigned|numberDecimal" />
+
+            <TextView
+                android:id="@+id/timezone"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5.0dip"
+                android:textAppearance="?android:textAppearanceMedium"
+                 android:text="@string/timezone"/>
+
+            <EditText
+                android:id="@+id/timezoneEditText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5.0dip"
+                android:ems="10"
+                android:inputType="numberSigned|numberDecimal" />
+            
+            
+            <TextView
+                android:id="@+id/cityName"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5.0dip"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:text="@string/city" />
+
+            <EditText
+                android:id="@+id/cityNameEditText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5.0dip"
+                android:ems="10"
+                android:inputType="textCapWords" />
+            
+            
+            
+               <TextView
+                android:id="@+id/country"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5.0dip"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:text="@string/country" />
+
+            <EditText
+                android:id="@+id/countryEditText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5.0dip"
+                android:ems="10"
+                android:inputType="textCapWords" />
+            
+              
+            
+             <TextView
+                android:id="@+id/altitude"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5.0dip"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:text="@string/altitude" />
+
+            <EditText
+                android:id="@+id/altitudeEditText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5.0dip"
+                android:ems="10"
+                android:inputType="numberSigned|numberDecimal" />
+            
+              
+             <TextView
+                android:id="@+id/temperature"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5.0dip"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:text="@string/temperature" />
+
+            <EditText
+                android:id="@+id/temperatureEditText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5.0dip"
+                android:ems="10"
+                android:inputType="numberSigned|numberDecimal" />
+                 
+             <TextView
+                android:id="@+id/pressure"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5.0dip"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:text="@string/pressure" />
+
+            <EditText
+                android:id="@+id/pressureEditText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5.0dip"
+                android:ems="10"
+                android:inputType="numberSigned|numberDecimal" />
+            
+              
+            
+            
         </LinearLayout>
     </ScrollView>
 

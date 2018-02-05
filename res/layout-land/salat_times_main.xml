@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="39.98° N ;32.87°E"
-                    android:textSize="@dimen/smallTextSize" />
+                    android:textSize="@dimen/blueTextPanel" />
 
                 <TextView
                     android:id="@+id/timezone"
@@ -107,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="GMT+3"
-                    android:textSize="@dimen/smallTextSize" />
+                    android:textSize="@dimen/blueTextPanel" />
             </LinearLayout>
 
             <LinearLayout
@@ -175,8 +175,7 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|center_vertical"
+                android:layout_height="fill_parent"
                 android:layout_marginLeft="@dimen/bosluk2"
                 android:layout_marginTop="@dimen/default_gap"
                 android:background="@color/duzarkaplan"
@@ -188,7 +187,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/default_gap"
                     android:layout_marginRight="@dimen/default_gap"
-                    android:background="@drawable/bg_label" >
+                    android:background="@drawable/bg_label2" >
 
                     <LinearLayout
                         android:layout_width="fill_parent"
@@ -205,7 +204,7 @@
                             android:layout_weight="1.0"
                             android:gravity="left"
                             android:text="@string/fajr"
-                            android:textSize="@dimen/vakitTextSize" />
+                            android:textSize="@dimen/vakitLandTextSize" />
 
                         <TextView
                             android:id="@+id/FajrTxtView"
@@ -216,7 +215,7 @@
                             android:layout_weight="0.25"
                             android:gravity="right"
                             android:text="00:00"
-                            android:textSize="@dimen/vakitTextSize" />
+                            android:textSize="@dimen/vakitLandTextSize" />
                     </LinearLayout>
                 </FrameLayout>
 
@@ -226,7 +225,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/default_gap"
                     android:layout_marginRight="@dimen/default_gap"
-                    android:background="@drawable/bg_label" >
+                    android:background="@drawable/bg_label2" >
 
                     <LinearLayout
                         android:layout_width="fill_parent"
@@ -243,7 +242,7 @@
                             android:layout_marginLeft="@dimen/voice_margin"
                             android:layout_weight="1.0"
                             android:text="@string/sunrise"
-                            android:textSize="@dimen/vakitTextSize" />
+                            android:textSize="@dimen/vakitLandTextSize" />
 
                         <TextView
                             android:id="@+id/SunRiseTxtView"
@@ -254,7 +253,7 @@
                             android:layout_weight="0.25"
                             android:gravity="right"
                             android:text="00:00"
-                            android:textSize="@dimen/vakitTextSize" />
+                            android:textSize="@dimen/vakitLandTextSize" />
                     </LinearLayout>
                 </FrameLayout>
 
@@ -264,7 +263,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/default_gap"
                     android:layout_marginRight="@dimen/default_gap"
-                    android:background="@drawable/bg_label" >
+                    android:background="@drawable/bg_label2" >
 
                     <LinearLayout
                         android:layout_width="fill_parent"
@@ -281,7 +280,7 @@
                             android:layout_marginLeft="@dimen/voice_margin"
                             android:layout_weight="1.0"
                             android:text="@string/dhuhr"
-                            android:textSize="@dimen/vakitTextSize" />
+                            android:textSize="@dimen/vakitLandTextSize" />
 
                         <TextView
                             android:id="@+id/ZuhrTxtView"
@@ -291,15 +290,14 @@
                             android:layout_weight="0.25"
                             android:gravity="right"
                             android:text="00:00"
-                            android:textSize="@dimen/vakitTextSize" />
+                            android:textSize="@dimen/vakitLandTextSize" />
                     </LinearLayout>
                 </FrameLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|center_vertical"
+                android:layout_height="fill_parent"
                 android:layout_marginRight="@dimen/bosluk2"
                 android:layout_marginTop="@dimen/default_gap"
                 android:background="@color/duzarkaplan"
@@ -311,7 +309,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/default_gap"
                     android:layout_marginRight="@dimen/default_gap"
-                    android:background="@drawable/bg_label" >
+                    android:background="@drawable/bg_label2" >
 
                     <LinearLayout
                         android:layout_width="fill_parent"
@@ -328,7 +326,7 @@
                             android:layout_marginLeft="@dimen/voice_margin"
                             android:layout_weight="1.0"
                             android:text="@string/asr"
-                            android:textSize="@dimen/vakitTextSize" />
+                            android:textSize="@dimen/vakitLandTextSize" />
 
                         <TextView
                             android:id="@+id/AsrTxtView"
@@ -338,7 +336,7 @@
                             android:layout_weight="0.25"
                             android:gravity="right"
                             android:text="00:00"
-                            android:textSize="@dimen/vakitTextSize" />
+                            android:textSize="@dimen/vakitLandTextSize" />
                     </LinearLayout>
                 </FrameLayout>
 
@@ -347,7 +345,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/default_gap"
                     android:layout_marginRight="@dimen/default_gap"
-                    android:background="@drawable/bg_label" >
+                    android:background="@drawable/bg_label2" >
 
                     <LinearLayout
                         android:layout_width="fill_parent"
@@ -364,7 +362,7 @@
                             android:layout_marginLeft="@dimen/voice_margin"
                             android:layout_weight="1.0"
                             android:text="@string/maghrib"
-                            android:textSize="@dimen/vakitTextSize" />
+                            android:textSize="@dimen/vakitLandTextSize" />
 
                         <TextView
                             android:id="@+id/MagribTxtView"
@@ -374,7 +372,7 @@
                             android:layout_weight="0.25"
                             android:gravity="right"
                             android:text="00:00"
-                            android:textSize="@dimen/vakitTextSize" />
+                            android:textSize="@dimen/vakitLandTextSize" />
                     </LinearLayout>
                 </FrameLayout>
 
@@ -383,7 +381,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/default_gap"
                     android:layout_marginRight="@dimen/default_gap"
-                    android:background="@drawable/bg_label" >
+                    android:background="@drawable/bg_label2" >
 
                     <LinearLayout
                         android:layout_width="fill_parent"
@@ -400,7 +398,7 @@
                             android:layout_marginLeft="@dimen/voice_margin"
                             android:layout_weight="1.0"
                             android:text="@string/ishaa"
-                            android:textSize="@dimen/vakitTextSize" />
+                            android:textSize="@dimen/vakitLandTextSize" />
 
                         <TextView
                             android:id="@+id/IshaTxtView"
@@ -410,7 +408,7 @@
                             android:layout_weight="0.25"
                             android:gravity="right"
                             android:text="00:00"
-                            android:textSize="@dimen/vakitTextSize" />
+                            android:textSize="@dimen/vakitLandTextSize" />
                     </LinearLayout>
                 </FrameLayout>
             </LinearLayout>

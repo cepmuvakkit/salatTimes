@@ -5,7 +5,6 @@ import java.util.GregorianCalendar;
 
 import com.cepmuvakkit.times.posAlgo.AstroLib;
 import com.cepmuvakkit.times.timer.MyCountDownTimer;
-import com.cepmuvakkit.times.timer.MyCountDownTimerRecursive;
 import com.cepmuvakkit.times.widget.NextNotificationWidgetProvider;
 import com.cepmuvakkit.times.widget.TimetableWidgetProvider;
 

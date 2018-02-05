@@ -13,7 +13,6 @@ public class MyCountDownTimer extends CountDownTimer {
 
 	public void onFinish() {
 		mTimer.setText("Vakit Tamam!");//Sabah Namazında Namaz vakti demek olmuyor
-		//MyCountDownTimerRecursive.onUpdate(mTimer);
 	}
 	public static String intTwoDigit(int i) {
 		return ((i < 10) ? "0" : "") + i;

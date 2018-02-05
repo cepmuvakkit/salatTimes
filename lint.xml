@@ -10,4 +10,4 @@
         <ignore path="src/com/cepmuvakkit/times/SalatTimesMainActivity.java" />
         <ignore path="src/com/cepmuvakkit/times/search/LocationActivity.java" />
     </issue>
-</lint>
+  </lint>

@@ -25,12 +25,12 @@
     <color name="compass_pin_color">#ff00ff21</color>
     <color name="date_time_flash">#ffff2222</color>
     <color name="White">#FFF</color>
+    <color name="BlackTimes">#000</color>
     <color name="Black">#000</color>
     <color name="Grey">#7F7F7F</color>
     <color name="DarkGrey">#4F4F4F</color>
     <color name="Green">#0F0</color>
-        <color name="BluePanel">#98c9ff</color>
-    
+    <color name="BluePanel">#98c9ff</color>
     <color name="GreenPanel">#c1c7ab</color>
     <color name="TransparentGrey">#7F000000</color>
     <color name="duzarkaplan">#1c1c1c</color>

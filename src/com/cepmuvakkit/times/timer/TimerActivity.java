@@ -10,7 +10,7 @@ public class TimerActivity extends Activity implements OnClickListener {
 	private final long startTime = 30 * 1000;
 	private final long interval = 1 * 1000;
 
-	@Override
+	:ÇÖ@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_timer);

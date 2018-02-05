@@ -2,6 +2,9 @@ package com.cepmuvakkit.times;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+import android.content.SharedPreferences;
+
 import com.cepmuvakkit.times.posAlgo.AstroLib;
 import com.cepmuvakkit.times.posAlgo.EarthPosition;
 import com.cepmuvakkit.times.posAlgo.HigherLatitude;
@@ -16,20 +19,23 @@ public class Schedule implements Methods, HigherLatitude {
 	private static Schedule today;
 
 	public Schedule(GregorianCalendar day) {
-		Settings.load(VARIABLE.settings);
-		byte[] estMethod =Settings.getInstance().getEstMethods();
-		byte calculationMethod = (byte) Integer.parseInt(VARIABLE.settings
-				.getString("calculationMethodsIndex",
+		SharedPreferences pref=VARIABLE.settings;
+		byte[] estMethod = {
+				Byte.parseByte(pref.getString("estMethodofFajr", NO_ESTIMATION
+						+ "")),
+				Byte.parseByte(pref.getString("estMethodofIsha", NO_ESTIMATION
+						+ "")) };
+		byte calculationMethod = Byte.parseByte(pref.getString("calculationMethodsIndex",
 						CONSTANT.DEFAULT_CALCULATION_METHOD + ""));
 		jd = AstroLib.calculateJulianDay(day);
 		jdn = Math.round(jd) - 0.5;
 		EarthPosition loc = new EarthPosition(
-				Settings.getInstance().getLatitude(),
-				Settings.getInstance().getLongitude(),
-				Settings.getInstance().getTimezone(),
-				Settings.getInstance().getAltitude(),
-				Settings.getInstance().getTemperature(),
-				Settings.getInstance().getPressure());
+				Double.parseDouble(pref.getString("latitude", "39.938")),
+				Double.parseDouble(pref.getString("longitude", "32.848")),
+				Double.parseDouble(pref.getString("timezone", "3.0")),
+				Integer.parseInt(pref.getString("altitude", "0")),
+				Integer.parseInt(pref.getString("temperature","10")),
+				Integer.parseInt(pref.getString("pressure", "1010")));
 	
 		PTimes ptimes = new PTimes(jdn, loc, calculationMethod, estMethod);
 		PTimes ptimesNext = new PTimes(jdn+1, loc, calculationMethod, estMethod);
@@ -58,12 +64,12 @@ public class Schedule implements Methods, HigherLatitude {
 				+ salat[SUNTRANSIT] / 24.0);
 
 		schedule[CONSTANT.ASR_EW] = AstroLib.convertJulian2Gregorian(jdn
-				+ salat[Settings.getInstance().isHanafiMathab() ? ASR_HANEFI
+				+ salat[pref.getString("isHanafiMathab", "0").equals("1")? ASR_HANEFI
 						: ASR_SHAFI] / 24.0
 				- VARIABLE.settings.getInt("ewSetAsr", 10) / 1440.0);
 
 		schedule[CONSTANT.ASR] = AstroLib.convertJulian2Gregorian(jdn
-				+ salat[Settings.getInstance().isHanafiMathab() ? ASR_HANEFI
+				+ salat[pref.getString("isHanafiMathab", "0").equals("1") ? ASR_HANEFI
 						: ASR_SHAFI] / 24.0);
 
 		schedule[CONSTANT.MAGHRIB_EW] = AstroLib.convertJulian2Gregorian(jdn

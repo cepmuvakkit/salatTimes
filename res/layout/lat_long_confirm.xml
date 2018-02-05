@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/backgroundpattern"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/sclv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10.0dip" >
+
+        <LinearLayout
+            android:id="@+id/sclv"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TableLayout
+                android:id="@+id/lll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TableRow
+                    android:id="@+id/TableRow1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/duzarkaplan"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/countrylbl"
+                        style="@style/PageTitle4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/countryplain" />
+
+                    <TextView
+                        android:id="@+id/country"
+                        style="@style/PageTitle4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Türkiye" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/TableRow1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/duzarkaplan"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/customCityLbl"
+                        style="@style/PageTitle4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/cityplain" />
+
+                    <TextView
+                        android:id="@+id/city"
+                        style="@style/PageTitle4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Ankara" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/TableRow1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/duzarkaplan"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/latitudeLbl"
+                        style="@style/PageTitle4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/latitudeplain" />
+
+                    <TextView
+                        android:id="@+id/latitude"
+                        style="@style/PageTitle4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="39.98°N" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/TableRow1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/duzarkaplan"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/longitudeLbl"
+                        style="@style/PageTitle4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/longitudeplain" />
+
+                    <TextView
+                        android:id="@+id/longitude"
+                        style="@style/PageTitle4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="39.98°N" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/TableRow1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/duzarkaplan"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/longitudeLbl"
+                        style="@style/PageTitle4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/timezone" />
+
+                    <TextView
+                        android:id="@+id/timezone"
+                        style="@style/PageTitle4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="+3 GMT" />
+                </TableRow>
+
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

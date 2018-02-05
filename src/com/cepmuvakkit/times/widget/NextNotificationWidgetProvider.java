@@ -22,6 +22,7 @@ public class NextNotificationWidgetProvider extends AppWidgetProvider {
 	private static final int[] times = new int[] { R.string.fajr,
 			R.string.sunrise, R.string.dhuhr, R.string.asr, R.string.maghrib,
 			R.string.ishaa, R.string.next_fajr };
+	private static SimpleDateFormat currentTimeFormat;
 
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager,
@@ -44,19 +45,10 @@ public class NextNotificationWidgetProvider extends AppWidgetProvider {
 		VARIABLE.context = context.getApplicationContext();
 		VARIABLE.settings = PreferenceManager
 				.getDefaultSharedPreferences(VARIABLE.context);
+		setTimeFormat();
 
-		// VARIABLE.settings =
-		// VARIABLE.context.getSharedPreferences("settingsFile",
-		// Context.MODE_PRIVATE);
-		// new LocaleManagerOwn();
 
-		SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
-		if (VARIABLE.settings.getInt("timeFormatIndex",
-				CONSTANT.DEFAULT_TIME_FORMAT) != CONSTANT.DEFAULT_TIME_FORMAT) {
-			timeFormat = new SimpleDateFormat("k:mm");
-		}
 		int nextTimeIndex = Schedule.today().nextTimeIndex();
-		//nextTimeIndex=CONSTANT.NEXT_FAJR;
 		if (nextTimeIndex % 2 == 0)
 			nextTimeIndex++;
 		final GregorianCalendar nextTime = Schedule.today().getTimes()[nextTimeIndex];
@@ -72,9 +64,27 @@ public class NextNotificationWidgetProvider extends AppWidgetProvider {
 			views.setTextViewText(R.id.time_name,
 					context.getString(times[(nextTimeIndex - 1) / 2]));
 			views.setTextViewText(R.id.next_notification,
-					timeFormat.format(nextTime.getTime()));
+					currentTimeFormat.format(nextTime.getTime()));
 
 			appWidgetManager.updateAppWidget(appWidgetIds[i], views);
+		}
+	}
+	private static void setTimeFormat() {
+		int formatIndex = Integer.parseInt(VARIABLE.settings.getString("timeFormatIndex",CONSTANT.DEFAULT_TIME_FORMAT+""));
+		SimpleDateFormat timeFormatAMPM, timeFormatHHMM, timeFormatHHMMSS;
+		timeFormatAMPM = new SimpleDateFormat("h:mm a");
+		timeFormatHHMM = new SimpleDateFormat("HH:mm");
+		timeFormatHHMMSS = new SimpleDateFormat("HH:mm:ss");
+		switch (formatIndex) {
+		case 0:
+			currentTimeFormat = timeFormatHHMM;
+			break;
+		case 1:
+			currentTimeFormat = timeFormatAMPM;
+			break;
+		case 2:
+			currentTimeFormat = timeFormatHHMMSS;
+			break;
 		}
 	}
 }

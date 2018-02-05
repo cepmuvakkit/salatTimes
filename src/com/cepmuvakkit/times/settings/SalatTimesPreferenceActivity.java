@@ -14,7 +14,6 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
-import android.preference.SwitchPreference;
 import android.widget.Toast;
 
 public class SalatTimesPreferenceActivity extends PreferenceActivity implements
@@ -26,7 +25,7 @@ public class SalatTimesPreferenceActivity extends PreferenceActivity implements
 	private CheckBoxPreference useEstAlwaysIshaCheckBox;
 	private EditTextPreference fixedMinText, baseLatitudeText;
 	private CheckBoxPreference applytoAllCheckBox;
-	private SwitchPreference onlineCalc;
+	//private CheckBoxPreference onlineCalc;
 	private PreferenceScreen dawn_dusk_angle, times_screen;
 	private final int REQUEST_CODE_PICK_FILE = 2;
 	private Intent fileExploreIntent;

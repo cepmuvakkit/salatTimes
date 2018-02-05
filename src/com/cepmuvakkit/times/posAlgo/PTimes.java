@@ -8,6 +8,8 @@ package com.cepmuvakkit.times.posAlgo;
 
 import java.util.GregorianCalendar;
 
+import android.content.SharedPreferences.Editor;
+
 import com.cepmuvakkit.times.CONSTANT;
 import com.cepmuvakkit.times.VARIABLE;
 
@@ -214,12 +216,15 @@ public class PTimes implements Methods, HigherLatitude {
                 duskAngle = 0;
                 break;
             case CUSTOM_DAWN_DUSK:
-        /*        dawnAngle =  VARIABLE.settings.getFloat("dawnAngle", -20f);
-                duskAngle = VARIABLE.settings.getFloat("duskAngle", -19.5f);*/
-                dawnAngle = -16f;
-                duskAngle = -17.5f;
+                dawnAngle =  Double.parseDouble(VARIABLE.settings.getString("dawnAngle", "-20.0"));
+                duskAngle =  Double.parseDouble(VARIABLE.settings.getString("duskAngle", "-19.5"));
+
                 break;
         }
+        Editor editor = VARIABLE.settings.edit();
+		editor.putString("dawnAngle", dawnAngle+"");
+		editor.putString("duskAngle", duskAngle+"");
+
         return new double[] {dawnAngle,duskAngle};
     }
 

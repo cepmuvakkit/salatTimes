@@ -35,10 +35,10 @@ public class TimetableWidgetProvider extends AppWidgetProvider {
 			R.string.ishaa, R.string.next_fajr };
 	private static final int[] times = new int[] { R.id.fajr, R.id.sunrise,
 			R.id.dhuhr, R.id.asr, R.id.maghrib, R.id.ishaa, R.id.next_fajr };
-	private static final int[] am_pms = new int[] { R.id.fajr_am_pm,
+	/*private static final int[] am_pms = new int[] { R.id.fajr_am_pm,
 			R.id.sunrise_am_pm, R.id.dhuhr_am_pm, R.id.asr_am_pm,
 			R.id.maghrib_am_pm, R.id.ishaa_am_pm, R.id.next_fajr_am_pm };
-	
+*/	private static SimpleDateFormat currentTimeFormat;
 	/*private static final int[] markers = new int[] { R.id.fajr_marker,
 			R.id.sunrise_marker, R.id.dhuhr_marker, R.id.asr_marker,
 			R.id.maghrib_marker, R.id.ishaa_marker, R.id.next_fajr_marker };
@@ -63,23 +63,12 @@ public class TimetableWidgetProvider extends AppWidgetProvider {
 			AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 		VARIABLE.context = context.getApplicationContext();
 		VARIABLE.settings =PreferenceManager.getDefaultSharedPreferences(VARIABLE.context);
-		
-	//	VARIABLE.settings = VARIABLE.context.getSharedPreferences(
-//		/		"settingsFile", Context.MODE_PRIVATE);
-		//new LocaleManagerOwn();
-		//Date today = new Date();
+		setTimeFormat();
 		Calendar now= Calendar.getInstance();
 		Date today=now.getTime();
 		SimpleDateFormat formatter = new SimpleDateFormat("EEE, d MMMM");
 
-		
-		
-		SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm");
-		if (VARIABLE.settings.getInt("timeFormatIndex",
-				CONSTANT.DEFAULT_TIME_FORMAT) != CONSTANT.DEFAULT_TIME_FORMAT) {
-			timeFormat = new SimpleDateFormat("k:mm");
-		}
-		final SimpleDateFormat amPmFormat = new SimpleDateFormat("a");
+	
 		int nextTimeIndex = Schedule.today().nextTimeIndex();
 		if (nextTimeIndex % 2 == 0) nextTimeIndex++;
 		int index=(nextTimeIndex-1)/2;		
@@ -104,30 +93,34 @@ public class TimetableWidgetProvider extends AppWidgetProvider {
 			views.setTextViewText(R.id.gregorinCalendar,formatter.format(today));
 			views.setTextViewText(R.id.hijriCalendar,hc.getHicriTakvim(context));
 			for (int j = 0; j < times.length; j++) {
-				
 				views.setTextViewText(text[j], context.getText(locale_text[j]));
-				views.setTextViewText(times[j],	timeFormat.format(schedule[2*j+1].getTime()));
+				views.setTextViewText(times[j],	currentTimeFormat.format(schedule[2*j+1].getTime()));
 				views.setTextColor(text[j], (j==index)?Color.RED:Color.WHITE);
 				views.setTextColor(times[j], (j==index)?Color.RED:Color.WHITE);
-				if (VARIABLE.settings.getInt("timeFormatIndex",
-						CONSTANT.DEFAULT_TIME_FORMAT) == CONSTANT.DEFAULT_TIME_FORMAT) {
-					views.setTextViewText(am_pms[j],
-							amPmFormat.format(schedule[2*j+1].getTime()));
-					views.setTextColor(am_pms[j], (j==index)?Color.RED:Color.WHITE);
-
-				} else {
-
-					views.setTextViewText(am_pms[j], "");
-				}
-	
-			/*	views.setTextViewText(markers[j],(j==index)?context.getString(R.string.next_time_marker_reverse)
-								: "");*/
+		
 			}
 			appWidgetManager.updateAppWidget(appWidgetIds[i], views);
 		}
 		
 		
 	}
-	
+	private static void setTimeFormat() {
+		int formatIndex = Integer.parseInt(VARIABLE.settings.getString("timeFormatIndex",CONSTANT.DEFAULT_TIME_FORMAT+""));
+		SimpleDateFormat timeFormatAMPM, timeFormatHHMM, timeFormatHHMMSS;
+		timeFormatAMPM = new SimpleDateFormat("h:mm a");
+		timeFormatHHMM = new SimpleDateFormat("HH:mm");
+		timeFormatHHMMSS = new SimpleDateFormat("HH:mm:ss");
+		switch (formatIndex) {
+		case 0:
+			currentTimeFormat = timeFormatHHMM;
+			break;
+		case 1:
+			currentTimeFormat = timeFormatAMPM;
+			break;
+		case 2:
+			currentTimeFormat = timeFormatHHMMSS;
+			break;
+		}
+	}
 	
 }
